@@ -4,6 +4,7 @@ import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
 import "handsontable/dist/handsontable.full.css"
 import Nav from './Components/Nav';
+import Upload_options from './Components/Upload_options';
 
 registerAllModules();
 registerLanguageDictionary(esMX);
@@ -12,6 +13,7 @@ registerLanguageDictionary(esMX);
 function App() {
 
   const [usuarios, setUsuarios] = React.useState([]);
+  const [option, setOption] = React.useState("---");
   const hotTableComponent = React.useRef(null);
 
   const descargarArchivo = () => {
@@ -49,28 +51,38 @@ function App() {
         <Nav></Nav>
       </div>
 
-      <div class="flex flex-row h-[90%]">
+      <div className="flex flex-row h-[90%]">
 
-        <div class="basis-2/12 bg-orange-600 h-full">
+        <div className="basis-2/12 bg-orange-600 h-full">
 
-          <div class="grid grid-cols-1 place-items-center">
+          <div className="grid grid-cols-1 place-items-center">
 
-            <h2 class="block py-4 text-sm font-bold text-gray-900 dark:text-white">Tipo de cargue</h2>
+            <h2 className="block py-4 text-sm font-bold text-gray-900 dark:text-white">Tipo de cargue</h2>
 
-            <select class="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center" id="upload_options">
-              <option selected value="-">---</option>
+            <select className="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
+
+              id="upload_options"
+              defaultValue="---"
+              onChange={(e) => setOption(e.target.value)}>
+
+              <option value="---">---</option>
               <option value="images">Imagenes</option>
               <option value="docs">Documentos Tecnicos</option>
               <option value="blueprints">Planos</option>
               <option value="rfa">Archivos RFA</option>
               <option value="prices">Precios</option>
+
             </select>
+
+            <p>{option}</p>
+
+            <Upload_options option = {option} />
 
           </div>
 
         </div>
 
-        <div class="basis-5/12 bg-orange-300 h-full">
+        <div className="basis-5/12 bg-orange-300 h-full">
 
           <div>
 
@@ -111,7 +123,7 @@ function App() {
 
         </div>
 
-        <div class="basis-5/12 bg-orange-900 h-full">
+        <div className="basis-5/12 bg-orange-900 h-full">
           b
         </div>
       </div>
