@@ -13,7 +13,7 @@ registerLanguageDictionary(esMX);
 function App() {
 
   const [usuarios, setUsuarios] = React.useState([]);
-  const [option, setOption] = React.useState("---");
+  const [option, setOption] = React.useState("images");
   const hotTableComponent = React.useRef(null);
 
   const descargarArchivo = () => {
@@ -62,10 +62,9 @@ function App() {
             <select className="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
 
               id="upload_options"
-              defaultValue="---"
+              defaultValue="images"
               onChange={(e) => setOption(e.target.value)}>
 
-              <option value="---">---</option>
               <option value="images">Imagenes</option>
               <option value="docs">Documentos Tecnicos</option>
               <option value="blueprints">Planos</option>
@@ -73,8 +72,6 @@ function App() {
               <option value="prices">Precios</option>
 
             </select>
-
-            <p>{option}</p>
 
             <Upload_options option = {option} />
 
