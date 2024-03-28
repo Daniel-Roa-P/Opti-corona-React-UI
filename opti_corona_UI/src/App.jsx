@@ -1,47 +1,32 @@
 import React from 'react';
-import { HotTable, HotColumn } from "@handsontable/react";
-import { registerAllModules } from "handsontable/registry";
-import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
-import "handsontable/dist/handsontable.full.css"
 import Nav from './Components/Nav';
-import Upload_options from './Components/Upload_options';
-
-registerAllModules();
-registerLanguageDictionary(esMX);
-
+import Upload_table from './Components/Upload_table';
 
 function App() {
+  
+  const [option, setOption] = React.useState(
+    {
+      upload_option: 'images',
+      modifyManually: false,
+    }
 
-  const [usuarios, setUsuarios] = React.useState([]);
-  const [option, setOption] = React.useState("images");
-  const hotTableComponent = React.useRef(null);
+  );
 
-  const descargarArchivo = () => {
-
-    const pluginDescarga = hotTableComponent.current.hotInstance.getPlugin("exportFile");
-
-    pluginDescarga.downloadFile("csv", { filename: "usuarios", filrExtension: "csv", MimeType: "text/csv" })
+  function handleOptionChange(e) {
+    setOption({
+      upload_option: e.target.value,
+      modifyManually: false
+    });
 
   }
 
-  React.useEffect(() => {
+  function handleModifyChange(e) {
+    setOption({
+      ...option,
+      modifyManually: e.target.checked
+    });
 
-    function getData() {
-
-      const data = new Array(200) // number of rows
-        .fill()
-        .map((_, row) => new Array(6) // number of columns
-          .fill()
-          .map((_, column) => "")
-        );
-
-      setUsuarios(data);
-
-    }
-
-    getData();
-
-  }, [])
+  }
 
   return (
 
@@ -62,8 +47,8 @@ function App() {
             <select className="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
 
               id="upload_options"
-              defaultValue="images"
-              onChange={(e) => setOption(e.target.value)}>
+              defaultValue={option.upload_option}
+              onChange={handleOptionChange}>
 
               <option value="images">Imagenes</option>
               <option value="docs">Documentos Tecnicos</option>
@@ -73,7 +58,19 @@ function App() {
 
             </select>
 
-            <Upload_options option = {option} />
+            <form>
+
+              <input type="checkbox"
+                id="modify_manually_checkbox"
+                name="modify_manually_checkbox"
+                key={option.upload_option}
+                className="my-4"
+                defaultChecked={option.modifyManually}
+                onChange={handleModifyChange} />
+              <label>Modificar Manualmente</label>
+              <br></br>
+
+            </form>
 
           </div>
 
@@ -81,40 +78,11 @@ function App() {
 
         <div className="basis-5/12 bg-orange-300 h-full">
 
-          <div>
+          <div className='p-4 h-full'>
 
-            <button onClick={() => { console.table(usuarios) }}> show state </button>
-            <button onClick={() => { descargarArchivo() }}> descargar archivo </button>
-
-            {usuarios &&
-
-              <HotTable
-
-                /* ref = {hotTableComponent}
-                language = {esMX.languageCode} 
-                data = {usuarios}
-                licenseKey = 'non-commercial-and-evaluation'
-                colHeaders = {true} 
-                rowHeaders = {true}
-                columnSorting = {true}
-                contextMenu = {true} */
-
-                data={usuarios}
-                width={320}
-                height={320}
-                rowHeaders={true}
-                colHeaders={true}
-                colWidths={100}
-                manualRowMove={true}
-                autoWrapRow={true}
-                autoWrapCol={true}
-                licenseKey="non-commercial-and-evaluation"
-
-              >
-
-              </HotTable>
-
-            }
+            <Upload_table
+            selected_option = {option.upload_option}
+            modifyManually = {option.modifyManually}/>
 
           </div>
 
