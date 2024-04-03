@@ -18,21 +18,27 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
         function getData() {
 
-            const data = new Array(2000) // number of rows
+            const data = new Array(1000) // number of rows
                 .fill()
                 .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
                     .fill()
                     .map((_, column) => "")
                 );
 
-            setReferencias(data);
+            console.log(data);
 
+            setReferencias(data);
         }
 
         getData();
 
     }, [selected_option])
 
+   /*  React.useEffect(() => {
+
+        console.log('chupelo');
+
+    }, [referencias]) */
 
     const descargarArchivo = () => {
 
@@ -52,8 +58,37 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
                     <label htmlFor="upload_filenames" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde carpeta</label>
                     <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
+                        
                         const fileList = event.target.files;
-                        console.log(fileList);                    
+                        const fileNames = Array.from(fileList).map((file)=>{
+
+                            return file.name;
+
+                        })   
+
+                        console.log(fileNames);
+                        console.log(referencias);
+
+                        let newReferences = [...referencias]
+
+                        for(let i = 0; i<referencias.length; i++){
+
+                            if ((fileNames.length)>i) {
+                                
+                                newReferences[i][1] = fileNames[i];
+                            
+                            } else {
+
+                                newReferences[i][1] = "";
+
+                            }
+                            
+
+                        }
+
+                        setReferencias(newReferences);
+                        console.log(referencias);
+
                     }} />
 
                 </div>
@@ -81,7 +116,6 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                     autoWrapRow={true}
                     autoWrapCol={true}
                     licenseKey="non-commercial-and-evaluation"
-
                 >
 
                     {/* <HotColumn title="SKU" /> */}
