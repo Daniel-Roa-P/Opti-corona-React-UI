@@ -38,7 +38,7 @@ function App() {
 
       <div className="flex flex-row h-[90%]">
 
-        <div className="basis-2/12 bg-orange-600 h-full">
+        <div className="basis-2/12 bg-neutral-700 h-full">
 
           <div className="grid grid-cols-1 place-items-center">
 
@@ -76,7 +76,7 @@ function App() {
 
         </div>
 
-        <div className="basis-5/12 bg-orange-300 h-full">
+        <div className="basis-5/12 bg-indigo-900 h-full">
 
           <div className='p-4 h-full'>
 
@@ -88,7 +88,7 @@ function App() {
 
         </div>
 
-        <div className="basis-5/12 bg-orange-900 h-full">
+        <div className="basis-5/12 bg-blue-900 h-full">
           b
         </div>
       </div>

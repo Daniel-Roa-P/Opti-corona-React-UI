@@ -8,7 +8,7 @@ import { assets_structure } from "../assets_structure";
 registerAllModules();
 registerLanguageDictionary(esMX);
 
-const Upload_table = ({selected_option, modifyManually}) => {
+const Upload_table = ({ selected_option, modifyManually }) => {
 
     const [referencias, setReferencias] = React.useState([]);
 
@@ -20,7 +20,7 @@ const Upload_table = ({selected_option, modifyManually}) => {
 
             const data = new Array(2000) // number of rows
                 .fill()
-                .map((_, row) => new Array(assets_structure[selected_option].length) // number of columns
+                .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
                     .fill()
                     .map((_, column) => "")
                 );
@@ -46,13 +46,36 @@ const Upload_table = ({selected_option, modifyManually}) => {
 
         <>
 
-                <HotTable
+            <div className='h-[10%] grid grid-cols-2 gap-8 place-content-center'>
 
+                <div>
+
+                    <label htmlFor="upload_filenames" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde carpeta</label>
+                    <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
+                        const fileList = event.target.files;
+                        console.log(fileList);                    
+                    }} />
+
+                </div>
+
+                <div>
+
+                    <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde hoja de calculo</label>
+                    <input id="upload_calc_sheet" className='opacity-0' type="file" />
+
+                </div>
+
+            </div>
+
+            <div className='h-[80%] bg-[#f0f0f0]'>
+
+                <HotTable
                     data={referencias}
+                    colHeaders={assets_structure[selected_option][modifyManually].header}
+                    columns={assets_structure[selected_option][modifyManually].column_structure}
                     width="100%"
                     height="100%"
                     rowHeaders={true}
-                    colHeaders={assets_structure[selected_option]}
                     colWidths={150}
                     manualRowMove={true}
                     autoWrapRow={true}
@@ -63,7 +86,7 @@ const Upload_table = ({selected_option, modifyManually}) => {
 
                     {/* <HotColumn title="SKU" /> */}
 
-                   {/*  {assets_structure[selected_option] !== undefined && assets_structure[selected_option].map(column => 
+                    {/*  {assets_structure[selected_option] !== undefined && assets_structure[selected_option].map(column => 
                     
                     <HotColumn 
                     key={column} 
@@ -72,6 +95,14 @@ const Upload_table = ({selected_option, modifyManually}) => {
                     )} */}
 
                 </HotTable>
+
+            </div>
+
+            <div className='h-[10%] p-4'>
+
+                <button className='bg-green-500 w-full h-full rounded-lg'>Generar Matriz de relacionamiento</button>
+
+            </div>
 
         </>
 
