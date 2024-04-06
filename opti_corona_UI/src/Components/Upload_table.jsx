@@ -4,6 +4,7 @@ import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
 import "handsontable/dist/handsontable.full.css";
 import { assets_structure } from "../assets_structure";
+import * as XLSX from "xlsx";
 
 registerAllModules();
 registerLanguageDictionary(esMX);
@@ -25,8 +26,6 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                     .map((_, column) => "")
                 );
 
-            console.log(data);
-
             setReferencias(data);
         }
 
@@ -34,11 +33,11 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
     }, [selected_option])
 
-   /*  React.useEffect(() => {
-
-        console.log('chupelo');
-
-    }, [referencias]) */
+    /*  React.useEffect(() => {
+ 
+         console.log('chupelo');
+ 
+     }, [referencias]) */
 
     const descargarArchivo = () => {
 
@@ -58,31 +57,30 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
                     <label htmlFor="upload_filenames" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde carpeta</label>
                     <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
-                        
+
                         const fileList = event.target.files;
-                        const fileNames = Array.from(fileList).map((file)=>{
+                        const fileNames = Array.from(fileList).map((file) => {
 
                             return file.name;
 
-                        })   
+                        })
 
                         console.log(fileNames);
                         console.log(referencias);
 
                         let newReferences = [...referencias]
 
-                        for(let i = 0; i<referencias.length; i++){
+                        for (let i = 0; i < referencias.length; i++) {
 
-                            if ((fileNames.length)>i) {
-                                
+                            if ((fileNames.length) > i) {
+
                                 newReferences[i][1] = fileNames[i];
-                            
+
                             } else {
 
                                 newReferences[i][1] = "";
 
                             }
-                            
 
                         }
 
@@ -96,7 +94,52 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                 <div>
 
                     <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde hoja de calculo</label>
-                    <input id="upload_calc_sheet" className='opacity-0' type="file" />
+                    <input id="upload_calc_sheet" className='opacity-0' type="file" multiple={false} onChange={(event) => {
+
+                        let fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
+                        let selectedFile = event.target.files[0];
+
+                        if (selectedFile) {
+                            if (selectedFile && fileTypes.includes(selectedFile.type)) {
+
+                                let reader = new FileReader();
+                                reader.readAsArrayBuffer(selectedFile);
+                                reader.onload = (e) => {
+
+                                    e.preventDefault();
+
+                                    const workbook = XLSX.read(e.target.result, { type: 'buffer' });
+                                    const worksheetName = workbook.SheetNames[0];
+                                    const worksheet = workbook.Sheets[worksheetName];
+                                    const data = XLSX.utils.sheet_to_json(worksheet);
+
+                                    console.log(data)
+
+                                    let newReferences = [...referencias]
+
+                                    for (let i = 0; i < referencias.length; i++) {
+            
+                                        if ((data.length) > i) {
+            
+                                            newReferences[i][0] = data[i].SKU;
+                                            newReferences[i][1] = data[i].NOMBRE_ARCHIVO;
+            
+                                        } else {
+            
+                                            newReferences[i][0] = "";
+                                            newReferences[i][1] = "";
+            
+                                        }
+            
+                                    }
+
+                                    setReferencias(newReferences);
+                                    console.log(referencias);
+
+                                }
+                            }
+                        }
+                    } }/>
 
                 </div>
 
