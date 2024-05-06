@@ -9,6 +9,29 @@ import * as XLSX from "xlsx";
 registerAllModules();
 registerLanguageDictionary(esMX);
 
+Array.prototype.equals = function (array) {
+
+    if (!array)
+        return false;
+    if(array === this)
+        return true;
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            if (!this[i].equals(array[i]))
+                return false;       
+        }           
+        else if (this[i] != array[i]) { 
+            return false;   
+        }           
+    }       
+    return true;
+}
+
+Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+
 const Upload_table = ({ selected_option, modifyManually }) => {
 
     const [referencias, setReferencias] = React.useState([]);
@@ -23,7 +46,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                 .fill()
                 .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
                     .fill()
-                    .map((_, column) => "")
+                    .map((_, column) => null)
                 );
 
             setReferencias(data);
@@ -33,17 +56,55 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
     }, [selected_option])
 
-    /*  React.useEffect(() => {
- 
-         console.log('chupelo');
- 
-     }, [referencias]) */
+    function getCol(matrix, col) {
+        var column = [];
+        for (var i = 0; i < matrix.length; i++) {
+            column.push(matrix[i][col]);
+        }
+        return column;
+    }
 
     const descargarArchivo = () => {
 
         const pluginDescarga = hotTableComponent.current.hotInstance.getPlugin("exportFile");
 
         pluginDescarga.downloadFile("csv", { filename: "referencias", filrExtension: "csv", MimeType: "text/csv" })
+
+    }
+
+    const send_json = () => {
+
+        let n_columnas = assets_structure[selected_option][modifyManually].header.length;
+        let table_data = hotTableComponent.current.hotInstance.getData()
+        let empty_row = Array.from({length: n_columnas}, (_, index) => null)
+
+        let filtered_table = table_data.filter(function (el) {
+            if(!el.equals(empty_row)){
+                return el
+            }
+          });
+
+        let objects_list = []
+
+        for (let i = 0; i < n_columnas ; i++) {
+
+            let temp_column = getCol(filtered_table, i)
+
+            console.log(temp_column)
+
+            const temp_object = {
+
+                [assets_structure[selected_option][modifyManually].header[i]]: temp_column
+
+            }
+
+            objects_list.push(temp_object);
+
+        }
+
+        let references_assets_JSON = JSON.stringify(objects_list);
+
+        console.log(references_assets_JSON)
 
     }
 
@@ -65,8 +126,8 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
                         })
 
-                        console.log(fileNames);
-                        console.log(referencias);
+                        //console.log(fileNames);
+                        //console.log(referencias);
 
                         let newReferences = [...referencias]
 
@@ -78,14 +139,14 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
                             } else {
 
-                                newReferences[i][1] = "";
+                                newReferences[i][1] = null;
 
                             }
 
                         }
 
                         setReferencias(newReferences);
-                        console.log(referencias);
+                        //console.log(referencias);
 
                     }} />
 
@@ -113,24 +174,22 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                                     const worksheet = workbook.Sheets[worksheetName];
                                     const data = XLSX.utils.sheet_to_json(worksheet);
 
-                                    console.log(data)
-
                                     let newReferences = [...referencias]
 
                                     for (let i = 0; i < referencias.length; i++) {
-            
+
                                         if ((data.length) > i) {
-            
+
                                             newReferences[i][0] = data[i].SKU;
                                             newReferences[i][1] = data[i].NOMBRE_ARCHIVO;
-            
+
                                         } else {
-            
-                                            newReferences[i][0] = "";
-                                            newReferences[i][1] = "";
-            
+
+                                            newReferences[i][0] = null;
+                                            newReferences[i][1] = null;
+
                                         }
-            
+
                                     }
 
                                     setReferencias(newReferences);
@@ -139,7 +198,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                                 }
                             }
                         }
-                    } }/>
+                    }} />
 
                 </div>
 
@@ -151,6 +210,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
                     data={referencias}
                     colHeaders={assets_structure[selected_option][modifyManually].header}
                     columns={assets_structure[selected_option][modifyManually].column_structure}
+                    ref={hotTableComponent}
                     width="100%"
                     height="100%"
                     rowHeaders={true}
@@ -177,7 +237,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
             <div className='h-[10%] p-4'>
 
-                <button className='bg-green-500 w-full h-full rounded-lg'>Generar Matriz de relacionamiento</button>
+                <button className='bg-green-500 w-full h-full rounded-lg' onClick={send_json}>Generar Matriz de relacionamiento</button>
 
             </div>
 

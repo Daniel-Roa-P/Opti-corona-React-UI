@@ -11,8 +11,8 @@ const assets_structure = {
                 { type: 'text' },
                 { type: 'text' },
                 { type: 'text' },
-                { type: 'numeric', "allowInvalid": false },
-                { type: 'dropdown', "allowInvalid": false, source: ['', 'thumbnail'] }
+                { type: 'numeric' },
+                { type: 'dropdown', source: ['', 'thumbnail'] }
             ]
 
         },
@@ -36,7 +36,7 @@ const assets_structure = {
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
-                { type: 'dropdown', "allowInvalid": false, source: ['PDF', 'TEXT', 'XML'] },
+                { type: 'dropdown', source: ['PDF', 'TEXT', 'XML'] },
                 { type: 'text' }
             ]
 
@@ -102,12 +102,12 @@ const assets_structure = {
             header: ['SKU', 'Unidad de venta', 'Divisa', 'Precio', 'Valor raro 1', 'Valor raro 2', 'Booleano raro', 'Zona'],
             column_structure: [
                 { type: 'text' },
-                { type: 'dropdown', "allowInvalid": false, source: ['pieces', 'M2', 'CJ'] },
-                { type: 'dropdown', "allowInvalid": false, source: ['COP', 'MXN', 'USD'] },
-                { type: 'numeric', "allowInvalid": false },
-                { type: 'numeric', "allowInvalid": false },
-                { type: 'numeric', "allowInvalid": false },
-                { type: 'checkbox', "allowInvalid": false },
+                { type: 'dropdown', source: ['pieces', 'M2', 'CJ'] },
+                { type: 'dropdown', source: ['COP', 'MXN', 'USD'] },
+                { type: 'numeric' },
+                { type: 'numeric' },
+                { type: 'numeric' },
+                { type: 'checkbox' },
                 { type: 'text' }
             ]
 
@@ -116,12 +116,36 @@ const assets_structure = {
             header: ['SKU', 'Precio', 'Divisa', 'Zona'],
             column_structure: [
                 { type: 'text' },
-                { type: 'numeric', "allowInvalid": false, readOnly: true },
-                { type: 'dropdown', "allowInvalid": false, source: ['COP', 'MXN', 'USD'], readOnly: true },
+                { type: 'numeric', readOnly: true },
+                { type: 'dropdown', source: ['COP', 'MXN', 'USD'], readOnly: true },
                 { type: 'text', readOnly: true }
             ]
 
         }
+
+    },
+    videos: {
+
+        true: {
+
+            header: ['SKU', 'ID Video', 'ID Miniatura'],
+            column_structure: [
+                { type: 'text' },
+                { type: 'text' },
+                { type: 'text' }
+            ]
+
+        },
+
+        false: {
+
+            header: ['SKU', 'ID Video'],
+            column_structure: [
+                { type: 'text' },
+                { type: 'text', readOnly: true, }
+            ]
+
+        },
 
     }
 

@@ -55,6 +55,7 @@ function App() {
               <option value="blueprints">Planos</option>
               <option value="rfa">Archivos RFA</option>
               <option value="prices">Precios</option>
+              <option value="videos">Videos</option>
 
             </select>
 
