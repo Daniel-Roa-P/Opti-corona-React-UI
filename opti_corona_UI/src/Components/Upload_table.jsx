@@ -2,6 +2,7 @@ import React from 'react';
 import { HotTable, HotColumn } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
+import { sendImagesJson } from '../api/task.api';
 import "handsontable/dist/handsontable.full.css";
 import { assets_structure } from "../assets_structure";
 import * as XLSX from "xlsx";
@@ -72,7 +73,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
 
     }
 
-    const send_json = () => {
+    const send_json = async () => {
 
         let n_columnas = assets_structure[selected_option][modifyManually].header.length;
         let table_data = hotTableComponent.current.hotInstance.getData()
@@ -105,6 +106,7 @@ const Upload_table = ({ selected_option, modifyManually }) => {
         let references_assets_JSON = JSON.stringify(objects_list);
 
         console.log(references_assets_JSON)
+        await sendImagesJson(references_assets_JSON);
 
     }
 

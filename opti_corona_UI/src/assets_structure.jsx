@@ -4,7 +4,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre archivo', 'Nombre archivo 2', 'Nombre archivo 3', 'Texto alternativo', 'Posición', 'miniatura'],
+            header: ['SKU', 'Nombre archivo', 'Imagen contenedor', 'Imagen rara', 'Texto alternativo', 'Posición', 'miniatura'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
