@@ -13,33 +13,29 @@ class Images:
 
             print('puto')
 
-        relaciones = []
         files = []
         cantidades = {}
+
+        skus = []
+        nombre_archivos = []
+        posiciones = []
+        thumbnails = []
 
         for referencia in referencias:
             
             for filename in res:
                 
                 if (str(referencia) in filename):
-                    
+
                     if(indice == 0):
                             
                         miniatura = 'thumbnail'
-                    
-                    temp_object = {
 
-                        "sku": str(referencia),
-                        "nombre_archivo": filename,
-                        "imagen_contenedor": filename,
-                        "imagen_rara": filename,
-                        "alt": filename,
-                        "pos": str(indice),
-                        "thumbnail": miniatura
+                    skus.append(str(referencia))
+                    nombre_archivos.append(filename)
+                    posiciones.append(str(indice))
+                    thumbnails.append(miniatura)
 
-                    }
-
-                    relaciones.append(temp_object)
                     indice = indice + 1
                     miniatura = ''
                     files.append(filename)
@@ -47,6 +43,8 @@ class Images:
             cantidades[referencia] = indice
 
             indice = 0       
+
+        relaciones = [ {'SKU':skus }, {'Nombre_archivo':nombre_archivos }, {'Imagen_contenedor':nombre_archivos }, {'Imagen_rara':nombre_archivos }, {'Texto_alternativo':nombre_archivos }, {'Posicion':posiciones }, {'Miniatura': thumbnails} ]
 
         for filename in res:
             

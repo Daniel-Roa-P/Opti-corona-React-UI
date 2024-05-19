@@ -106,7 +106,9 @@ const Upload_table = ({ selected_option, modifyManually }) => {
         let references_assets_JSON = JSON.stringify(objects_list);
 
         console.log(references_assets_JSON)
-        await sendImagesJson(references_assets_JSON);
+        let matriz_relacionada = await sendImagesJson(references_assets_JSON);
+
+        console.log(matriz_relacionada.data)
 
     }
 

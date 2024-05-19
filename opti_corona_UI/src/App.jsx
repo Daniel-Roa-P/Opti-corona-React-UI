@@ -1,9 +1,10 @@
 import React from 'react';
 import Nav from './Components/Nav';
 import Upload_table from './Components/Upload_table';
+import Matrix_upload_table from './Components/Matrix_upload_table';
 
 function App() {
-  
+
   const [option, setOption] = React.useState(
     {
       upload_option: 'images',
@@ -82,16 +83,23 @@ function App() {
           <div className='p-4 h-full'>
 
             <Upload_table
-            selected_option = {option.upload_option}
-            modifyManually = {option.modifyManually}/>
+              selected_option={option.upload_option}
+              modifyManually={option.modifyManually} />
 
           </div>
 
         </div>
 
         <div className="basis-5/12 bg-blue-900 h-full">
-          b
+
+          <div className='p-4 h-full'>
+
+            <Matrix_upload_table />
+
+          </div>
+
         </div>
+
       </div>
 
     </div>

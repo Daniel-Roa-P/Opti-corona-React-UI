@@ -4,7 +4,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre archivo', 'Imagen contenedor', 'Imagen rara', 'Texto alternativo', 'Posición', 'miniatura'],
+            header: ['SKU', 'Nombre_archivo', 'Imagen_contenedor', 'Imagen_rara', 'Texto_alternativo', 'Posicion', 'Miniatura'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
@@ -19,7 +19,7 @@ const assets_structure = {
 
         false: {
 
-            header: ['SKU', 'Nombre archivo'],
+            header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text', readOnly: true, }
@@ -32,7 +32,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre archivo', 'Extension archivo', 'Nombre del documento'],
+            header: ['SKU', 'Nombre_archivo', 'Extension_archivo', 'Nombre_documento'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
@@ -42,7 +42,7 @@ const assets_structure = {
 
         }, false: {
 
-            header: ['SKU', 'Nombre archivo'],
+            header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text', readOnly: true, }
@@ -56,14 +56,14 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre archivo'],
+            header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
             ]
         }, false: {
 
-            header: ['SKU', 'Nombre archivo'],
+            header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text', readOnly: true, }
@@ -76,7 +76,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre archivo', 'Nombre del documento'],
+            header: ['SKU', 'Nombre_archivo', 'Nombre_del_documento'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
@@ -85,7 +85,7 @@ const assets_structure = {
 
         }, false: {
 
-            header: ['SKU', 'Nombre archivo'],
+            header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text', readOnly: true, }
@@ -99,7 +99,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Unidad de venta', 'Divisa', 'Precio', 'Valor raro 1', 'Valor raro 2', 'Booleano raro', 'Zona'],
+            header: ['SKU', 'Unidad_de_venta', 'Divisa', 'Precio', 'Valor_raro_1', 'Valor_raro_2', 'Booleano_raro', 'Zona'],
             column_structure: [
                 { type: 'text' },
                 { type: 'dropdown', source: ['pieces', 'M2', 'CJ'] },
@@ -128,7 +128,7 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'ID Video', 'ID Miniatura'],
+            header: ['SKU', 'ID_Video', 'ID_Miniatura'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
@@ -139,7 +139,7 @@ const assets_structure = {
 
         false: {
 
-            header: ['SKU', 'ID Video'],
+            header: ['SKU', 'ID_Video'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text', readOnly: true, }

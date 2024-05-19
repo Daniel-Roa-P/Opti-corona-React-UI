@@ -27,11 +27,7 @@ def upload_images(request):
     else: 
 
         data = json.loads(request.body)
-
         images = Images()
 
         matrix = images.upload_images(data[0]['SKU'], data[1]['Nombre archivo'], False)
-
-        print(matrix)
-
-        return JsonResponse(data, safe=False)
+        return JsonResponse(matrix, safe=False)
