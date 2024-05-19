@@ -2,19 +2,21 @@ import React from 'react';
 import Nav from './Components/Nav';
 import Upload_table from './Components/Upload_table';
 import Matrix_upload_table from './Components/Matrix_upload_table';
+import { UploadContext } from './Upload_context';
 
 function App() {
 
-  const [option, setOption] = React.useState(
-    {
-      upload_option: 'images',
-      modifyManually: false,
-    }
-
-  );
+  const {
+    
+    tipoCargue,
+    setTipoCargue,
+    relaciones,
+    setRelaciones
+  
+  } = React.useContext(UploadContext)
 
   function handleOptionChange(e) {
-    setOption({
+    setTipoCargue({
       upload_option: e.target.value,
       modifyManually: false
     });
@@ -22,8 +24,8 @@ function App() {
   }
 
   function handleModifyChange(e) {
-    setOption({
-      ...option,
+    setTipoCargue({
+      ...tipoCargue,
       modifyManually: e.target.checked
     });
 
@@ -48,7 +50,7 @@ function App() {
             <select className="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
 
               id="upload_options"
-              defaultValue={option.upload_option}
+              defaultValue={tipoCargue.upload_option}
               onChange={handleOptionChange}>
 
               <option value="images">Imagenes</option>
@@ -65,9 +67,9 @@ function App() {
               <input type="checkbox"
                 id="modify_manually_checkbox"
                 name="modify_manually_checkbox"
-                key={option.upload_option}
+                key={tipoCargue.upload_option}
                 className="my-4"
-                defaultChecked={option.modifyManually}
+                defaultChecked={tipoCargue.modifyManually}
                 onChange={handleModifyChange} />
               <label>Modificar Manualmente</label>
               <br></br>
@@ -83,8 +85,9 @@ function App() {
           <div className='p-4 h-full'>
 
             <Upload_table
-              selected_option={option.upload_option}
-              modifyManually={option.modifyManually} />
+              selected_option={tipoCargue.upload_option}
+              modifyManually={tipoCargue.modifyManually}
+              setRelaciones = {setRelaciones} />
 
           </div>
 
@@ -94,7 +97,10 @@ function App() {
 
           <div className='p-4 h-full'>
 
-            <Matrix_upload_table />
+            <Matrix_upload_table 
+            selected_option={tipoCargue.upload_option}
+            relaciones = {relaciones} 
+            setRelaciones = {setRelaciones} />
 
           </div>
 

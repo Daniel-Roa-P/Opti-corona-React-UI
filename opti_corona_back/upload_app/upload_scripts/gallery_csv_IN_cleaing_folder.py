@@ -1,3 +1,5 @@
+import numpy as np
+
 class Images:
 
     def upload_images(self, sku_list, file_list, manual):
@@ -44,12 +46,24 @@ class Images:
 
             indice = 0       
 
-        relaciones = [ {'SKU':skus }, {'Nombre_archivo':nombre_archivos }, {'Imagen_contenedor':nombre_archivos }, {'Imagen_rara':nombre_archivos }, {'Texto_alternativo':nombre_archivos }, {'Posicion':posiciones }, {'Miniatura': thumbnails} ]
+        relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
+
+        relaciones_truncado = []
+
+        for i in range(0,len(relaciones[0])):
+
+            temp_list = []
+
+            for j in range(0,len(relaciones)):
+
+                temp_list.append(relaciones[j][i])
+
+            relaciones_truncado.append(temp_list)
 
         for filename in res:
             
             if filename not in files: 
                 
                 print(filename)
-                
-        return relaciones
+
+        return relaciones_truncado

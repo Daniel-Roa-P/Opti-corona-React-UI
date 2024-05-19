@@ -10,9 +10,21 @@ import * as XLSX from "xlsx";
 registerAllModules();
 registerLanguageDictionary(esMX);
 
-const Matrix_upload_table = () => {
+const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) => {
 
     const hotTableComponent = React.useRef(null);
+
+    React.useEffect(() => {
+
+        hotTableComponent.current.hotInstance.updateData(relaciones)
+        let table_data = hotTableComponent.current.hotInstance.getData()
+        
+        console.log('relaciones')
+        console.log(relaciones)
+        console.log('table_data')
+        console.log(table_data)
+
+    }, [relaciones])
 
     return (
 
@@ -31,9 +43,9 @@ const Matrix_upload_table = () => {
             <div className='h-[80%] bg-[#f0f0f0]'>
 
                 <HotTable
-                    data={[407971151,407971151,318004001,318004001,407918111,407918111,402911001,402911001,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021151,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021181,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021451,246021491,246021491,246021491,246021491,246021491,246021491,246021491,246021491,246021491,246021491,246021491,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031151,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247031761,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101,247041101]}
-                    colHeaders={assets_structure['images']['false'].header}
-                    columns={assets_structure['images']['false'].column_structure}
+                    data={relaciones}
+                    colHeaders={assets_structure[selected_option]['true'].header}
+                    columns={assets_structure[selected_option]['true'].column_structure}
                     ref={hotTableComponent}
                     width="100%"
                     height="100%"
