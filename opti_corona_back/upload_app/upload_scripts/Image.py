@@ -1,17 +1,22 @@
 import numpy as np
+from .Asset import Asset
 
-class Images:
+class Images(Asset):
 
-    def upload_images(self, sku_list, file_list, manual):
+    def __init__(self, sku_list, file_list, manual):
+        
+        super().__init__(sku_list, file_list, manual)
 
-        referencias = sorted(list(set(sku_list)))
+    def create_automatic_matrix(self):
+
+        referencias = sorted(list(set(self.references)))
 
         # list file and directories
-        res = sorted(file_list)
+        res = sorted(self.files)
         indice = 0
         miniatura = ''
         
-        if(manual):
+        if(self.manual):
 
             print('puto')
 
@@ -46,19 +51,9 @@ class Images:
 
             indice = 0       
 
-        relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
+        self.relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
 
-        relaciones_truncado = []
-
-        for i in range(0,len(relaciones[0])):
-
-            temp_list = []
-
-            for j in range(0,len(relaciones)):
-
-                temp_list.append(relaciones[j][i])
-
-            relaciones_truncado.append(temp_list)
+        self.truncate_relationships()
 
         for filename in res:
             
@@ -66,4 +61,4 @@ class Images:
                 
                 print(filename)
 
-        return relaciones_truncado
+        return self.relaciones_truncado

@@ -2,7 +2,7 @@ import React from 'react';
 import { HotTable, HotColumn } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
-import { sendImagesJson } from '../api/task.api';
+import { sendAssetsJson } from '../api/task.api';
 import "handsontable/dist/handsontable.full.css";
 import { assets_structure } from "../assets_structure";
 import * as XLSX from "xlsx";
@@ -65,12 +65,20 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
         return column;
     }
 
-    const descargarArchivo = () => {
+    function removeNullValues(item) {
 
-        const pluginDescarga = hotTableComponent.current.hotInstance.getPlugin("exportFile");
-
-        pluginDescarga.downloadFile("csv", { filename: "referencias", filrExtension: "csv", MimeType: "text/csv" })
-
+        // Recursively remove null values from nested arrays
+        if (Array.isArray(item)) {
+            const filteredArray = item
+                .map((subItem) => removeNullValues(subItem))
+                .flat(1)
+                .filter((subItem) => 
+                    subItem !== null && subItem !== undefined);
+            return filteredArray.length > 0 ? filteredArray : null;
+        } else {
+            // Remove null values from non-array items
+            return item !== null && item !== undefined ? [item] : [];
+        }
     }
 
     const send_json = async () => {
@@ -87,11 +95,17 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
 
         let objects_list = []
 
+        objects_list.push({'uploadType' : selected_option})
+
         for (let i = 0; i < n_columnas ; i++) {
 
-            let temp_column = getCol(filtered_table, i)
+            let temp_column = removeNullValues(getCol(filtered_table, i))
 
-            console.log(temp_column)
+            if(temp_column === null){
+
+                temp_column = []
+
+            }
 
             const temp_object = {
 
@@ -103,9 +117,13 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
 
         }
 
+        objects_list.push({'manual' : modifyManually})
+
         let references_assets_JSON = JSON.stringify(objects_list);
 
-        let matriz_relacionada = await sendImagesJson(references_assets_JSON);
+        console.log(references_assets_JSON);
+        
+        let matriz_relacionada = await sendAssetsJson(references_assets_JSON);
 
         setRelaciones(matriz_relacionada.data)
 
@@ -222,19 +240,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
                     autoWrapRow={true}
                     autoWrapCol={true}
                     licenseKey="non-commercial-and-evaluation"
-                >
-
-                    {/* <HotColumn title="SKU" /> */}
-
-                    {/*  {assets_structure[selected_option] !== undefined && assets_structure[selected_option].map(column => 
-                    
-                    <HotColumn 
-                    key={column} 
-                    title={column} />
-                    
-                    )} */}
-
-                </HotTable>
+                />
 
             </div>
 

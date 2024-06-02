@@ -22,7 +22,7 @@ const assets_structure = {
             header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
-                { type: 'text', readOnly: true, }
+                { type: 'text' }
             ]
 
         },
@@ -45,7 +45,7 @@ const assets_structure = {
             header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
-                { type: 'text', readOnly: true, }
+                { type: 'text' }
             ]
 
         }
@@ -66,7 +66,7 @@ const assets_structure = {
             header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
-                { type: 'text', readOnly: true, }
+                { type: 'text' }
             ]
 
         }
@@ -88,7 +88,7 @@ const assets_structure = {
             header: ['SKU', 'Nombre_archivo'],
             column_structure: [
                 { type: 'text' },
-                { type: 'text', readOnly: true, }
+                { type: 'text' }
             ]
 
         }
@@ -142,7 +142,7 @@ const assets_structure = {
             header: ['SKU', 'ID_Video'],
             column_structure: [
                 { type: 'text' },
-                { type: 'text', readOnly: true, }
+                { type: 'text' }
             ]
 
         },

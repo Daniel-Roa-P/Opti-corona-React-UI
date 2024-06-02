@@ -2,10 +2,8 @@ import React from 'react';
 import { HotTable, HotColumn } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
-import { sendImagesJson } from '../api/task.api';
 import "handsontable/dist/handsontable.full.css";
 import { assets_structure } from "../assets_structure";
-import * as XLSX from "xlsx";
 
 registerAllModules();
 registerLanguageDictionary(esMX);
@@ -18,13 +16,27 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
 
         hotTableComponent.current.hotInstance.updateData(relaciones)
         let table_data = hotTableComponent.current.hotInstance.getData()
-        
-        console.log('relaciones')
-        console.log(relaciones)
-        console.log('table_data')
-        console.log(table_data)
 
     }, [relaciones])
+
+    const buttonClickCallback = () => {
+
+        const hot = hotTableComponent.current.hotInstance;
+        const exportPlugin = hot.getPlugin('exportFile');
+
+        exportPlugin.downloadFile('csv', {
+          bom: false,
+          columnDelimiter: ',',
+          columnHeaders: false,
+          exportHiddenColumns: true,
+          exportHiddenRows: true,
+          fileExtension: 'csv',
+          filename: selected_option + '-co-es',
+          mimeType: 'text/csv',
+          rowDelimiter: '\r\n',
+          rowHeaders: true
+        });
+      };
 
     return (
 
@@ -55,25 +67,13 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
                     autoWrapRow={true}
                     autoWrapCol={true}
                     licenseKey="non-commercial-and-evaluation"
-                >
-
-                    {/* <HotColumn title="SKU" /> */}
-
-                    {/*  {assets_structure[selected_option] !== undefined && assets_structure[selected_option].map(column => 
-                    
-                    <HotColumn 
-                    key={column} 
-                    title={column} />
-                    
-                    )} */}
-
-                </HotTable>
+                />
 
             </div>
 
             <div className='h-[10%] p-4'>
 
-                <button className='bg-green-500 w-full h-full rounded-lg'>Exportar Matriz de relacionamiento</button>
+                <button className='bg-green-500 w-full h-full rounded-lg' onClick={buttonClickCallback}>Exportar Matriz de relacionamiento</button>
 
             </div>
 

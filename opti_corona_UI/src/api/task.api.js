@@ -6,4 +6,4 @@ const uploadApi = axios.create({
 
 })
 
-export const sendImagesJson = (task) =>  uploadApi.post('/',task)
+export const sendAssetsJson = (task) =>  uploadApi.post('/',task)

@@ -1,7 +1,10 @@
 import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from .upload_scripts.gallery_csv_IN_cleaing_folder import Images
+from .upload_scripts.Image import Images
+from .upload_scripts.Document import Document
+
+
 
 # Create your views here.
 def hello(request):
@@ -17,7 +20,7 @@ def about(request):
 
     })
 
-def upload_images(request):
+def upload_asset(request):
 
     if request.method == 'GET':
 
@@ -27,7 +30,18 @@ def upload_images(request):
     else: 
 
         data = json.loads(request.body)
-        images = Images()
 
-        matrix = images.upload_images(data[0]['SKU'], data[1]['Nombre_archivo'], False)
+        asset = idenfy_asset(data[0]['uploadType'],data[1]['SKU'], data[2]['Nombre_archivo'], data[3]['manual'])
+        
+        matrix = asset.create_automatic_matrix()
         return JsonResponse(matrix, safe=False)
+    
+def idenfy_asset(uploadType, skuList, filesList, manual): 
+
+    if(uploadType == "images"):
+
+        return Images(skuList, filesList, manual)
+
+    elif(uploadType == "docs"):
+
+        return Document(skuList, filesList, manual)
