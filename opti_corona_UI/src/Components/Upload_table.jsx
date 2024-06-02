@@ -33,7 +33,7 @@ Array.prototype.equals = function (array) {
 
 Object.defineProperty(Array.prototype, "equals", {enumerable: false});
 
-const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
+const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReporte }) => {
 
     const [referencias, setReferencias] = React.useState([]);
 
@@ -123,11 +123,12 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
 
         console.log(references_assets_JSON);
         
-        let matriz_relacionada = await sendAssetsJson(references_assets_JSON);
+        let response = await sendAssetsJson(references_assets_JSON);
 
-        console.log(matriz_relacionada.data);
+        console.log(response.data)
 
-        setRelaciones(matriz_relacionada.data)
+        setRelaciones(response.data[0])
+        setReporte(response.data[1])
 
     }
 

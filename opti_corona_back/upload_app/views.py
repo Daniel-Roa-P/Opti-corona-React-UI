@@ -4,8 +4,6 @@ from django.shortcuts import render
 from .upload_scripts.Image import Images
 from .upload_scripts.Document import Document
 
-
-
 # Create your views here.
 def hello(request):
 

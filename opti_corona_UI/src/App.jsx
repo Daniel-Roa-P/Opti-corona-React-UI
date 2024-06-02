@@ -3,6 +3,7 @@ import Nav from './Components/Nav';
 import Upload_table from './Components/Upload_table';
 import Matrix_upload_table from './Components/Matrix_upload_table';
 import { UploadContext } from './Upload_context';
+import Reports_component from './Components/Reports_component';
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
     tipoCargue,
     setTipoCargue,
     relaciones,
-    setRelaciones
+    setRelaciones,
+    reporte,
+    setReporte
 
   } = React.useContext(UploadContext)
 
@@ -78,19 +81,19 @@ function App() {
 
           </div>
 
-          <div className='w-full h-4/6 p-2'>
+          <div className='w-full h-4/6 p-4'>
 
-            <div className='h-[10%] w-full p-2'>
+            <div className='h-[10%] w-full'>
               <h2 className="block text-sm font-bold text-gray-900 dark:text-white w-full text-center">Reporte de matriz generada</h2>
             </div>
 
-            <div className='bg-red-900 h-[90%] w-full'>
+            <div className='h-[90%] w-full'>
 
-            <div className="overflow-auto h-full w-full">
+            <div className="overflow-auto h-full w-full bg-slate-300">
 
-              <div className="h-48 w-full bg-green-400"></div>
-              <div className="h-48 w-full bg-yellow-400"></div>
-              <div className="h-48 w-full bg-red-400"></div>
+              <Reports_component
+                reporte = {reporte}
+              />
 
             </div>
 
@@ -107,7 +110,9 @@ function App() {
             <Upload_table
               selected_option={tipoCargue.upload_option}
               modifyManually={tipoCargue.modifyManually}
-              setRelaciones={setRelaciones} />
+              setRelaciones={setRelaciones} 
+              setReporte={setReporte}
+              />
 
           </div>
 

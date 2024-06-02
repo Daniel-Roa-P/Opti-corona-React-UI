@@ -69,7 +69,7 @@ class Images(Asset):
 
             else:
 
-                danger_report.append(str(referencia) + " no tiene ninguna imagen sociada")
+                danger_report.append('el archivo ' + str(referencia) + " no tiene ninguna imagen sociada")
 
         
         for filename in self.files:

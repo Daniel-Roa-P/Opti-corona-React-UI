@@ -13,6 +13,7 @@ function UploadProvider(props) {
 
   );
   const [relaciones, setRelaciones] = React.useState([]);
+  const [reporte, setReporte] = React.useState([]);
 
   return (
 
@@ -21,7 +22,9 @@ function UploadProvider(props) {
       tipoCargue,
       setTipoCargue,
       relaciones,
-      setRelaciones
+      setRelaciones,
+      reporte,
+      setReporte
 
     }}>
 
