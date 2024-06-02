@@ -7,8 +7,7 @@ class Document(Asset):
         super().__init__(sku_list, file_list, manual)
 
     def create_automatic_matrix(self):
-
-        print(self.references)
+        
         referencias = sorted(list(set(self.references)))
 
         # list file and directories

@@ -125,6 +125,8 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones }) => {
         
         let matriz_relacionada = await sendAssetsJson(references_assets_JSON);
 
+        console.log(matriz_relacionada.data);
+
         setRelaciones(matriz_relacionada.data)
 
     }

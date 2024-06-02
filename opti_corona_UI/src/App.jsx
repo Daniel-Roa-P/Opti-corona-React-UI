@@ -7,12 +7,12 @@ import { UploadContext } from './Upload_context';
 function App() {
 
   const {
-    
+
     tipoCargue,
     setTipoCargue,
     relaciones,
     setRelaciones
-  
+
   } = React.useContext(UploadContext)
 
   function handleOptionChange(e) {
@@ -43,7 +43,7 @@ function App() {
 
         <div className="basis-2/12 bg-neutral-700 h-full">
 
-          <div className="grid grid-cols-1 place-items-center">
+          <div className="grid grid-cols-1 place-items-center h-2/6">
 
             <h2 className="block py-4 text-sm font-bold text-gray-900 dark:text-white">Tipo de cargue</h2>
 
@@ -78,6 +78,26 @@ function App() {
 
           </div>
 
+          <div className='w-full h-4/6 p-2'>
+
+            <div className='h-[10%] w-full p-2'>
+              <h2 className="block text-sm font-bold text-gray-900 dark:text-white w-full text-center">Reporte de matriz generada</h2>
+            </div>
+
+            <div className='bg-red-900 h-[90%] w-full'>
+
+            <div className="overflow-auto h-full w-full">
+
+              <div className="h-48 w-full bg-green-400"></div>
+              <div className="h-48 w-full bg-yellow-400"></div>
+              <div className="h-48 w-full bg-red-400"></div>
+
+            </div>
+
+            </div>
+
+          </div>
+
         </div>
 
         <div className="basis-5/12 bg-indigo-900 h-full">
@@ -87,7 +107,7 @@ function App() {
             <Upload_table
               selected_option={tipoCargue.upload_option}
               modifyManually={tipoCargue.modifyManually}
-              setRelaciones = {setRelaciones} />
+              setRelaciones={setRelaciones} />
 
           </div>
 
@@ -97,10 +117,10 @@ function App() {
 
           <div className='p-4 h-full'>
 
-            <Matrix_upload_table 
-            selected_option={tipoCargue.upload_option}
-            relaciones = {relaciones} 
-            setRelaciones = {setRelaciones} />
+            <Matrix_upload_table
+              selected_option={tipoCargue.upload_option}
+              relaciones={relaciones}
+              setRelaciones={setRelaciones} />
 
           </div>
 

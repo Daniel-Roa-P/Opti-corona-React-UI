@@ -20,9 +20,6 @@ class Images(Asset):
 
             print('puto')
 
-        files = []
-        cantidades = {}
-
         skus = []
         nombre_archivos = []
         posiciones = []
@@ -45,20 +42,44 @@ class Images(Asset):
 
                     indice = indice + 1
                     miniatura = ''
-                    files.append(filename)
+                    self.relatedFiles.append(filename)
 
-            cantidades[referencia] = indice
+            self.cantidades[referencia] = indice
 
             indice = 0       
 
         self.relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
-
         self.truncate_relationships()
 
-        for filename in res:
-            
-            if filename not in files: 
-                
-                print(filename)
-
         return self.relaciones_truncado
+    
+    def generate_report(self):
+        
+        info_report = []
+        warning_report = []
+        danger_report = []
+
+        for referencia in self.references: 
+
+            temp_ammount = self.cantidades[referencia]
+
+            if(temp_ammount != 0):
+
+                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' imagenes')
+
+            else:
+
+                danger_report.append(str(referencia) + " no tiene ninguna imagen sociada")
+
+        
+        for filename in self.files:
+            
+            if filename not in self.relatedFiles: 
+                
+                warning_report.append('el archivo ' + filename + ' no fue asociado a ninguna referencia')
+
+        report = [info_report, warning_report, danger_report]
+
+        return report
+
+            

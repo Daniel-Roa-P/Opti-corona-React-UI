@@ -33,8 +33,10 @@ def upload_asset(request):
 
         asset = idenfy_asset(data[0]['uploadType'],data[1]['SKU'], data[2]['Nombre_archivo'], data[3]['manual'])
         
-        matrix = asset.create_automatic_matrix()
-        return JsonResponse(matrix, safe=False)
+        response = []
+        response.append(asset.create_automatic_matrix())
+        response.append(asset.generate_report())
+        return JsonResponse(response, safe=False)
     
 def idenfy_asset(uploadType, skuList, filesList, manual): 
 
