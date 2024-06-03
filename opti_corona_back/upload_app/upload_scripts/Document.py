@@ -7,13 +7,12 @@ class Document(Asset):
         super().__init__(sku_list, file_list, manual)
 
     def create_automatic_matrix(self):
-        
-        referencias = sorted(list(set(self.references)))
+
+        referencias = sorted(self.references)
 
         # list file and directories
         res = sorted(self.files)
         indice = 0
-        miniatura = ''
         
         if(self.manual):
 
@@ -33,7 +32,7 @@ class Document(Asset):
             
             for filename in res:
                 
-                if (str(referencia) in filename and 'pdf' in filename.lower()):
+                if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
             
                     if('ficha' in filename.lower() or 'ft' in filename.lower()):
                         
@@ -51,14 +50,14 @@ class Document(Asset):
                         
                         tipoArchivo.append(' ')
 
-                    extentionFile.append('PDF')
+                    extentionFile.append(filename.upper()[-3:])
                     skus.append(str(referencia))
                     nombre_archivos.append(filename)
 
                     indice = indice + 1
                     files.append(filename)
 
-            cantidades[referencia] = indice
+            self.cantidades[referencia] = indice
 
             indice = 0       
 
@@ -66,10 +65,38 @@ class Document(Asset):
 
         self.truncate_relationships()
 
-        for filename in res:
-            
-            if filename not in files: 
-                
-                print(filename)
-
         return self.relaciones_truncado
+    
+    def generate_report(self):
+        
+        info_report = []
+        warning_report = []
+        danger_report = []
+
+        for referencia in self.references: 
+
+            temp_ammount = self.cantidades[referencia]
+
+            if(temp_ammount != 0):
+
+                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' documentos')
+
+            else:
+
+                danger_report.append(str(referencia) + " no tiene ningun documento asociado")
+
+        for i in range(0 , len(self.relaciones[2])):
+
+            if(self.relaciones[2][i] == ' '): 
+
+                danger_report.append('el documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
+
+        for filename in self.files:
+            
+            if filename not in self.relatedFiles: 
+                
+                warning_report.append('el documento ' + filename + ' no fue asociado a ninguna referencia')
+
+        report = [info_report, warning_report, danger_report]
+
+        return report

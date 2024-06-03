@@ -9,7 +9,7 @@ class Images(Asset):
 
     def create_automatic_matrix(self):
 
-        referencias = sorted(list(set(self.references)))
+        referencias = sorted(self.references)
 
         # list file and directories
         res = sorted(self.files)
@@ -69,17 +69,15 @@ class Images(Asset):
 
             else:
 
-                danger_report.append('el archivo ' + str(referencia) + " no tiene ninguna imagen sociada")
+                danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
 
         
         for filename in self.files:
             
             if filename not in self.relatedFiles: 
                 
-                warning_report.append('el archivo ' + filename + ' no fue asociado a ninguna referencia')
+                warning_report.append('la imagen ' + filename + ' no fue asociada a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 
         return report
-
-            

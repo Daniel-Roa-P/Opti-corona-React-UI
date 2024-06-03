@@ -34,7 +34,6 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
           filename: selected_option + '-co-es',
           mimeType: 'text/csv',
           rowDelimiter: '\r\n',
-          rowHeaders: true
         });
       };
 

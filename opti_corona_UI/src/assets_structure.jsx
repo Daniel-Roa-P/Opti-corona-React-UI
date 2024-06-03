@@ -32,12 +32,12 @@ const assets_structure = {
 
         true: {
 
-            header: ['SKU', 'Nombre_archivo', 'Extension_archivo', 'Nombre_documento'],
+            header: ['SKU', 'Nombre_archivo', 'Nombre_documento' , 'Extension_archivo'],
             column_structure: [
                 { type: 'text' },
                 { type: 'text' },
-                { type: 'dropdown', source: ['PDF', 'TEXT', 'XML'] },
-                { type: 'text' }
+                { type: 'text' },
+                { type: 'dropdown', source: ['PDF', 'TEXT', 'XML'] }
             ]
 
         }, false: {

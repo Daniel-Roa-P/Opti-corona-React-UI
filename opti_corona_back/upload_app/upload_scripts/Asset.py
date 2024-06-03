@@ -2,8 +2,8 @@ class Asset:
 
     def __init__(self, references, files, manual = False):
 
-        self.references = set(references)
-        self.files = files
+        self.references = set(map(str,references))
+        self.files = set(map(str,files))
         self.relaciones = []
         self.relaciones_truncado = []
         self.manual = manual
