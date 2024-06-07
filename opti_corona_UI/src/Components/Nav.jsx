@@ -2,11 +2,24 @@ import { useState } from "react";
 import { Link } from "react-scroll";
 import { FaTimes } from "react-icons/fa";
 import { CiMenuFries } from "react-icons/ci"
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
 
+    const navigate = useNavigate();
+
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
+
+    const onUpload = () => {
+        console.log('patata')
+        navigate( '/upload/' );
+    }
+    
+    const onUpdate = () => {
+        console.log('patata 2')
+        navigate( '/update/' );
+    }
 
     const content = <>
 
@@ -15,12 +28,14 @@ const Nav = () => {
             <ul className="text-center text-xl p-20">
 
                 <Link spy={true} smooth={true} to="Upload_assets">
-                    <li className="my-4py-4 border-b botder-slate-800 hover:bg-slate-800 hover:rounded">Cargue</li>
+                    <li className="my-4py-4 border-b botder-slate-800 hover:bg-slate-800 hover:rounded">
+                    <button onClick={onUpload}>Cargue</button></li>
                 </Link>
 
 
                 <Link spy={true} smooth={true} to="Update_attributes">
-                    <li className="my-4py-4 border-b botder-slate-800 hover:bg-slate-800 hover:rounded" >Actualizacion</li>
+                    <li className="my-4py-4 border-b botder-slate-800 hover:bg-slate-800 hover:rounded">
+                    <button onClick={onUpload}>Cargue</button></li>
                 </Link>
 
             </ul>

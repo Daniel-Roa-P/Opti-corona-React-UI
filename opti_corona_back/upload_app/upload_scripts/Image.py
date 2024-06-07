@@ -76,7 +76,7 @@ class Images(Asset):
             
             if filename not in self.relatedFiles: 
                 
-                warning_report.append('la imagen ' + filename + ' no fue asociada a ninguna referencia')
+                warning_report.append('La imagen ' + filename + ' no fue asociada a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

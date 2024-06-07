@@ -89,13 +89,13 @@ class Document(Asset):
 
             if(self.relaciones[2][i] == ' '): 
 
-                danger_report.append('el documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
+                danger_report.append('El documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
 
         for filename in self.files:
             
             if filename not in self.relatedFiles: 
                 
-                warning_report.append('el documento ' + filename + ' no fue asociado a ninguna referencia')
+                warning_report.append('El documento ' + filename + ' no fue asociado a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 
