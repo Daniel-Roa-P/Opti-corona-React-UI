@@ -1,5 +1,5 @@
 import React from 'react';
-import { HotTable, HotColumn } from "@handsontable/react";
+import { HotTable } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
 import { sendAssetsJson } from '../api/task.api';
