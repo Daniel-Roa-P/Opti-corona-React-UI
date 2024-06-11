@@ -106,6 +106,15 @@ const attributes_structure = {
                 ]
             },
             {
+                "type": "checkbox"
+            },
+            {
+                "type": "checkbox"
+            },
+            {
+                "type": "checkbox"
+            },
+            {
                 "type": "numeric"
             },
             {
@@ -114,6 +123,9 @@ const attributes_structure = {
                     "M2",
                     "CM2"
                 ]
+            },
+            {
+                "type": "checkbox"
             },
             {
                 "type": "numeric"

@@ -46,6 +46,10 @@ def create_structure(df_atributes, df_values):
                 }
             
             estructura[clasificacion]['column_structure'].append(temp_lista)
+            
+        elif(df_atributes["type"][index] == 'Booleano'):
+
+            estructura[clasificacion]['column_structure'].append({ 'type': 'checkbox' })
 
     return estructura
 
