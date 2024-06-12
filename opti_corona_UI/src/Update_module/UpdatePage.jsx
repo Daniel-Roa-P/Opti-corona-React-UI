@@ -1,8 +1,9 @@
 import React from 'react';
 import Nav from '../Components/Nav';
-import { HotTable } from "@handsontable/react";
 import { attributes_structure } from "../attributes_structure";
 import { Attributes_selection } from '../Components/Attributes_selection';
+import { UpdateContext } from './UpdateContext';
+import { Impex_table } from '../Components/Impex_table';
 
 function UpdatePage() {
 
@@ -10,6 +11,15 @@ function UpdatePage() {
   const [header, setHeader] = React.useState([]);
   const [structure, setStructure] = React.useState([]);
   const [option, setOption] = React.useState(Object.keys(attributes_structure)[0]);
+
+  const {
+
+    selectedAttributes,
+    setSelectedAttributes,
+    impex,
+    setImpex,
+
+  } = React.useContext(UpdateContext)
 
   function handleOptionChange(e) {
     
@@ -21,18 +31,6 @@ function UpdatePage() {
 
     function getData() {
 
-      let stringHeader = []
-      let structureList = []
-
-      for (const property in attributes_structure) {
-
-        stringHeader.push(attributes_structure[property]["header"])
-        structureList.push(attributes_structure[property]["column_structure"])
-
-      }
-
-      setHeader(stringHeader.flat(1))
-      setStructure(structureList.flat(1))
       const data = new Array(1000) // number of rows
         .fill()
         .map((_, row) => new Array(header.length) // number of columns
@@ -69,9 +67,9 @@ function UpdatePage() {
                 defaultValue={option}
                 onChange={handleOptionChange}>
 
-                {Object.keys(attributes_structure).map((option) => (
+                {Object.keys(attributes_structure).map((clasification) => (
 
-                  <option key={option} value={option}>{option}</option>
+                  <option key={clasification} value={clasification}>{clasification}</option>
 
                 ))}
 
@@ -85,9 +83,12 @@ function UpdatePage() {
 
               <Attributes_selection
 
-                options={attributes_structure[option]["header"]}
+                clasification = {option}
+                options = {Object.keys(attributes_structure[option])}
+                selectedAttributes = {selectedAttributes}
+                setSelectedAttributes = {setSelectedAttributes}
 
-              />
+              />  
 
           </div>
 
@@ -97,18 +98,10 @@ function UpdatePage() {
 
           <div className='h-[80%] bg-[#f0f0f0]'>
 
-            <HotTable
-              data={atributes}
-              colHeaders={header}
-              columns={structure}
-              width="100%"
-              height="100%"
-              rowHeaders={true}
-              colWidths={150}
-              manualRowMove={true}
-              autoWrapRow={true}
-              autoWrapCol={true}
-              licenseKey="non-commercial-and-evaluation"
+            <Impex_table 
+            atributes = {atributes}
+            header = {header}
+            structure = {structure}
             />
 
           </div>

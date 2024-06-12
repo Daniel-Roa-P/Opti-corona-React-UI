@@ -1,4 +1,4 @@
-const attributes_structure = {
+{
     "corona": {
         "name": {
             "type": "text"
@@ -781,4 +781,3 @@ const attributes_structure = {
         }
     }
 }
-export { attributes_structure };

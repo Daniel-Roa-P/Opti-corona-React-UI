@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from '../Components/Nav';
 import Upload_table from '../Components/Upload_table';
 import Matrix_upload_table from '../Components/Matrix_upload_table';
-import { UploadContext } from '../Upload_context';
+import { UploadContext } from './UploadContext';
 import Reports_component from '../Components/Reports_component';
 
 function UploadPage(){
@@ -35,7 +35,7 @@ function UploadPage(){
       }
     
       return (
-    
+
         <div className='h-screen'>
     
           <div className='bg-slate-900 h-[10%]'>
