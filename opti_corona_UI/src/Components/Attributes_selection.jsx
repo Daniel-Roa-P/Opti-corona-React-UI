@@ -1,5 +1,4 @@
 import React from 'react';
-import { attributes_structure } from "../attributes_structure";
 
 function Attributes_selection({ options , selectedAttributes , setSelectedAttributes, clasification }) {
 

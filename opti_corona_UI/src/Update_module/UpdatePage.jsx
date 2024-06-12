@@ -7,9 +7,6 @@ import { Impex_table } from '../Components/Impex_table';
 
 function UpdatePage() {
 
-  const [atributes, setAtributes] = React.useState([]);
-  const [header, setHeader] = React.useState([]);
-  const [structure, setStructure] = React.useState([]);
   const [option, setOption] = React.useState(Object.keys(attributes_structure)[0]);
 
   const {
@@ -26,24 +23,6 @@ function UpdatePage() {
     setOption(e.target.value)
 
   }
-
-  React.useEffect(() => {
-
-    function getData() {
-
-      const data = new Array(1000) // number of rows
-        .fill()
-        .map((_, row) => new Array(header.length) // number of columns
-          .fill()
-          .map((_, column) => null)
-        );
-
-      setAtributes(data);
-    }
-
-    getData();
-
-  }, [])
 
   return (
 
@@ -94,17 +73,13 @@ function UpdatePage() {
 
         </div>
 
-        <div className="bg-blue-900 h-[90%] p-4">
-
-          <div className='h-[80%] bg-[#f0f0f0]'>
+        <div className="bg-blue-900 h-[85%] p-4">
 
             <Impex_table 
-            atributes = {atributes}
-            header = {header}
-            structure = {structure}
+            selectedAttributes = {selectedAttributes}
+            impex = {impex}
+            setImpex = {setImpex}
             />
-
-          </div>
 
         </div>
 
