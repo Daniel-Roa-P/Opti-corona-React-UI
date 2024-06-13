@@ -5,8 +5,12 @@ import { attributes_structure } from "../attributes_structure";
 function Impex_table({ selectedAttributes, impex, setImpex }) {
 
     const [attributes, setAtributes] = React.useState([]);
-    const [header, setHeader] = React.useState([]);
-    const [structure, setStructure] = React.useState([]);
+    const [header, setHeader] = React.useState(['code', '$catalogversion']);
+    const [structure, setStructure] = React.useState([{
+        "type": "text"
+    }, {
+        "type": "text"
+    }]);
 
     const hotTableComponent = React.useRef(null);
 
@@ -15,30 +19,49 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
         const hot = hotTableComponent.current.hotInstance;
         const exportPlugin = hot.getPlugin('exportFile');
 
-        exportPlugin.downloadFile('csv', {
-          bom: false,
-          columnDelimiter: ';',
-          columnHeaders: false,
-          exportHiddenColumns: true,
-          exportHiddenRows: true,
-          fileExtension: 'csv',
-          filename: 'IMPEX-co-es',
-          mimeType: 'text/csv',
-          rowDelimiter: '\r\n',
+        let table_data = hotTableComponent.current.hotInstance.getData()
+
+        let empty_row = Array.from({ length: header.length }, (_, index) => null)
+
+        let filtered_table = table_data.filter(function (el) {
+            if (!el.equals(empty_row)) {
+                return el
+            }
         });
-      };
+
+        console.log(attributes)
+        console.log(filtered_table)
+
+        hotTableComponent.current.hotInstance.loadData(filtered_table)
+
+        exportPlugin.downloadFile('csv', {
+            bom: false,
+            columnDelimiter: ';',
+            columnHeaders: false,
+            exportHiddenColumns: true,
+            exportHiddenRows: true,
+            fileExtension: 'csv',
+            filename: 'IMPEX-co-es',
+            mimeType: 'text/csv',
+            rowDelimiter: '\r\n',
+        });
+    };
 
     React.useEffect(() => {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
 
-        let tempHeader = []
-        let tempStructure = []
+        let tempHeader = [...header]
+        let tempStructure = [...structure]
 
         for (let i = 0; i < selectedAttributes.length; i++) {
 
-            tempHeader.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])
-            tempStructure.push(attributes_structure[Object.keys(selectedAttributes[i])][selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]])
+            if (!header.includes(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])) {
+
+                tempHeader.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])
+                tempStructure.push(attributes_structure[Object.keys(selectedAttributes[i])][selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]])
+
+            }
         }
 
         setHeader(tempHeader);
@@ -56,7 +79,11 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
             setAtributes(data);
         }
 
-        getData();
+        if (attributes.length == 0) {
+
+            getData();
+
+        }
 
     }, [selectedAttributes])
 
@@ -69,6 +96,10 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
                     data={attributes}
                     colHeaders={header}
                     columns={structure}
+                    hiddenColumns={{
+                        columns: [1],
+                        indicators: true,
+                    }}
                     width="100%"
                     height="100%"
                     ref={hotTableComponent}
