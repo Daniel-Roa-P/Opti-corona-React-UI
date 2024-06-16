@@ -183,9 +183,12 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
 
                         let fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
                         let selectedFile = event.target.files[0];
-
+                        console.log(selectedFile.type)
                         if (selectedFile) {
+                            console.log(selectedFile.type)
                             if (selectedFile && fileTypes.includes(selectedFile.type)) {
+
+                                console.log(selectedFile.type)
 
                                 let reader = new FileReader();
                                 reader.readAsArrayBuffer(selectedFile);

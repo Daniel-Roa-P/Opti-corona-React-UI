@@ -1,18 +1,17 @@
-import numpy as np
 from .Asset import Asset
 
 class Images(Asset):
 
-    def __init__(self, sku_list, file_list, manual):
-        
-        super().__init__(sku_list, file_list, manual)
+    def __init__(self, data):
+
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
         referencias = sorted(self.references)
 
         # list file and directories
-        res = sorted(self.files)
+        res = sorted(self.assets)
         indice = 0
         miniatura = ''
         
@@ -20,36 +19,44 @@ class Images(Asset):
 
             print('puto')
 
-        skus = []
-        nombre_archivos = []
-        posiciones = []
-        thumbnails = []
+        else:
 
-        for referencia in referencias:
-            
-            for filename in res:
+            self.create_dictionary_by_name()
+
+            skus = []
+            nombre_archivos = []
+            posiciones = []
+            thumbnails = []
+
+            for referencia in self.relations_dictionary:
                 
-                if (str(referencia) in filename):
+                print(referencia)
 
-                    if(indice == 0):
-                            
-                        miniatura = 'thumbnail'
+                for filename in self.relations_dictionary[str(referencia)]:
 
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
-                    posiciones.append(str(indice))
-                    thumbnails.append(miniatura)
+                    print(filename)
 
-                    indice = indice + 1
-                    miniatura = ''
-                    self.relatedFiles.append(filename)
+                    if (str(referencia) in filename):
 
-            self.cantidades[referencia] = indice
+                        if(indice == 0):
+                                
+                            miniatura = 'thumbnail'
 
-            indice = 0       
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
+                        posiciones.append(str(indice))
+                        thumbnails.append(miniatura)
 
-        self.relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
-        self.truncate_relationships()
+                        indice = indice + 1
+                        miniatura = ''
+                        self.relatedAssets.append(filename)
+
+                self.cantidades[referencia] = indice
+
+                indice = 0       
+
+            self.relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
+            self.truncate_relationships()
 
         return self.relaciones_truncado
     
@@ -72,9 +79,9 @@ class Images(Asset):
                 danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
 
         
-        for filename in self.files:
+        for filename in self.assets:
             
-            if filename not in self.relatedFiles: 
+            if filename not in self.relatedAssets: 
                 
                 warning_report.append('La imagen ' + filename + ' no fue asociada a ninguna referencia')
 

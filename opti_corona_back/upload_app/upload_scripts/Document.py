@@ -2,68 +2,69 @@ from .Asset import Asset
 
 class Document(Asset):
 
-    def __init__(self, sku_list, file_list, manual):
+    def __init__(self, data):
 
-        super().__init__(sku_list, file_list, manual)
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
         referencias = sorted(self.references)
 
         # list file and directories
-        res = sorted(self.files)
+        res = sorted(self.assets)
         indice = 0
         
         if(self.manual):
 
             print('puto')
 
-        files = []
-        cantidades = {}
+        else:
 
-        allowedTypes = ['pdf', 'xml', 'txt']
+            assets = []
 
-        skus = []
-        nombre_archivos = []
-        tipoArchivo = []
-        extentionFile = []
+            allowedTypes = ['pdf', 'xml', 'txt']
 
-        for referencia in referencias:
-            
-            for filename in res:
+            skus = []
+            nombre_archivos = []
+            tipoArchivo = []
+            extentionFile = []
+
+            for referencia in referencias:
                 
-                if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
-            
-                    if('ficha' in filename.lower() or 'ft' in filename.lower()):
-                        
-                        tipoArchivo.append('Ficha Técnica')
-                        
-                    elif('instructivo' in filename.lower()): 
-                        
-                        tipoArchivo.append('Instructivo Instalación')
-                        
-                    elif('fds' in filename.lower()):
+                for filename in res:
+                    
+                    if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
+                
+                        if('ficha' in filename.lower() or 'ft' in filename.lower()):
+                            
+                            tipoArchivo.append('Ficha Técnica')
+                            
+                        elif('instructivo' in filename.lower()): 
+                            
+                            tipoArchivo.append('Instructivo Instalación')
+                            
+                        elif('fds' in filename.lower()):
 
-                        tipoArchivo.append('Hoja de seguridad')
+                            tipoArchivo.append('Hoja de seguridad')
 
-                    else:
-                        
-                        tipoArchivo.append(' ')
+                        else:
+                            
+                            tipoArchivo.append(' ')
 
-                    extentionFile.append(filename.upper()[-3:])
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
+                        extentionFile.append(filename.upper()[-3:])
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
 
-                    indice = indice + 1
-                    files.append(filename)
+                        indice = indice + 1
+                        assets.append(filename)
 
-            self.cantidades[referencia] = indice
+                self.cantidades[referencia] = indice
 
-            indice = 0       
+                indice = 0       
 
-        self.relaciones = [ skus , nombre_archivos , tipoArchivo, extentionFile ]
+            self.relaciones = [ skus , nombre_archivos , tipoArchivo, extentionFile ]
 
-        self.truncate_relationships()
+            self.truncate_relationships()
 
         return self.relaciones_truncado
     
@@ -91,9 +92,9 @@ class Document(Asset):
 
                 danger_report.append('El documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
 
-        for filename in self.files:
+        for filename in self.assets:
             
-            if filename not in self.relatedFiles: 
+            if filename not in self.relatedAssets: 
                 
                 warning_report.append('El documento ' + filename + ' no fue asociado a ninguna referencia')
 

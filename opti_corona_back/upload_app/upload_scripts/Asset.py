@@ -1,14 +1,16 @@
 class Asset:
 
-    def __init__(self, references, files, manual = False):
+    def __init__(self, data, references, assets, manual = False):
 
         self.references = set(map(str,references))
-        self.files = set(map(str,files))
+        self.assets = set(map(str,assets))
         self.relaciones = []
         self.relaciones_truncado = []
         self.manual = manual
+        self.relatedAssets = []
         self.cantidades = {}
-        self.relatedFiles = []
+        self.relations_dictionary = {}
+        self.data = data
 
     def create_automatic_matrix(self):
         pass
@@ -29,3 +31,20 @@ class Asset:
             self.relaciones_truncado.append(temp_list)
 
         return self.relaciones_truncado
+    
+    def create_dictionary_by_name(self):
+
+        referencias = sorted(self.references)
+
+        # list file and directories
+        res = sorted(self.assets)
+
+        for referencia in referencias:
+            
+            self.relations_dictionary[str(referencia)] = []
+
+            for filename in res:
+
+                if(str(referencia) in filename):
+
+                    self.relations_dictionary[str(referencia)].append(filename)
