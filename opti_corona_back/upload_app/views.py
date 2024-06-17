@@ -32,7 +32,6 @@ def upload_asset(request):
         data = json.loads(request.body)
 
         asset = idenfy_asset(data)
-        #asset = idenfy_asset(,data[1]['SKU'], data[2]['Nombre_archivo'], data[3]['manual'])
 
         response = []
         response.append(asset.create_automatic_matrix())

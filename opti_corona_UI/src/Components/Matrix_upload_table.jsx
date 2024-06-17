@@ -72,7 +72,7 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
 
             <div className='h-[10%] p-4'>
 
-                <button className='bg-green-500 w-full h-full rounded-lg' onClick={buttonClickCallback}>Exportar Matriz de relacionamiento</button>
+                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800' onClick={buttonClickCallback}>Exportar Matriz de relacionamiento</button>
 
             </div>
 

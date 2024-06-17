@@ -4,14 +4,10 @@ class Images(Asset):
 
     def __init__(self, data):
 
-        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
-        referencias = sorted(self.references)
-
-        # list file and directories
-        res = sorted(self.assets)
         indice = 0
         miniatura = ''
         
@@ -21,7 +17,13 @@ class Images(Asset):
 
         else:
 
-            self.create_dictionary_by_name()
+            if(self.asociation == 'name'):
+                
+                self.create_dictionary_by_name()
+
+            else:
+
+                self.create_dictionary_by_row()
 
             skus = []
             nombre_archivos = []
@@ -29,27 +31,21 @@ class Images(Asset):
             thumbnails = []
 
             for referencia in self.relations_dictionary:
-                
-                print(referencia)
 
                 for filename in self.relations_dictionary[str(referencia)]:
 
-                    print(filename)
+                    if(indice == 0):
+                            
+                        miniatura = 'thumbnail'
 
-                    if (str(referencia) in filename):
+                    skus.append(str(referencia))
+                    nombre_archivos.append(filename)
+                    posiciones.append(str(indice))
+                    thumbnails.append(miniatura)
 
-                        if(indice == 0):
-                                
-                            miniatura = 'thumbnail'
-
-                        skus.append(str(referencia))
-                        nombre_archivos.append(filename)
-                        posiciones.append(str(indice))
-                        thumbnails.append(miniatura)
-
-                        indice = indice + 1
-                        miniatura = ''
-                        self.relatedAssets.append(filename)
+                    indice = indice + 1
+                    miniatura = ''
+                    self.relatedAssets.append(filename)
 
                 self.cantidades[referencia] = indice
 
@@ -66,7 +62,7 @@ class Images(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in self.references: 
+        for referencia in sorted(set(map(str,self.references))):
 
             temp_ammount = self.cantidades[referencia]
 

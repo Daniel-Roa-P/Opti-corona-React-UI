@@ -9,36 +9,36 @@ class Blueprints(Asset):
 
     def create_automatic_matrix(self):
 
-        referencias = sorted(self.references)
-
-        res = sorted(self.assets)
         indice = 0
         
         if(self.manual):
 
             print('puto')
 
-        skus = []
-        nombre_archivos = []
+        else:
 
-        for referencia in referencias:
-            
-            for filename in res:
-                
-                if (str(referencia) in filename):
+            self.create_dictionary_by_name()
+            skus = []
+            nombre_archivos = []
 
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
+            for referencia in self.relations_dictionary:
 
-                    indice = indice + 1
-                    self.relatedAssets.append(filename)
+                for filename in self.relations_dictionary[str(referencia)]:
+                    
+                    if (str(referencia) in filename):
 
-            self.cantidades[referencia] = indice
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
 
-            indice = 0       
+                        indice = indice + 1
+                        self.relatedAssets.append(filename)
 
-        self.relaciones = [ skus , nombre_archivos]
-        self.truncate_relationships()
+                self.cantidades[referencia] = indice
+
+                indice = 0       
+
+            self.relaciones = [ skus , nombre_archivos]
+            self.truncate_relationships()
 
         return self.relaciones_truncado
     

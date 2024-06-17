@@ -8,38 +8,39 @@ class Videos(Asset):
 
     def create_automatic_matrix(self):
 
-        referencias = sorted(self.references)
-
-        res = sorted(self.assets)
         indice = 0
         
         if(self.manual):
 
             print('puto')
 
-        skus = []
-        videos_urls = []
-        thumbnails_urls = []
+        else:
 
-        for referencia in referencias:
-            
-            for filename in res:
-                
-                if (str(referencia) in filename):
+            self.create_dictionary_by_name()
 
-                    skus.append(str(referencia))
-                    videos_urls.append('https://youtu.be/' +  filename)
-                    thumbnails_urls.append('https://i.ytimg.com/vi/' + filename + '/hqdefault.jpg')
+            skus = []
+            videos_urls = []
+            thumbnails_urls = []
 
-                    indice = indice + 1
-                    self.relatedAssets.append(filename)
+            for referencia in self.relations_dictionary:
 
-            self.cantidades[referencia] = indice
+                for filename in self.relations_dictionary[str(referencia)]:
+                    
+                    if (str(referencia) in filename):
 
-            indice = 0       
+                        skus.append(str(referencia))
+                        videos_urls.append('https://youtu.be/' +  filename)
+                        thumbnails_urls.append('https://i.ytimg.com/vi/' + filename + '/hqdefault.jpg')
 
-        self.relaciones = [ skus , videos_urls, thumbnails_urls]
-        self.truncate_relationships()
+                        indice = indice + 1
+                        self.relatedAssets.append(filename)
+
+                self.cantidades[referencia] = indice
+
+                indice = 0       
+
+            self.relaciones = [ skus , videos_urls, thumbnails_urls]
+            self.truncate_relationships()
 
         return self.relaciones_truncado
     

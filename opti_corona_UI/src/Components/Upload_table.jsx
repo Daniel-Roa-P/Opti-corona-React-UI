@@ -33,17 +33,17 @@ Array.prototype.equals = function (array) {
 
 Object.defineProperty(Array.prototype, "equals", {enumerable: false});
 
-const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReporte }) => {
+const Upload_table = ({ selected_option, modifyManually, setRelaciones, setReporte }) => {
 
     const [referencias, setReferencias] = React.useState([]);
-
     const hotTableComponent = React.useRef(null);
+    const [asociation, setAsociation] = React.useState('name');
 
     React.useEffect(() => {
 
         function getData() {
 
-            const data = new Array(1000) // number of rows
+            const data = new Array(1000) 
                 .fill()
                 .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
                     .fill()
@@ -117,15 +117,12 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
 
         }
 
+        objects_list.push({'asociation': asociation})
         objects_list.push({'manual' : modifyManually})
 
         let references_assets_JSON = JSON.stringify(objects_list);
-
-        console.log(references_assets_JSON);
         
         let response = await sendAssetsJson(references_assets_JSON);
-
-        console.log(response.data)
 
         setRelaciones(response.data[0])
         setReporte(response.data[1])
@@ -140,7 +137,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
 
                 <div>
 
-                    <label htmlFor="upload_filenames" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde carpeta</label>
+                    <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
                     <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
 
                         const fileList = event.target.files;
@@ -170,7 +167,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
                         }
 
                         setReferencias(newReferences);
-                        //console.log(referencias);
+                        setAsociation('name')
 
                     }} />
 
@@ -178,7 +175,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
 
                 <div>
 
-                    <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-8 text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer activos digitales desde hoja de calculo</label>
+                    <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde hoja de calculo<br></br>(asociación por fila)</label>
                     <input id="upload_calc_sheet" className='opacity-0' type="file" multiple={false} onChange={(event) => {
 
                         let fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
@@ -220,7 +217,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
                                     }
 
                                     setReferencias(newReferences);
-                                    console.log(referencias);
+                                    setAsociation('row')
 
                                 }
                             }
@@ -252,7 +249,7 @@ const Upload_table = ({ selected_option, modifyManually,setRelaciones, setReport
 
             <div className='h-[10%] p-4'>
 
-                <button className='bg-green-500 w-full h-full rounded-lg' onClick={send_json}>Generar Matriz de relacionamiento</button>
+                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800' onClick={send_json}>Generar Matriz de relacionamiento</button>
 
             </div>
 

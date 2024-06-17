@@ -7,18 +7,16 @@ class Document(Asset):
         super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
-
-        referencias = sorted(self.references)
-
-        # list file and directories
-        res = sorted(self.assets)
-        indice = 0
         
+        indice = 0
+
         if(self.manual):
 
             print('puto')
 
         else:
+
+            self.create_dictionary_by_name()
 
             assets = []
 
@@ -29,9 +27,9 @@ class Document(Asset):
             tipoArchivo = []
             extentionFile = []
 
-            for referencia in referencias:
-                
-                for filename in res:
+            for referencia in self.relations_dictionary:
+
+                for filename in self.relations_dictionary[str(referencia)]:
                     
                     if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
                 

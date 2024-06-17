@@ -9,43 +9,41 @@ class Rfa(Asset):
 
     def create_automatic_matrix(self):
 
-        referencias = sorted(self.references)
-
-        res = sorted(self.assets)
         indice = 0
         
         if(self.manual):
 
             print('puto')
 
-        assets = []
+        else:
 
-        allowedTypes = ['rfa']
+            self.create_dictionary_by_name()
+            assets = []
+            allowedTypes = ['rfa']
+            skus = []
+            nombre_archivos = []
+            tipoArchivo = []
 
-        skus = []
-        nombre_archivos = []
-        tipoArchivo = []
+            for referencia in self.relations_dictionary:
 
-        for referencia in referencias:
-            
-            for filename in res:
+                for filename in self.relations_dictionary[str(referencia)]:
+                    
+                    if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
                 
-                if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
-            
-                    tipoArchivo.append('Modelo BIM')
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
+                        tipoArchivo.append('Modelo BIM')
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
 
-                    indice = indice + 1
-                    assets.append(filename)
+                        indice = indice + 1
+                        assets.append(filename)
 
-            self.cantidades[referencia] = indice
+                self.cantidades[referencia] = indice
 
-            indice = 0       
+                indice = 0       
 
-        self.relaciones = [ skus , nombre_archivos , tipoArchivo ]
+            self.relaciones = [ skus , nombre_archivos , tipoArchivo ]
 
-        self.truncate_relationships()
+            self.truncate_relationships()
 
         return self.relaciones_truncado
     
