@@ -54,7 +54,7 @@ class Images(Asset):
             self.relaciones = [ skus , nombre_archivos , nombre_archivos , nombre_archivos , nombre_archivos, posiciones , thumbnails ]
             self.truncate_relationships()
 
-        return self.relaciones_truncado
+            return self.relaciones_truncado
     
     def generate_report(self):
         

@@ -12,7 +12,6 @@ const Reports_component = ({ reporte }) => {
         setWarning(reporte[1])
         setDanger(reporte[2])
 
-
     }, [reporte])
 
     return (
@@ -23,7 +22,7 @@ const Reports_component = ({ reporte }) => {
 
                 {info && info.map((report) => (
 
-                    <p className='p-2' key={report.split(' ')[0]}> {report} </p>
+                    <p className='p-2 break-all' key={report.split(' ')[0]}> {report} </p>
 
                 ))}
 
@@ -32,9 +31,7 @@ const Reports_component = ({ reporte }) => {
 
                 {warning && warning.map((report) => (
 
-
-                    <p className='p-2' key={report}> {report} </p>
-
+                    <p className='p-2 break-all' key={report}> {report} </p>
 
                 ))}
 
@@ -43,9 +40,7 @@ const Reports_component = ({ reporte }) => {
 
                 {danger && danger.map((report) => (
 
-
-                    <p className='p-2' key={report.split(' ')[0]}> {report} </p>
-
+                    <p className='p-2 break-all' key={report.split(' ')[0]}> {report} </p>
 
                 ))}
 

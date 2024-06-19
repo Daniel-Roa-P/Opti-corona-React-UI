@@ -13,11 +13,18 @@ class Blueprints(Asset):
         
         if(self.manual):
 
-            print('puto')
+            return self.create_manual_matrix()
 
         else:
 
-            self.create_dictionary_by_name()
+            if(self.asociation == 'name'):
+                
+                self.create_dictionary_by_name()
+
+            else:
+
+                self.create_dictionary_by_row()
+            
             skus = []
             nombre_archivos = []
 
@@ -40,7 +47,7 @@ class Blueprints(Asset):
             self.relaciones = [ skus , nombre_archivos]
             self.truncate_relationships()
 
-        return self.relaciones_truncado
+            return self.relaciones_truncado
     
     def generate_report(self):
         

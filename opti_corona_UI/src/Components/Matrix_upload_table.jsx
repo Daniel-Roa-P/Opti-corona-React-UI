@@ -15,9 +15,14 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
     React.useEffect(() => {
 
         hotTableComponent.current.hotInstance.updateData(relaciones)
-        let table_data = hotTableComponent.current.hotInstance.getData()
 
     }, [relaciones])
+
+    React.useEffect(() => {
+
+        hotTableComponent.current.hotInstance.updateData([])
+
+    }, [selected_option])
 
     const buttonClickCallback = () => {
 
