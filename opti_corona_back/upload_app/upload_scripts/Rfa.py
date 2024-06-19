@@ -53,23 +53,25 @@ class Rfa(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in self.references: 
+        if(not self.manual):
 
-            temp_ammount = self.cantidades[referencia]
+            for referencia in self.references: 
 
-            if(temp_ammount != 0):
+                temp_ammount = self.cantidades[referencia]
 
-                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' modelos BIM')
+                if(temp_ammount != 0):
 
-            else:
+                    info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' modelos BIM')
 
-                danger_report.append(str(referencia) + " no tiene ningun modelo BIM asociado")
+                else:
 
-        for filename in self.assets:
-            
-            if filename not in self.relatedAssets: 
+                    danger_report.append(str(referencia) + " no tiene ningun modelo BIM asociado")
+
+            for filename in self.assets:
                 
-                warning_report.append('El modelo BIM ' + filename + ' no fue asociado a ninguna referencia')
+                if filename not in self.relatedAssets: 
+                    
+                    warning_report.append('El modelo BIM ' + filename + ' no fue asociado a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

@@ -14,24 +14,24 @@ Array.prototype.equals = function (array) {
 
     if (!array)
         return false;
-    if(array === this)
+    if (array === this)
         return true;
     if (this.length != array.length)
         return false;
 
-    for (var i = 0, l=this.length; i < l; i++) {
+    for (var i = 0, l = this.length; i < l; i++) {
         if (this[i] instanceof Array && array[i] instanceof Array) {
             if (!this[i].equals(array[i]))
-                return false;       
-        }           
-        else if (this[i] != array[i]) { 
-            return false;   
-        }           
-    }       
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            return false;
+        }
+    }
     return true;
 }
 
-Object.defineProperty(Array.prototype, "equals", {enumerable: false});
+Object.defineProperty(Array.prototype, "equals", { enumerable: false });
 
 const Upload_table = ({ selected_option, modifyManually, setRelaciones, setReporte }) => {
 
@@ -43,7 +43,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         function getData() {
 
-            const data = new Array(1000) 
+            const data = new Array(1000)
                 .fill()
                 .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
                     .fill()
@@ -72,7 +72,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
             const filteredArray = item
                 .map((subItem) => removeNullValues(subItem))
                 .flat(1)
-                .filter((subItem) => 
+                .filter((subItem) =>
                     subItem !== null && subItem !== undefined);
             return filteredArray.length > 0 ? filteredArray : null;
         } else {
@@ -85,23 +85,24 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         let n_columnas = assets_structure[selected_option][modifyManually].header.length;
         let table_data = hotTableComponent.current.hotInstance.getData()
-        let empty_row = Array.from({length: n_columnas}, (_, index) => null)
+        let empty_row = Array.from({ length: n_columnas }, (_, index) => null)
 
         let filtered_table = table_data.filter(function (el) {
-            if(!el.equals(empty_row)){
+            if (!el.equals(empty_row)) {
                 return el
             }
-          });
+        });
 
         let objects_list = []
+        let columns_sizes = []
 
-        objects_list.push({'uploadType' : selected_option})
+        objects_list.push({ 'uploadType': selected_option })
 
-        for (let i = 0; i < n_columnas ; i++) {
+        for (let i = 0; i < n_columnas; i++) {
 
             let temp_column = removeNullValues(getCol(filtered_table, i))
 
-            if(temp_column === null){
+            if (temp_column === null) {
 
                 temp_column = []
 
@@ -113,19 +114,27 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             }
 
+            columns_sizes.push(temp_column.length);
             objects_list.push(temp_object);
 
         }
 
-        objects_list.push({'asociation': asociation})
-        objects_list.push({'manual' : modifyManually})
+        if (asociation == 'row' && (columns_sizes[0] != columns_sizes[1]) && !modifyManually) {
 
-        let references_assets_JSON = JSON.stringify(objects_list);
-        
-        let response = await sendAssetsJson(references_assets_JSON);
+            alert('Por favor ingrese relaciones uno a uno en la tabla')
 
-        setRelaciones(response.data[0])
-        setReporte(response.data[1])
+        } else {
+
+            objects_list.push({ 'asociation': asociation })
+            objects_list.push({ 'manual': modifyManually })
+
+            let references_assets_JSON = JSON.stringify(objects_list);
+            let response = await sendAssetsJson(references_assets_JSON);
+
+            setRelaciones(response.data[0])
+            setReporte(response.data[1])
+
+        }
 
     }
 
@@ -146,9 +155,6 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
                             return file.name;
 
                         })
-
-                        //console.log(fileNames);
-                        //console.log(referencias);
 
                         let newReferences = [...referencias]
 

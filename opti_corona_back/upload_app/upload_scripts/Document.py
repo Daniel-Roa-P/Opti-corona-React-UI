@@ -72,29 +72,31 @@ class Document(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in self.references: 
+        if(not self.manual):
 
-            temp_ammount = self.cantidades[referencia]
+            for referencia in self.references: 
 
-            if(temp_ammount != 0):
+                temp_ammount = self.cantidades[referencia]
 
-                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' documentos')
+                if(temp_ammount != 0):
 
-            else:
+                    info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' documentos')
 
-                danger_report.append(str(referencia) + " no tiene ningun documento asociado")
+                else:
 
-        for i in range(0 , len(self.relaciones[2])):
+                    danger_report.append(str(referencia) + " no tiene ningun documento asociado")
 
-            if(self.relaciones[2][i] == ' '): 
+            for i in range(0 , len(self.relaciones[2])):
 
-                danger_report.append('El documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
+                if(self.relaciones[2][i] == ' '): 
 
-        for filename in self.assets:
-            
-            if filename not in self.relatedAssets: 
+                    danger_report.append('El documento ' + self.relaciones[1][i] + " no pudo ser clasificado")
+
+            for filename in self.assets:
                 
-                warning_report.append('El documento ' + filename + ' no fue asociado a ninguna referencia')
+                if filename not in self.relatedAssets: 
+                    
+                    warning_report.append('El documento ' + filename + ' no fue asociado a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

@@ -48,24 +48,26 @@ class Blueprints(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in self.references: 
+        if(not self.manual):
 
-            temp_ammount = self.cantidades[referencia]
+            for referencia in self.references: 
 
-            if(temp_ammount != 0):
+                temp_ammount = self.cantidades[referencia]
 
-                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' planos')
+                if(temp_ammount != 0):
 
-            else:
+                    info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' planos')
 
-                danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
+                else:
 
-        
-        for filename in self.assets:
+                    danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
+
             
-            if filename not in self.relatedAssets: 
+            for filename in self.assets:
                 
-                warning_report.append('El plano ' + filename + ' no fue asociada a ninguna referencia')
+                if filename not in self.relatedAssets: 
+                    
+                    warning_report.append('El plano ' + filename + ' no fue asociada a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

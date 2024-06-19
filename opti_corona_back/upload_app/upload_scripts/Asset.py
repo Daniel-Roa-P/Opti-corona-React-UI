@@ -60,3 +60,12 @@ class Asset:
                 self.relations_dictionary[str(referencias[i])] = []
 
             self.relations_dictionary[str(referencias[i])].append(archivos[i])
+
+    def create_manual_matrix(self):
+
+        for i in range (1,(len(self.data)-2)):
+
+            self.relaciones.append(list(self.data[i].values())[0])
+
+        self.truncate_relationships()
+        return self.relaciones_truncado

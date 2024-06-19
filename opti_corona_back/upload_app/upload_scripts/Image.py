@@ -13,7 +13,7 @@ class Images(Asset):
         
         if(self.manual):
 
-            print('puto')
+            return self.create_manual_matrix()
 
         else:
 
@@ -62,24 +62,26 @@ class Images(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in sorted(set(map(str,self.references))):
+        if(not self.manual):
 
-            temp_ammount = self.cantidades[referencia]
+            for referencia in sorted(set(map(str,self.references))):
 
-            if(temp_ammount != 0):
+                temp_ammount = self.cantidades[referencia]
 
-                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' imagenes')
+                if(temp_ammount != 0):
 
-            else:
+                    info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' imagenes')
 
-                danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
+                else:
 
-        
-        for filename in self.assets:
+                    danger_report.append(str(referencia) + " no tiene ninguna imagen asociada")
+
             
-            if filename not in self.relatedAssets: 
+            for filename in self.assets:
                 
-                warning_report.append('La imagen ' + filename + ' no fue asociada a ninguna referencia')
+                if filename not in self.relatedAssets: 
+                    
+                    warning_report.append('La imagen ' + filename + ' no fue asociada a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

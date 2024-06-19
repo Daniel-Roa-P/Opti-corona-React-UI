@@ -50,24 +50,26 @@ class Videos(Asset):
         warning_report = []
         danger_report = []
 
-        for referencia in self.references: 
+        if(not self.manual):
 
-            temp_ammount = self.cantidades[referencia]
+            for referencia in self.references: 
 
-            if(temp_ammount != 0):
+                temp_ammount = self.cantidades[referencia]
 
-                info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' videos')
+                if(temp_ammount != 0):
 
-            else:
+                    info_report.append(str(referencia) + " se le asocio " + str(temp_ammount) + ' videos')
 
-                danger_report.append(str(referencia) + " no tiene ningun video asociado")
+                else:
 
-        
-        for filename in self.assets:
+                    danger_report.append(str(referencia) + " no tiene ningun video asociado")
+
             
-            if filename not in self.relatedAssets: 
+            for filename in self.assets:
                 
-                warning_report.append('El plano ' + filename + ' no fue asociado a ninguna referencia')
+                if filename not in self.relatedAssets: 
+                    
+                    warning_report.append('El plano ' + filename + ' no fue asociado a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 
