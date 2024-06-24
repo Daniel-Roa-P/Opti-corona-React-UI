@@ -142,9 +142,11 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         <>
 
-            <div className='h-[10%] grid grid-cols-2 gap-8 place-content-center'>
+            <div className= {(selected_option != 'prices' && selected_option != 'videos') ? 'h-[10%] flex flex-nowrap': 'h-[10%] flex justify-center'} >
 
-                <div>
+            {(selected_option != 'prices' && selected_option != 'videos') ? 
+
+                <div className='m-2'>
 
                     <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
                     <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
@@ -176,10 +178,12 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
                         setAsociation('name')
 
                     }} />
-
+                
                 </div>
 
-                <div>
+                : null }
+                
+                <div className='m-2'>
 
                     <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde hoja de calculo<br></br>(asociación por fila)</label>
                     <input id="upload_calc_sheet" className='opacity-0' type="file" multiple={false} onChange={(event) => {

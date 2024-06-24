@@ -1,11 +1,10 @@
-import numpy as np
 from .Asset import Asset
 
 class Blueprints(Asset):
 
     def __init__(self, data):
 
-        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
@@ -32,13 +31,11 @@ class Blueprints(Asset):
 
                 for filename in self.relations_dictionary[str(referencia)]:
                     
-                    if (str(referencia) in filename):
+                    skus.append(str(referencia))
+                    nombre_archivos.append(filename)
 
-                        skus.append(str(referencia))
-                        nombre_archivos.append(filename)
-
-                        indice = indice + 1
-                        self.relatedAssets.append(filename)
+                    indice = indice + 1
+                    self.relatedAssets.append(filename)
 
                 self.cantidades[referencia] = indice
 
@@ -57,7 +54,7 @@ class Blueprints(Asset):
 
         if(not self.manual):
 
-            for referencia in self.references: 
+            for referencia in sorted(set(map(str,self.references))): 
 
                 temp_ammount = self.cantidades[referencia]
 

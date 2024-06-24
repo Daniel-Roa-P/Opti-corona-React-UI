@@ -6,6 +6,7 @@ from .upload_scripts.Document import Document
 from .upload_scripts.Blueprints import Blueprints
 from .upload_scripts.Rfa import Rfa
 from .upload_scripts.Videos import Videos
+from .upload_scripts.Prices import Prices
 
 def hello(request):
 
@@ -61,3 +62,7 @@ def idenfy_asset(data):
     elif(uploadType == "videos"):
 
         return Videos(data)
+    
+    elif(uploadType == "prices"):
+
+        return Prices(data)

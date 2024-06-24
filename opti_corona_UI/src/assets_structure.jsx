@@ -108,17 +108,16 @@ const assets_structure = {
                 { type: 'numeric' },
                 { type: 'numeric' },
                 { type: 'checkbox' },
-                { type: 'text' }
+                { type: 'dropdown', source: ['ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
             ]
 
         }, false: {
 
-            header: ['SKU', 'Precio', 'Divisa', 'Zona'],
+            header: ['SKU', 'Precio', 'Zona'],
             column_structure: [
                 { type: 'text' },
-                { type: 'numeric', readOnly: true },
-                { type: 'dropdown', source: ['COP', 'MXN', 'USD'], readOnly: true },
-                { type: 'text', readOnly: true }
+                { type: 'numeric'},
+                { type: 'dropdown', source: ['ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
             ]
 
         }

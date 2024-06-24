@@ -1,11 +1,10 @@
-import numpy as np
 from .Asset import Asset
 
 class Rfa(Asset):
 
     def __init__(self, data):
 
-        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
@@ -24,7 +23,7 @@ class Rfa(Asset):
             else:
 
                 self.create_dictionary_by_row()
-                
+
             assets = []
             allowedTypes = ['rfa']
             skus = []
@@ -35,16 +34,16 @@ class Rfa(Asset):
 
                 for filename in self.relations_dictionary[str(referencia)]:
                     
-                    if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
+                    if (filename.lower()[-3:] in allowedTypes):
                 
                         tipoArchivo.append('Modelo BIM')
                         skus.append(str(referencia))
                         nombre_archivos.append(filename)
 
                         indice = indice + 1
-                        assets.append(filename)
+                        self.relatedAssets.append(filename)
 
-                self.cantidades[referencia] = indice
+                        self.cantidades[referencia] = indice
 
                 indice = 0       
 
@@ -62,7 +61,7 @@ class Rfa(Asset):
 
         if(not self.manual):
 
-            for referencia in self.references: 
+            for referencia in sorted(set(map(str,self.references))): 
 
                 temp_ammount = self.cantidades[referencia]
 

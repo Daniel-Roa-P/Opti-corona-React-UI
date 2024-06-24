@@ -53,6 +53,9 @@ class Asset:
         referencias = list(map(str,self.references))
         archivos = list(map(str,self.assets))
 
+        print(referencias)
+        print(archivos)
+
         for i in range(0, len(referencias)):
             
             if(str(referencias[i]) not in self.relations_dictionary):

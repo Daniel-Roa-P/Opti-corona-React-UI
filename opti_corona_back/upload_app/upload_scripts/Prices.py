@@ -1,10 +1,11 @@
+import numpy as np
 from .Asset import Asset
 
-class Videos(Asset):
+class Prices(Asset):
 
     def __init__(self, data):
 
-        super().__init__(data, data[1]['SKU'], data[2]['ID_Video'], data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
+        super().__init__(data, data[1]['SKU'], map(lambda precio, zona: str(precio) + ',' + str(zona), data[2]['Precio'], data[3]['Zona']), data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
@@ -19,25 +20,37 @@ class Videos(Asset):
             self.create_dictionary_by_row()
 
             skus = []
-            videos_urls = []
-            thumbnails_urls = []
+            unidad_de_venta = []
+            divisa = []
+            precio = []
+            zonas = []
+            a = []
+            b = []
+            booleano = []
 
             for referencia in self.relations_dictionary:
 
-                for filename in self.relations_dictionary[str(referencia)]:
+                for price in self.relations_dictionary[str(referencia)]:
+
+                    temp = price.split(',')
 
                     skus.append(str(referencia))
-                    videos_urls.append('https://youtu.be/' +  filename)
-                    thumbnails_urls.append('https://i.ytimg.com/vi/' + filename + '/hqdefault.jpg')
+                    unidad_de_venta.append('pieces')
+                    divisa.append('COP')
+                    a.append('1')
+                    b.append('1')
+                    booleano.append('True')
+                    precio.append(temp[0])
+                    zonas.append(temp[1])
 
                     indice = indice + 1
-                    self.relatedAssets.append(filename)
+                    self.relatedAssets.append(price)
 
                 self.cantidades[referencia] = indice
 
                 indice = 0       
 
-            self.relaciones = [ skus , videos_urls, thumbnails_urls]
+            self.relaciones = [ skus , unidad_de_venta, divisa, precio, a, b, booleano, zonas]
             self.truncate_relationships()
 
             return self.relaciones_truncado

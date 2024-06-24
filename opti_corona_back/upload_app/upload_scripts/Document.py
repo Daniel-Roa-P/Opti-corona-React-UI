@@ -4,7 +4,7 @@ class Document(Asset):
 
     def __init__(self, data):
 
-        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 1]['manual'])
+        super().__init__(data, data[1]['SKU'], data[2]['Nombre_archivo'], data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
         
@@ -24,8 +24,6 @@ class Document(Asset):
 
                 self.create_dictionary_by_row()
 
-            assets = []
-
             allowedTypes = ['pdf', 'xml', 'txt']
 
             skus = []
@@ -37,7 +35,7 @@ class Document(Asset):
 
                 for filename in self.relations_dictionary[str(referencia)]:
                     
-                    if (str(referencia) in filename and filename.lower()[-3:] in allowedTypes):
+                    if (filename.lower()[-3:] in allowedTypes):
                 
                         if('ficha' in filename.lower() or 'ft' in filename.lower()):
                             
@@ -60,7 +58,7 @@ class Document(Asset):
                         nombre_archivos.append(filename)
 
                         indice = indice + 1
-                        assets.append(filename)
+                        self.relatedAssets.append(filename)
 
                 self.cantidades[referencia] = indice
 
@@ -80,7 +78,7 @@ class Document(Asset):
 
         if(not self.manual):
 
-            for referencia in self.references: 
+            for referencia in sorted(set(map(str,self.references))): 
 
                 temp_ammount = self.cantidades[referencia]
 
