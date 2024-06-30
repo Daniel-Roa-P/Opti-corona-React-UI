@@ -66,7 +66,7 @@ class Videos(Asset):
                 
                 if filename not in self.relatedAssets: 
                     
-                    warning_report.append('El plano ' + filename + ' no fue asociado a ninguna referencia')
+                    warning_report.append('El video ' + filename + ' no fue asociado a ninguna referencia')
 
         report = [info_report, warning_report, danger_report]
 

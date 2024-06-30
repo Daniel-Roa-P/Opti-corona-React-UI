@@ -123,6 +123,10 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             alert('Por favor ingrese relaciones uno a uno en la tabla')
 
+        } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[2]) && columns_sizes[2] != 0) && !modifyManually){
+
+            alert('Por favor ingrese relaciones uno a uno en la tabla')
+
         } else {
 
             objects_list.push({ 'asociation': asociation })
@@ -142,47 +146,47 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         <>
 
-            <div className= {(selected_option != 'prices' && selected_option != 'videos') ? 'h-[10%] flex flex-nowrap': 'h-[10%] flex justify-center'} >
+            <div className={(selected_option != 'prices' && selected_option != 'videos') ? 'h-[10%] flex flex-nowrap' : 'h-[10%] flex justify-center'} >
 
-            {(selected_option != 'prices' && selected_option != 'videos') ? 
+                {(selected_option != 'prices' && selected_option != 'videos') ?
 
-                <div className='m-2'>
+                    <div className='m-2'>
 
-                    <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
-                    <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
+                        <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
+                        <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
 
-                        const fileList = event.target.files;
-                        const fileNames = Array.from(fileList).map((file) => {
+                            const fileList = event.target.files;
+                            const fileNames = Array.from(fileList).map((file) => {
 
-                            return file.name;
+                                return file.name;
 
-                        })
+                            })
 
-                        let newReferences = [...referencias]
+                            let newReferences = [...referencias]
 
-                        for (let i = 0; i < referencias.length; i++) {
+                            for (let i = 0; i < referencias.length; i++) {
 
-                            if ((fileNames.length) > i) {
+                                if ((fileNames.length) > i) {
 
-                                newReferences[i][1] = fileNames[i];
+                                    newReferences[i][1] = fileNames[i];
 
-                            } else {
+                                } else {
 
-                                newReferences[i][1] = null;
+                                    newReferences[i][1] = null;
+
+                                }
 
                             }
 
-                        }
+                            setReferencias(newReferences);
+                            setAsociation('name')
 
-                        setReferencias(newReferences);
-                        setAsociation('name')
+                        }} />
 
-                    }} />
-                
-                </div>
+                    </div>
 
-                : null }
-                
+                    : null}
+
                 <div className='m-2'>
 
                     <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde hoja de calculo<br></br>(asociación por fila)</label>
@@ -190,46 +194,87 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
                         let fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
                         let selectedFile = event.target.files[0];
-                        console.log(selectedFile.type)
-                        if (selectedFile) {
-                            console.log(selectedFile.type)
-                            if (selectedFile && fileTypes.includes(selectedFile.type)) {
 
-                                console.log(selectedFile.type)
+                        if (selectedFile) {
+                            if (selectedFile && fileTypes.includes(selectedFile.type)) {
 
                                 let reader = new FileReader();
                                 reader.readAsArrayBuffer(selectedFile);
-                                reader.onload = (e) => {
 
-                                    e.preventDefault();
+                                if (selected_option === 'prices') {
 
-                                    const workbook = XLSX.read(e.target.result, { type: 'buffer' });
-                                    const worksheetName = workbook.SheetNames[0];
-                                    const worksheet = workbook.Sheets[worksheetName];
-                                    const data = XLSX.utils.sheet_to_json(worksheet);
+                                    reader.onload = (e) => {
 
-                                    let newReferences = [...referencias]
+                                        e.preventDefault();
 
-                                    for (let i = 0; i < referencias.length; i++) {
+                                        const workbook = XLSX.read(e.target.result, { type: 'buffer' });
+                                        const worksheetName = workbook.SheetNames[0];
+                                        const worksheet = workbook.Sheets[worksheetName];
+                                        const data = XLSX.utils.sheet_to_json(worksheet);
 
-                                        if ((data.length) > i) {
+                                        let newReferences = [...referencias]
 
-                                            newReferences[i][0] = data[i].SKU;
-                                            newReferences[i][1] = data[i].NOMBRE_ARCHIVO;
+                                        for (let i = 0; i < referencias.length; i++) {
 
-                                        } else {
+                                            if ((data.length) > i) {
 
-                                            newReferences[i][0] = null;
-                                            newReferences[i][1] = null;
+                                                newReferences[i][0] = data[i].SKU;
+                                                newReferences[i][1] = data[i].PRECIOS;
+                                                newReferences[i][2] = data[i].ZONA;
+
+                                            } else {
+
+                                                newReferences[i][0] = null;
+                                                newReferences[i][1] = null;
+                                                newReferences[i][2] = null;
+
+                                            }
 
                                         }
 
+                                        setReferencias(newReferences);
+                                        setAsociation('row')
+
                                     }
 
-                                    setReferencias(newReferences);
-                                    setAsociation('row')
+                                } else {
+
+                                    let reader = new FileReader();
+                                    reader.readAsArrayBuffer(selectedFile);
+                                    reader.onload = (e) => {
+
+                                        e.preventDefault();
+
+                                        const workbook = XLSX.read(e.target.result, { type: 'buffer' });
+                                        const worksheetName = workbook.SheetNames[0];
+                                        const worksheet = workbook.Sheets[worksheetName];
+                                        const data = XLSX.utils.sheet_to_json(worksheet);
+
+                                        let newReferences = [...referencias]
+
+                                        for (let i = 0; i < referencias.length; i++) {
+
+                                            if ((data.length) > i) {
+
+                                                newReferences[i][0] = data[i].SKU;
+                                                newReferences[i][1] = data[i].NOMBRE_ARCHIVO;
+
+                                            } else {
+
+                                                newReferences[i][0] = null;
+                                                newReferences[i][1] = null;
+
+                                            }
+
+                                        }
+
+                                        setReferencias(newReferences);
+                                        setAsociation('row')
+
+                                    }
 
                                 }
+
                             }
                         }
                     }} />
