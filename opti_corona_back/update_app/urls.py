@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
 
-    path('api/v1/upload_images/', views.upload_asset),
+    path('api/v1/update_impex/', views.update_impex),
 
 ]

@@ -1,25 +1,11 @@
 import json
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 from .upload_scripts.Image import Images
 from .upload_scripts.Document import Document
 from .upload_scripts.Blueprints import Blueprints
 from .upload_scripts.Rfa import Rfa
 from .upload_scripts.Videos import Videos
 from .upload_scripts.Prices import Prices
-
-def hello(request):
-
-    return HttpResponse("<h1>Hello world upload App</h1>")
-
-def about(request):
-
-    username = 'un pendejo enamorado ciegamente :c'
-    return render(request, 'about.html', {
-
-        'username':username
-
-    })
 
 def upload_asset(request):
 
