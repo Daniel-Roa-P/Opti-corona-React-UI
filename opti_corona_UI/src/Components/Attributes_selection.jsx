@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Attributes_selection({ options , selectedAttributes , setSelectedAttributes, clasification }) {
+function Attributes_selection({ clasification, options , selectedAttributes , setSelectedAttributes }) {
 
     const [attribute, setAttribute] =  React.useState();
 
@@ -8,7 +8,7 @@ function Attributes_selection({ options , selectedAttributes , setSelectedAttrib
 
         setAttribute(options[0])
 
-    },[options])
+    },[clasification])
 
     function containsObject(obj, list) {
         for (let i = 0; i < list.length; i++) {
@@ -27,7 +27,9 @@ function Attributes_selection({ options , selectedAttributes , setSelectedAttrib
             let newAttributes = [...selectedAttributes]
             newAttributes.push({[clasification] : attribute})
 
-            setSelectedAttributes(newAttributes)
+            console.log(selectedAttributes)
+
+            setSelectedAttributes(newAttributes);
 
         }
 
@@ -35,7 +37,14 @@ function Attributes_selection({ options , selectedAttributes , setSelectedAttrib
 
     const removeAttribute = () => {
 
-        console.log(selectedAttributes)
+        if(containsObject({[clasification] : attribute}, selectedAttributes)){
+
+            let newAttributes = [...selectedAttributes]
+            newAttributes.pop({[clasification] : attribute})
+
+            setSelectedAttributes(newAttributes);
+
+        }
 
     }
 
