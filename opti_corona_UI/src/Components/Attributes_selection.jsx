@@ -27,8 +27,6 @@ function Attributes_selection({ clasification, options , selectedAttributes , se
             let newAttributes = [...selectedAttributes]
             newAttributes.push({[clasification] : attribute})
 
-            console.log(selectedAttributes)
-
             setSelectedAttributes(newAttributes);
 
         }

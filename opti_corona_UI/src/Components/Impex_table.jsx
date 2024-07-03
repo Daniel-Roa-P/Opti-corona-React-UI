@@ -29,12 +29,8 @@ Object.defineProperty(Array.prototype, "equals", { enumerable: false });
 function Impex_table({ selectedAttributes, impex, setImpex }) {
 
     const [attributes, setAtributes] = React.useState([]);
-    const [header, setHeader] = React.useState(['code', '$catalogversion']);
-    const [structure, setStructure] = React.useState([{
-        "type": "text"
-    }, {
-        "type": "text"
-    }]);
+    const [header, setHeader] = React.useState([]);
+    const [structure, setStructure] = React.useState([]);
 
     const hotTableComponent = React.useRef(null);
 
@@ -46,28 +42,12 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
         return column;
     }
 
-    function removeNullValues(item) {
-
-        // Recursively remove null values from nested arrays
-        if (Array.isArray(item)) {
-            const filteredArray = item
-                .map((subItem) => removeNullValues(subItem))
-                .flat(1)
-                .filter((subItem) =>
-                    subItem !== null && subItem !== undefined);
-            return filteredArray.length > 0 ? filteredArray : null;
-        } else {
-            // Remove null values from non-array items
-            return item !== null && item !== undefined ? [item] : [];
-        }
-    }
-
     const saveData = (function () {
         const a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";
         return function (data, fileName) {
-            const blob = new Blob([data], {type: "octet/stream"}),
+            const blob = new Blob([data], { type: "octet/stream" }),
                 url = window.URL.createObjectURL(blob);
             a.href = url;
             a.download = fileName;
@@ -161,17 +141,18 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
 
-        let tempHeader = [...header]
-        let tempStructure = [...structure]
+        let tempHeader = ['code', '$catalogversion']
+        let tempStructure = [{
+            "type": "text"
+        }, {
+            "type": "text"
+        }]
 
         for (let i = 0; i < selectedAttributes.length; i++) {
 
-            if (!header.includes(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])) {
+            tempHeader.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])
+            tempStructure.push(attributes_structure[Object.keys(selectedAttributes[i])][selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]])
 
-                tempHeader.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])
-                tempStructure.push(attributes_structure[Object.keys(selectedAttributes[i])][selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]])
-
-            }
         }
 
         setHeader(tempHeader);
