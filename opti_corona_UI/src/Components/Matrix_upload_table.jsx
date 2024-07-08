@@ -1,16 +1,17 @@
 import React from 'react';
-import { HotTable, HotColumn } from "@handsontable/react";
+import { HotTable } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
 import "handsontable/dist/handsontable.full.css";
-import { assets_structure } from "../assets_structure";
+import { getAssetStructureJson } from '../api/task.api';
 
 registerAllModules();
 registerLanguageDictionary(esMX);
 
-const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) => {
+const Matrix_upload_table = ( { selected_option, relaciones }) => {
 
     const hotTableComponent = React.useRef(null);
+    const [assetStructure, setAssetStructure] = React.useState([]);
 
     React.useEffect(() => {
 
@@ -20,7 +21,24 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
 
     React.useEffect(() => {
 
-        hotTableComponent.current.hotInstance.updateData([])
+        const getAssetStructure = async () => {
+            
+            const response = await getAssetStructureJson([selected_option,'true']);
+            
+            const data = new Array(1000)
+                .fill()
+                .map((_, row) => new Array(response.data.header.length) // number of columns
+                    .fill()
+                    .map((_, column) => null)
+                );
+
+                setAssetStructure(response.data);    
+                hotTableComponent.current.hotInstance.updateData([])
+
+        }
+      
+        getAssetStructure();
+        
 
     }, [selected_option])
 
@@ -60,8 +78,8 @@ const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) =>
 
                 <HotTable
                     data={relaciones}
-                    colHeaders={assets_structure[selected_option]['true'].header}
-                    columns={assets_structure[selected_option]['true'].column_structure}
+                    colHeaders={assetStructure.header}
+                    columns={assetStructure.column_structure}
                     ref={hotTableComponent}
                     width="100%"
                     height="100%"

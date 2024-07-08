@@ -22,7 +22,7 @@ const Reports_component = ({ reporte }) => {
 
                 {info && info.map((report) => (
 
-                    <p className='p-2 break-all' key={report.split(' ')[0]}> {report} </p>
+                    <p className='p-2 break-all' key={report}> {report} </p>
 
                 ))}
 
@@ -40,7 +40,7 @@ const Reports_component = ({ reporte }) => {
 
                 {danger && danger.map((report) => (
 
-                    <p className='p-2 break-all' key={report.split(' ')[0]}> {report} </p>
+                    <p className='p-2 break-all' key={report}> {report} </p>
 
                 ))}
 

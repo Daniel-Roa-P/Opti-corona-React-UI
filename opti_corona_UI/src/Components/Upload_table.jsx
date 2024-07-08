@@ -2,9 +2,8 @@ import React from 'react';
 import { HotTable } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { registerLanguageDictionary, esMX } from 'handsontable/i18n';
-import { sendAssetsJson } from '../api/task.api';
+import { sendAssetsJson, getAssetStructureJson } from '../api/task.api';
 import "handsontable/dist/handsontable.full.css";
-import { assets_structure } from "../assets_structure";
 import * as XLSX from "xlsx";
 
 registerAllModules();
@@ -38,24 +37,29 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
     const [referencias, setReferencias] = React.useState([]);
     const hotTableComponent = React.useRef(null);
     const [asociation, setAsociation] = React.useState('name');
+    const [assetStructure, setAssetStructure] = React.useState([]);
 
     React.useEffect(() => {
 
-        function getData() {
-
+        const getAssetStructure = async () => {
+            
+            const response = await getAssetStructureJson([selected_option,modifyManually]);
+            
             const data = new Array(1000)
                 .fill()
-                .map((_, row) => new Array(assets_structure[selected_option][modifyManually].header.length) // number of columns
+                .map((_, row) => new Array(response.data.header.length) // number of columns
                     .fill()
                     .map((_, column) => null)
                 );
 
-            setReferencias(data);
+                setAssetStructure(response.data);    
+                setReferencias(data);
+
         }
+      
+        getAssetStructure();
 
-        getData();
-
-    }, [selected_option])
+    }, [selected_option, modifyManually])
 
     function getCol(matrix, col) {
         var column = [];
@@ -83,7 +87,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
     const send_json = async () => {
 
-        let n_columnas = assets_structure[selected_option][modifyManually].header.length;
+        let n_columnas = assetStructure.header.length;
         let table_data = hotTableComponent.current.hotInstance.getData()
         let empty_row = Array.from({ length: n_columnas }, (_, index) => null)
 
@@ -110,7 +114,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             const temp_object = {
 
-                [assets_structure[selected_option][modifyManually].header[i]]: temp_column
+                [assetStructure.header[i]]: temp_column
 
             }
 
@@ -287,8 +291,8 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
                 <HotTable
                     data={referencias}
-                    colHeaders={assets_structure[selected_option][modifyManually].header}
-                    columns={assets_structure[selected_option][modifyManually].column_structure}
+                    colHeaders={assetStructure.header}
+                    columns={assetStructure.column_structure}
                     ref={hotTableComponent}
                     width="100%"
                     height="100%"
