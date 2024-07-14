@@ -1,7 +1,6 @@
 import React from 'react';
 import { HotTable } from "@handsontable/react";
-import { attributes_structure } from "../attributes_structure";
-import { sendAttributesJson } from '../api/task.api';
+import { sendAttributesJson, getAttributeStructureJson } from '../api/task.api';
 
 Array.prototype.equals = function (array) {
 
@@ -125,9 +124,6 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         }
 
-        console.log(attributes)
-        console.log(filtered_table)
-
         let references_assets_JSON = JSON.stringify(objects_list);
         let response = await sendAttributesJson(references_assets_JSON);
 
@@ -148,10 +144,12 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
             "type": "text"
         }]
 
+        
+
         for (let i = 0; i < selectedAttributes.length; i++) {
 
-            tempHeader.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]])
-            tempStructure.push(attributes_structure[Object.keys(selectedAttributes[i])][selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]])
+            tempHeader.push(Object.keys(selectedAttributes[i]))
+            tempStructure.push(selectedAttributes[i][Object.keys(selectedAttributes[i])]['attribute_structure'])
 
         }
 
@@ -206,7 +204,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
             <div className='h-[10%] py-4'>
 
-                <button className='text-center text-xl  bg-green-400 w-full h-full rounded-lg' onClick={buttonClickCallback}>Generar impex</button>
+                <button className='text-center text-xl bg-green-400 hover:bg-green-800 w-full h-full rounded-lg' onClick={buttonClickCallback}>Generar impex</button>
 
             </div>
 

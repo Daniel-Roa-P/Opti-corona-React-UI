@@ -1,14 +1,26 @@
 import React from 'react';
+import { getAttributesListJson } from '../api/task.api';
 
-function Attributes_selection({ clasification, options , selectedAttributes , setSelectedAttributes }) {
+function Attributes_selection({ clasification, selectedAttributes, setSelectedAttributes }) {
 
-    const [attribute, setAttribute] =  React.useState();
+    const [attribute, setAttribute] = React.useState();
+    const [options, setOptions] = React.useState([]);
+    const [attributesStructure, setAttributesStructure] = React.useState([]);
 
     React.useEffect(() => {
 
-        setAttribute(options[0])
+        const getAttributesList = async () => {
+            const response = await getAttributesListJson([clasification]);
 
-    },[clasification])
+            setAttributesStructure(response.data)
+            setOptions(Object.keys(response.data));
+            setAttribute(Object.keys(response.data)[0]);
+
+        }
+
+        getAttributesList()
+
+    }, [clasification])
 
     function containsObject(obj, list) {
         for (let i = 0; i < list.length; i++) {
@@ -16,18 +28,22 @@ function Attributes_selection({ clasification, options , selectedAttributes , se
                 return true;
             }
         }
-    
+
         return false;
     }
 
     const addAttribute = () => {
 
-        if(!containsObject({[clasification] : attribute}, selectedAttributes)){
+        if (!containsObject(attributesStructure[attribute], selectedAttributes)) {
 
             let newAttributes = [...selectedAttributes]
-            newAttributes.push({[clasification] : attribute})
+            newAttributes.push({[attribute] : attributesStructure[attribute]})
 
             setSelectedAttributes(newAttributes);
+
+        } else {
+
+            alert("El atributo ya se encuentra en la tabla");
 
         }
 
@@ -35,12 +51,25 @@ function Attributes_selection({ clasification, options , selectedAttributes , se
 
     const removeAttribute = () => {
 
-        if(containsObject({[clasification] : attribute}, selectedAttributes)){
+        if (containsObject({ [clasification]: attribute }, selectedAttributes)) {
 
-            let newAttributes = [...selectedAttributes]
-            newAttributes.pop({[clasification] : attribute})
+            let newAttributes = []
+
+            for(let i = 0; i < selectedAttributes.length; i++){
+
+                if(JSON.stringify(selectedAttributes[i]) !== JSON.stringify({ [clasification]: attribute })){
+
+                    newAttributes.push(selectedAttributes[i])
+
+                }
+
+            }
 
             setSelectedAttributes(newAttributes);
+
+        } else {
+
+            alert("El atributo no se encuentra en la tabla");
 
         }
 
@@ -77,8 +106,8 @@ function Attributes_selection({ clasification, options , selectedAttributes , se
 
             <div className="w-1/4 gap-4 grid grid-cols-1 place-content-center h-full px-8">
 
-                <button className="bg-green-300 rounded-lg" onClick={addAttribute}>Agregar</button>
-                <button className="bg-red-300 rounded-lg" onClick={removeAttribute}>Retirar</button>
+                <button className="bg-green-300 rounded-lg hover:bg-green-600" onClick={addAttribute}>Agregar</button>
+                <button className="bg-red-300 rounded-lg hover:bg-red-600" onClick={removeAttribute}>Retirar</button>
 
             </div>
 

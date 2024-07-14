@@ -1,13 +1,14 @@
 import React from 'react';
 import Nav from '../Components/Nav';
-import { attributes_structure } from "../attributes_structure";
 import { Attributes_selection } from '../Components/Attributes_selection';
 import { UpdateContext } from './UpdateContext';
 import { Impex_table } from '../Components/Impex_table';
+import { getClassificationsListJson } from '../api/task.api';
 
 function UpdatePage() {
 
-  const [option, setOption] = React.useState(Object.keys(attributes_structure)[0]);
+  const [option, setOption] = React.useState('corona');
+  const [classificationList, setClassificationList] = React.useState([]);
 
   const {
 
@@ -17,6 +18,18 @@ function UpdatePage() {
     setImpex,
 
   } = React.useContext(UpdateContext)
+
+  React.useEffect(() => {
+
+    const getClassificationList = async () => {
+      const response = await getClassificationsListJson([]);
+      setClassificationList(response.data);
+      setOption(response.data[0])
+    }
+
+    getClassificationList()
+
+  }, [])
 
   function handleOptionChange(e) {
     
@@ -46,7 +59,7 @@ function UpdatePage() {
                 defaultValue={option}
                 onChange={handleOptionChange}>
 
-                {Object.keys(attributes_structure).map((clasification) => (
+                {classificationList.map((clasification) => (
 
                   <option key={clasification} value={clasification}>{clasification}</option>
 
@@ -63,7 +76,6 @@ function UpdatePage() {
               <Attributes_selection
 
                 clasification = {option}
-                options = {Object.keys(attributes_structure[option])}
                 selectedAttributes = {selectedAttributes}
                 setSelectedAttributes = {setSelectedAttributes}
 

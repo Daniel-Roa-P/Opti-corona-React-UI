@@ -49,7 +49,7 @@ def main():
 
     excel_path = str(os.getcwd()) + '/consolidado.xlsx'
     
-    file_json = open('products_attributes_structure_v2.json','w')
+    file_json = open('products_attributes_structure_v3.json','w')
          
     file_json.write(str(create_structure(pd.read_excel(excel_path, sheet_name='Atributos'),pd.read_excel(excel_path, sheet_name='values'))).replace("'", '"'))
       
