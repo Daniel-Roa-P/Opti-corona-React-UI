@@ -30,7 +30,6 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
     const [attributes, setAtributes] = React.useState([]);
     const [header, setHeader] = React.useState([]);
     const [structure, setStructure] = React.useState([]);
-
     const hotTableComponent = React.useRef(null);
 
     function getCol(matrix, col) {
@@ -88,51 +87,6 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
         });
     }; */
 
-    const buttonClickCallback = async () => {
-
-        let table_data = hotTableComponent.current.hotInstance.getData()
-
-        let empty_row = Array.from({ length: header.length }, (_, index) => null)
-
-        let filtered_table = table_data.filter(function (el) {
-            if (!el.equals(empty_row)) {
-                return el
-            }
-        });
-
-        let objects_list = []
-        let columns_sizes = []
-
-        for (let i = 0; i < header.length; i++) {
-
-            let temp_column = getCol(filtered_table, i)
-
-            if (temp_column === null) {
-
-                temp_column = []
-
-            }
-
-            const temp_object = {
-
-                [header[i]]: temp_column
-
-            }
-
-            columns_sizes.push(temp_column.length);
-            objects_list.push(temp_object);
-
-        }
-
-        let references_assets_JSON = JSON.stringify(objects_list);
-        let response = await sendAttributesJson(references_assets_JSON);
-
-        console.log(response)
-
-        saveData(response.data, "impex.csv");
-
-    };
-
     React.useEffect(() => {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
@@ -144,12 +98,10 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
             "type": "text"
         }]
 
-        
-
         for (let i = 0; i < selectedAttributes.length; i++) {
 
-            tempHeader.push(Object.keys(selectedAttributes[i]))
-            tempStructure.push(selectedAttributes[i][Object.keys(selectedAttributes[i])]['attribute_structure'])
+            tempHeader.push(Object.keys(selectedAttributes[i])[0])
+            tempStructure.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]['attribute_structure'])
 
         }
 
@@ -175,6 +127,57 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
         }
 
     }, [selectedAttributes])
+
+    const buttonClickCallback = async () => {
+
+        let table_data = hotTableComponent.current.hotInstance.getData()
+
+        let empty_row = Array.from({ length: header.length }, (_, index) => null)
+
+        let filtered_table = table_data.filter(function (el) {
+            if (!el.equals(empty_row)) {
+                return el
+            }
+        });
+
+        let objects_list = []
+
+        for (let i = 0; i < header.length; i++) {
+
+            let temp_column = getCol(filtered_table, i)
+
+            if (temp_column === null) {
+
+                temp_column = []
+
+            }
+
+            const temp_object = {
+
+                [header[i]]: temp_column
+
+            }
+
+            objects_list.push(temp_object);
+
+        }
+
+        if (objects_list[0]['code'].includes(null) || objects_list[0]['code'].includes('')){
+
+            alert('Por favor ingrese siempre un SKU al inicio de una fila')
+
+        } else {
+
+            let references_assets_JSON = JSON.stringify(objects_list);
+            let response = await sendAttributesJson(references_assets_JSON);
+    
+            console.log(response)
+    
+            saveData(response.data, "impex.csv");
+
+        }
+
+    };
 
     return (
 

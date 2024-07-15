@@ -1,4 +1,4 @@
-attributes_structure = {
+{
     "corona": {
         "advantages": {
             "id": 1,
@@ -1415,7 +1415,7 @@ attributes_structure = {
             "multivalued": "false",
             "zonified": "true"
         },
-        "tamaño": {
+        "tama�o": {
             "id": 142,
             "attribute_structure": {
                 "type": "text"
@@ -1556,16 +1556,3 @@ attributes_structure = {
         }
     }
 }
-
-
-def get_list():
-
-    return list(attributes_structure.keys())
-
-def get_attributes(clasification):
-
-    return attributes_structure[str(clasification)]
-
-def get_structure(clasification, attribute):
-
-    return list(attributes_structure[str(clasification)][str(attribute)])

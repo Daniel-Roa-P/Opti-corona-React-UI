@@ -6,6 +6,8 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
     const [attribute, setAttribute] = React.useState();
     const [options, setOptions] = React.useState([]);
     const [attributesStructure, setAttributesStructure] = React.useState([]);
+    const [attributesIds, setAttributesIds] = React.useState([]);
+    const [mode, setMode] = React.useState('');
 
     React.useEffect(() => {
 
@@ -22,7 +24,7 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
     }, [clasification])
 
-    function containsObject(obj, list) {
+    /* function containsObject(obj, list) {
         for (let i = 0; i < list.length; i++) {
             if ((Object.keys(list[i])[0] == Object.keys(obj)[0]) && (list[i][Object.keys(list[i])[0]] == obj[Object.keys(obj)[0]])) {
                 return true;
@@ -30,14 +32,23 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
         }
 
         return false;
-    }
+    } */
 
     const addAttribute = () => {
 
-        if (!containsObject(attributesStructure[attribute], selectedAttributes)) {
+        console.log(attributesIds)
+        console.log(attributesStructure[attribute]['id'])
+
+        if (!(attributesIds.includes(attributesStructure[attribute]['id']))) {
+        //if (!containsObject({ [attribute]: attributesStructure[attribute] }, selectedAttributes)) {
+
+            let newIds = [...attributesIds]
+            newIds.push(attributesStructure[attribute]['id'])
+
+            setAttributesIds(newIds);
 
             let newAttributes = [...selectedAttributes]
-            newAttributes.push({[attribute] : attributesStructure[attribute]})
+            newAttributes.push({ [attribute]: attributesStructure[attribute], mode: mode })
 
             setSelectedAttributes(newAttributes);
 
@@ -51,13 +62,21 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
     const removeAttribute = () => {
 
-        if (containsObject({ [clasification]: attribute }, selectedAttributes)) {
+        if ((attributesIds.includes(attributesStructure[attribute]['id']))) {
+        //if (containsObject({ [attribute]: attributesStructure[attribute] }, selectedAttributes)) {
 
             let newAttributes = []
 
-            for(let i = 0; i < selectedAttributes.length; i++){
+            let newIds = [...attributesIds]
+            newIds = newIds.filter(item => item !== attributesStructure[attribute]['id'])
 
-                if(JSON.stringify(selectedAttributes[i]) !== JSON.stringify({ [clasification]: attribute })){
+            console.log(newIds)
+
+            setAttributesIds(newIds);
+
+            for (let i = 0; i < selectedAttributes.length; i++) {
+
+                if (JSON.stringify({ [attribute]:selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]}) !== JSON.stringify({ [attribute]: attributesStructure[attribute] })) {
 
                     newAttributes.push(selectedAttributes[i])
 
@@ -77,6 +96,13 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
     function handleOptionChange(e) {
         setAttribute(e.target.value);
+        setMode('');
+    }
+
+    function handleModeChange(e) {
+
+        setMode(e.target.value);
+
     }
 
     return (
@@ -89,17 +115,30 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
                     <h2 className="block text-lg font-bold text-gray-900 dark:text-white">Atributos</h2>
 
-                    <select className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
-                        defaultValue={attribute}
-                        onChange={handleOptionChange}>
+                    <div className="flex h-full">
 
-                        {options.map((option) => (
+                        <select className="w-3/4 h-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
+                            defaultValue={attribute}
+                            onChange={handleOptionChange}>
 
-                            <option key={option} value={option}>{option}</option>
+                            {options.map((option) => (
 
-                        ))}
+                                <option key={option} value={option}>{option}</option>
 
-                    </select>
+                            ))}
+
+                        </select>
+
+                        {(attributesStructure[attribute] != undefined && attributesStructure[attribute]['multivalued'] == 'true') ?
+
+                            <div className="grid grid-cols-2 gap-2 w-1/4">
+                                <input type="radio" value="Append" name="mode" onChange={handleModeChange} />Append
+                                <input type="radio" value="Remove" name="mode" onChange={handleModeChange} />Remove
+                            </div>
+
+                            : null}
+
+                    </div>
 
                 </div>
             </div>
