@@ -93,9 +93,9 @@ const Matrix_upload_table = ( { selected_option, relaciones }) => {
 
             </div>
 
-            <div className='h-[10%] p-4'>
+            <div className='h-[10%] py-2'>
 
-                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800' onClick={buttonClickCallback}>Exportar Matriz de relacionamiento</button>
+                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800 text-sm' onClick={buttonClickCallback}>Exportar Matriz de relacionamiento</button>
 
             </div>
 

@@ -60,33 +60,39 @@ function UploadPage() {
 
         <div className="w-[20%] bg-neutral-700 h-full">
 
-          <div className="grid grid-cols-1 place-items-center h-1/6">
+          <div className="flex flex-col h-1/6">
+            
+            <div className='h-1/4 flex items-center'>
+              <p className="text-center font-bold text-sm text-gray-900 dark:text-white w-full">Tipo de cargue</p>
+            </div>
+            
+            <div className='h-2/4 flex items-center'>
 
-            <h2 className="block py-4 text-sm font-bold text-gray-900 dark:text-white">Tipo de cargue</h2>
+              <select className="mx-[10%] w-[80%] h-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
 
-            <select className="w-[80%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
+                defaultValue={tipoCargue.upload_option}
+                onChange={handleOptionChange}>
 
-              defaultValue={tipoCargue.upload_option}
-              onChange={handleOptionChange}>
+                {assetsList.map((option) => (
 
-              {assetsList.map((option) => (
+                  <option key={option} value={option}>{option}</option>
 
-                <option key={option} value={option}>{option}</option>
+                ))}
 
-              ))}
+              </select>
 
-            </select>
+            </div>
 
-            <div>
+            <div className='h-1/4 text-sm flex items-center'>
 
               <input type="checkbox"
                 id="modify_manually_checkbox"
                 name="modify_manually_checkbox"
+                className='w-[30%]'
                 key={tipoCargue.upload_option}
-                className="my-4"
                 defaultChecked={tipoCargue.modifyManually}
                 onChange={handleModifyChange} />
-              <label>Modificar Manualmente</label>
+              <label className='w-[70%] text-start'>Modificar Manualmente</label>
               <br></br>
 
             </div>
@@ -95,7 +101,7 @@ function UploadPage() {
 
           <div className='w-full h-5/6 p-4'>
 
-            <div className='h-[10%] w-full'>
+            <div className='h-[10%] flex items-center'>
               <h2 className="block text-sm font-bold text-gray-900 dark:text-white w-full text-center">Reporte de matriz generada</h2>
             </div>
 

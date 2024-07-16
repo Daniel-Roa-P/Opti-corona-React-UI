@@ -154,9 +154,9 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
                 {(selected_option != 'prices' && selected_option != 'videos') ?
 
-                    <div className='m-2'>
+                    <div className='w-1/2 p-2'>
 
-                        <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
+                        <label htmlFor="upload_filenames" className='bg-gray-300 h-auto text-sm hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde carpeta<br></br>(asociación por nombre)</label>
                         <input id="upload_filenames" className='opacity-0' type="file" multiple onChange={(event) => {
 
                             const fileList = event.target.files;
@@ -191,9 +191,9 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
                     : null}
 
-                <div className='m-2'>
+                <div className='w-1/2 p-2'>
 
-                    <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-auto text-md hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde hoja de calculo<br></br>(asociación por fila)</label>
+                    <label htmlFor="upload_calc_sheet" className='bg-gray-300 h-auto text-sm hover:bg-gray-500 w-full inline-block rounded-lg text-center cursor-pointer'>Leer desde hoja de calculo<br></br>(asociación por fila)</label>
                     <input id="upload_calc_sheet" className='opacity-0' type="file" multiple={false} onChange={(event) => {
 
                         let fileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
@@ -306,9 +306,9 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             </div>
 
-            <div className='h-[10%] p-4'>
+            <div className='h-[10%] py-2'>
 
-                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800' onClick={send_json}>Generar Matriz de relacionamiento</button>
+                <button className='bg-green-400 w-full h-full rounded-lg hover:bg-green-800 text-sm' onClick={send_json}>Generar Matriz de relacionamiento</button>
 
             </div>
 

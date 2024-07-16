@@ -5,12 +5,10 @@ const Nav = () => {
     const navigate = useNavigate();
 
     const onUpload = () => {
-        console.log('patata')
         navigate( '/upload/' );
     }
     
     const onUpdate = () => {
-        console.log('patata 2')
         navigate( '/update/' );
     }
 

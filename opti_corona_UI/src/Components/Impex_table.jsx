@@ -164,7 +164,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         if (objects_list[0]['code'].includes(null) || objects_list[0]['code'].includes('')){
 
-            alert('Por favor ingrese siempre un SKU al inicio de una fila')
+            alert('Por favor ingrese siempre un SKU al inicio de las filas')
 
         } else {
 
@@ -205,9 +205,9 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
             </div>
 
-            <div className='h-[10%] py-4'>
+            <div className='h-[10%] pt-2'>
 
-                <button className='text-center text-xl bg-green-400 hover:bg-green-800 w-full h-full rounded-lg' onClick={buttonClickCallback}>Generar impex</button>
+                <button className='text-center text-md bg-green-400 hover:bg-green-800 w-full h-full rounded-lg' onClick={buttonClickCallback}>Generar impex</button>
 
             </div>
 
