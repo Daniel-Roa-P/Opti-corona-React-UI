@@ -54,39 +54,6 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
         };
     }());
 
-    /* const buttonClickCallback = () => {
-
-        const hot = hotTableComponent.current.hotInstance;
-        const exportPlugin = hot.getPlugin('exportFile');
-
-        let table_data = hotTableComponent.current.hotInstance.getData()
-
-        let empty_row = Array.from({ length: header.length }, (_, index) => null)
-
-        let filtered_table = table_data.filter(function (el) {
-            if (!el.equals(empty_row)) {
-                return el
-            }
-        });
-
-        console.log(attributes)
-        console.log(filtered_table)
-
-        hotTableComponent.current.hotInstance.loadData(filtered_table)
-
-        exportPlugin.downloadFile('csv', {
-            bom: false,
-            columnDelimiter: ';',
-            columnHeaders: false,
-            exportHiddenColumns: true,
-            exportHiddenRows: true,
-            fileExtension: 'csv',
-            filename: 'IMPEX-co-es',
-            mimeType: 'text/csv',
-            rowDelimiter: '\r\n',
-        });
-    }; */
-
     React.useEffect(() => {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
@@ -100,7 +67,19 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         for (let i = 0; i < selectedAttributes.length; i++) {
 
-            tempHeader.push(Object.keys(selectedAttributes[i])[0])
+            console.log(selectedAttributes[i])
+
+            if(selectedAttributes[i]['mode'] === ''){
+
+                tempHeader.push(Object.keys(selectedAttributes[i])[0])
+
+            } else {
+
+                tempHeader.push(Object.keys(selectedAttributes[i])[0] + ' - mode[' + selectedAttributes[i]['mode'] + ']' )
+
+            }
+
+            
             tempStructure.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]['attribute_structure'])
 
         }
@@ -196,7 +175,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
                     height="100%"
                     ref={hotTableComponent}
                     rowHeaders={true}
-                    colWidths={150}
+                    colWidths={250}
                     manualRowMove={true}
                     autoWrapRow={true}
                     autoWrapCol={true}

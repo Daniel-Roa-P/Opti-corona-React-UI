@@ -36,15 +36,15 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
     const [referencias, setReferencias] = React.useState([]);
     const hotTableComponent = React.useRef(null);
-    const [asociation, setAsociation] = React.useState('name');
+    const [asociation, setAsociation] = React.useState('row');
     const [assetStructure, setAssetStructure] = React.useState([]);
 
     React.useEffect(() => {
 
         const getAssetStructure = async () => {
-            
-            const response = await getAssetStructureJson([selected_option,modifyManually]);
-            
+
+            const response = await getAssetStructureJson([selected_option, modifyManually]);
+
             const data = new Array(1000)
                 .fill()
                 .map((_, row) => new Array(response.data.header.length) // number of columns
@@ -52,11 +52,11 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
                     .map((_, column) => null)
                 );
 
-                setAssetStructure(response.data);    
-                setReferencias(data);
+            setAssetStructure(response.data);
+            setReferencias(data);
 
         }
-      
+
         getAssetStructure();
 
     }, [selected_option, modifyManually])
@@ -104,13 +104,15 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         for (let i = 0; i < n_columnas; i++) {
 
-            let temp_column = removeNullValues(getCol(filtered_table, i))
+            let temp_column = getCol(filtered_table, i)
+
+            /* let temp_column = removeNullValues(getCol(filtered_table, i))
 
             if (temp_column === null) {
 
                 temp_column = []
 
-            }
+            } */
 
             const temp_object = {
 
@@ -127,7 +129,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             alert('Por favor ingrese relaciones uno a uno en la tabla')
 
-        } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[2]) && columns_sizes[2] != 0) && !modifyManually){
+        } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[2]) && columns_sizes[2] != 0) && !modifyManually) {
 
             alert('Por favor ingrese relaciones uno a uno en la tabla')
 

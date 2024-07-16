@@ -5,35 +5,29 @@ const Nav = () => {
     const navigate = useNavigate();
 
     const onUpload = () => {
-        navigate( '/upload/' );
+        navigate('/upload/');
     }
-    
+
     const onUpdate = () => {
-        navigate( '/update/' );
+        navigate('/update/');
     }
 
     return (
 
-        <nav>
+        <nav className='h-full'>
 
-            <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-4">
-                <div className="flex items-center flex-1">
-                    <span className="text-2xl font-blod">Logo</span>
+            <div className='flex h-full w-full text-white'>
+
+                <div className="flex items-center w-[80%] h-full">
+                    <span className="text-2xl font-blod  ms-8">Logo</span>
                 </div>
-                <div className="lg:flex md:flexlg: flex-1 items center justify-end font-normal hidden">
-                    <div className="flex-10">
 
-                        <ul className="flex gap-8 mr-16 text-[18px]">
+                <div className="flex items-center w-[10%] h-full">
+                    <button className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer text-center w-full h-full" onClick={onUpload}>Cargue</button>
+                </div>
 
-                                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
-                                <button onClick={onUpload}>Cargue</button></li>
-
-                                <li className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer">
-                                <button onClick={onUpdate}>Actualización</button></li>
-                                
-                        </ul>
-
-                    </div>
+                <div className="flex items-center w-[10%] h-full">
+                    <button className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer text-center w-full h-full" onClick={onUpdate}>Actualización</button>
                 </div>
 
             </div>

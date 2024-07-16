@@ -69,9 +69,6 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
             let newIds = [...attributesIds]
             newIds = newIds.filter(item => item !== attributesStructure[attribute]['id'])
-
-            console.log(newIds)
-
             setAttributesIds(newIds);
 
             for (let i = 0; i < selectedAttributes.length; i++) {
@@ -132,8 +129,8 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
                         {(attributesStructure[attribute] != undefined && attributesStructure[attribute]['multivalued'] == 'true') ?
 
                             <div className="grid grid-cols-2 gap-2 w-1/4">
-                                <input type="radio" value="Append" name="mode" onChange={handleModeChange} />Append
-                                <input type="radio" value="Remove" name="mode" onChange={handleModeChange} />Remove
+                                <input type="radio" value="append" name="mode" onChange={handleModeChange} />Append
+                                <input type="radio" value="remove" name="mode" onChange={handleModeChange} />Remove
                             </div>
 
                             : null}

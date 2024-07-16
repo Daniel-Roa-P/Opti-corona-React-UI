@@ -19,6 +19,8 @@ def upload_asset(request):
 
         data = json.loads(request.body)
 
+        print(data)
+
         asset = idenfy_asset(data)
 
         response = []

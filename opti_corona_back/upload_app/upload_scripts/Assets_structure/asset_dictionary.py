@@ -4,7 +4,7 @@ assets_structure = {
 
         'true': {
 
-            'header': ['SKU', 'Nombre_archivo', 'Imagen_contenedor', 'Imagen_rara', 'Texto_alternativo', 'Posicion', 'Miniatura'],
+            'header': ['SKU', 'Nombre_archivo', 'Contenedor_de_imagen', 'Contenedor_de_medio', 'Texto_alternativo', 'Posicion', 'Miniatura'],
             'column_structure': [
                 { 'type': 'text' },
                 { 'type': 'text' },
@@ -99,7 +99,7 @@ assets_structure = {
 
         'true': {
 
-            'header': ['SKU', 'Unidad_de_venta', 'Divisa', 'Precio', 'Valor_raro_1', 'Valor_raro_2', 'Booleano_raro', 'Zona'],
+            'header': ['SKU', 'Unidad_de_venta', 'Divisa', 'Precio', 'Escala', 'Factor_de_unidad', 'Activo', 'Zona'],
             'column_structure': [
                 { 'type': 'text' },
                 { 'type': 'dropdown', 'source': ['pieces', 'M2', 'CJ'] },
