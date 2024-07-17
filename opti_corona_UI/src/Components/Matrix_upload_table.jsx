@@ -8,7 +8,7 @@ import { getAssetStructureJson } from '../api/task.api';
 registerAllModules();
 registerLanguageDictionary(esMX);
 
-const Matrix_upload_table = ( { selected_option, relaciones }) => {
+const Matrix_upload_table = ( { selected_option, relaciones, setRelaciones }) => {
 
     const hotTableComponent = React.useRef(null);
     const [assetStructure, setAssetStructure] = React.useState([]);
@@ -24,40 +24,43 @@ const Matrix_upload_table = ( { selected_option, relaciones }) => {
         const getAssetStructure = async () => {
             
             const response = await getAssetStructureJson([selected_option,'true']);
-            
-            const data = new Array(1000)
-                .fill()
-                .map((_, row) => new Array(response.data.header.length) // number of columns
-                    .fill()
-                    .map((_, column) => null)
-                );
-
-                setAssetStructure(response.data);    
-                hotTableComponent.current.hotInstance.updateData([])
+            setRelaciones([])
+            setAssetStructure(response.data);    
+            hotTableComponent.current.hotInstance.updateData([])
 
         }
       
         getAssetStructure();
-        
 
     }, [selected_option])
 
     const buttonClickCallback = () => {
 
         const hot = hotTableComponent.current.hotInstance;
+        const hot_data = hotTableComponent.current.hotInstance.getData().length
         const exportPlugin = hot.getPlugin('exportFile');
 
-        exportPlugin.downloadFile('csv', {
-          bom: false,
-          columnDelimiter: ',',
-          columnHeaders: false,
-          exportHiddenColumns: true,
-          exportHiddenRows: true,
-          fileExtension: 'csv',
-          filename: selected_option + '-co-es',
-          mimeType: 'text/csv',
-          rowDelimiter: '\r\n',
-        });
+        if(hot_data != 0){
+
+            exportPlugin.downloadFile('csv', {
+                bom: false,
+                columnDelimiter: ',',
+                columnHeaders: false,
+                exportHiddenColumns: true,
+                exportHiddenRows: true,
+                fileExtension: 'csv',
+                filename: selected_option + '-co-es',
+                mimeType: 'text/csv',
+                rowDelimiter: '\r\n',
+              });
+
+        } else {
+
+            alert('No se encontro una matriz generada');
+
+        }
+
+        
       };
 
     return (

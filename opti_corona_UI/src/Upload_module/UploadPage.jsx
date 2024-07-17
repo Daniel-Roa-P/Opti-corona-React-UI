@@ -142,7 +142,8 @@ function UploadPage() {
 
             <Matrix_upload_table
               selected_option={tipoCargue.upload_option}
-              relaciones={relaciones} />
+              relaciones={relaciones}
+              setRelaciones={setRelaciones} />
 
           </div>
 

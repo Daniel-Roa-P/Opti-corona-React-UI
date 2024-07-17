@@ -8,8 +8,13 @@ class Prices(Asset):
         self.autoCompletar = False
         self.zonas = ['ZNV000','ZNV001','ZNV002','ZNV003','ZNV004','ZNV005','ZNV006','ZNV016']
 
-        precios = data[2]['Precio']
-        zonas = data[3]['Zona']
+        precios = []
+        zonas = []
+
+        if(not data[len(data) - 1]['manual']):
+
+            precios = data[2]['Precio']
+            zonas = data[3]['Zona']
 
         if(len(zonas) == 0):
 

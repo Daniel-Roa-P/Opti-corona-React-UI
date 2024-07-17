@@ -104,15 +104,23 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         for (let i = 0; i < n_columnas; i++) {
 
-            let temp_column = getCol(filtered_table, i)
+            let temp_column = []
 
-            /* let temp_column = removeNullValues(getCol(filtered_table, i))
+            if(modifyManually){
 
-            if (temp_column === null) {
+                temp_column = getCol(filtered_table, i)
 
-                temp_column = []
+            } else {
 
-            } */
+                temp_column = removeNullValues(getCol(filtered_table, i))
+
+                if(temp_column === null){
+
+                    temp_column = []
+
+                }
+
+            }
 
             const temp_object = {
 
@@ -125,13 +133,17 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         }
 
-        if (asociation == 'row' && (columns_sizes[0] != columns_sizes[1]) && !modifyManually) {
+        if (((columns_sizes[0] == 0 || columns_sizes[1] == 0) && !modifyManually)) {
 
-            alert('Por favor ingrese relaciones uno a uno en la tabla')
+            alert('No deje vacias las dos primeras columnas al momento de hacer una asociacion no manual');
+
+        }else if ((asociation == 'row' && (columns_sizes[0] != columns_sizes[1]) && !modifyManually)) {
+
+            alert('Por favor ingrese relaciones uno a uno en la tabla al momento de hacer una asociacion por filas')
 
         } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[2]) && columns_sizes[2] != 0) && !modifyManually) {
 
-            alert('Por favor ingrese relaciones uno a uno en la tabla')
+            alert('Ingrese relaciones uno a uno en la columna de zonas o dejela vacia')
 
         } else {
 
