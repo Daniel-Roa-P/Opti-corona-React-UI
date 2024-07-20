@@ -1,6 +1,6 @@
 import React from 'react';
 import { HotTable } from "@handsontable/react";
-import { sendAttributesJson, getAttributeStructureJson } from '../api/task.api';
+import { sendAttributesJson } from '../api/task.api';
 
 Array.prototype.equals = function (array) {
 
@@ -58,12 +58,8 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
 
-        let tempHeader = ['code', '$catalogversion']
-        let tempStructure = [{
-            "type": "text"
-        }, {
-            "type": "text"
-        }]
+        let tempHeader = ['code']
+        let tempStructure = [{"type": "text"}]
 
         for (let i = 0; i < selectedAttributes.length; i++) {
 
@@ -71,16 +67,15 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
             if(selectedAttributes[i]['mode'] === ''){
 
-                tempHeader.push(Object.keys(selectedAttributes[i])[0])
+                tempHeader.push(selectedAttributes[i]['attribute'])
 
             } else {
 
-                tempHeader.push(Object.keys(selectedAttributes[i])[0] + ' - mode[' + selectedAttributes[i]['mode'] + ']' )
+                tempHeader.push(selectedAttributes[i]['attribute'] + ' mode[' + selectedAttributes[i]['mode'] + ']' )
 
             }
 
-            
-            tempStructure.push(selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]['attribute_structure'])
+            tempStructure.push(selectedAttributes[i]['attribute_structure'])
 
         }
 
@@ -131,26 +126,20 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
             }
 
-            const temp_object = {
-
-                [header[i]]: temp_column
-
-            }
-
-            objects_list.push(temp_object);
+            objects_list.push({ properties: selectedAttributes[i], values:temp_column });
 
         }
 
-        if (objects_list[0]['code'].includes(null) || objects_list[0]['code'].includes('')){
+        if (objects_list[0]['values'].includes(null) || objects_list[0]['values'].includes('')){
 
             alert('Por favor ingrese siempre un SKU al inicio de las filas')
 
         } else {
 
+            console.log(selectedAttributes)
+            console.log(objects_list)
             let references_assets_JSON = JSON.stringify(objects_list);
             let response = await sendAttributesJson(references_assets_JSON);
-    
-            console.log(response)
     
             saveData(response.data, "impex.csv");
 
@@ -167,10 +156,6 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
                     data={attributes}
                     colHeaders={header}
                     columns={structure}
-                    hiddenColumns={{
-                        columns: [1],
-                        indicators: true,
-                    }}
                     width="100%"
                     height="100%"
                     ref={hotTableComponent}

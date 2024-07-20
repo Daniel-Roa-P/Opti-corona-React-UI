@@ -24,23 +24,9 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
     }, [clasification])
 
-    /* function containsObject(obj, list) {
-        for (let i = 0; i < list.length; i++) {
-            if ((Object.keys(list[i])[0] == Object.keys(obj)[0]) && (list[i][Object.keys(list[i])[0]] == obj[Object.keys(obj)[0]])) {
-                return true;
-            }
-        }
-
-        return false;
-    } */
-
     const addAttribute = () => {
 
-        console.log(attributesIds)
-        console.log(attributesStructure[attribute]['id'])
-
         if (!(attributesIds.includes(attributesStructure[attribute]['id']))) {
-        //if (!containsObject({ [attribute]: attributesStructure[attribute] }, selectedAttributes)) {
 
             let newIds = [...attributesIds]
             newIds.push(attributesStructure[attribute]['id'])
@@ -48,7 +34,7 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
             setAttributesIds(newIds);
 
             let newAttributes = [...selectedAttributes]
-            newAttributes.push({ [attribute]: attributesStructure[attribute], mode: mode })
+            newAttributes.push({clasification: clasification, attribute: attribute , attribute_structure: attributesStructure[attribute]['attribute_structure'], mode: mode })
 
             setSelectedAttributes(newAttributes);
 
@@ -63,7 +49,6 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
     const removeAttribute = () => {
 
         if ((attributesIds.includes(attributesStructure[attribute]['id']))) {
-        //if (containsObject({ [attribute]: attributesStructure[attribute] }, selectedAttributes)) {
 
             let newAttributes = []
 
@@ -73,7 +58,7 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
 
             for (let i = 0; i < selectedAttributes.length; i++) {
 
-                if (JSON.stringify({ [attribute]:selectedAttributes[i][Object.keys(selectedAttributes[i])[0]]}) !== JSON.stringify({ [attribute]: attributesStructure[attribute] })) {
+                if (JSON.stringify(attributesStructure[selectedAttributes[i]['attribute']]) !== JSON.stringify( attributesStructure[attribute] )) {
 
                     newAttributes.push(selectedAttributes[i])
 

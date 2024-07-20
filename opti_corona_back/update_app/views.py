@@ -51,4 +51,6 @@ def get_attibute_structure(request):
 
         data = json.loads(request.body)
 
+        print(data)
+
         return JsonResponse(impex_dictionary.get_structure(data[0],data[1]), safe=False)

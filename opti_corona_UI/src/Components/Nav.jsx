@@ -19,7 +19,7 @@ const Nav = () => {
             <div className='flex h-full w-full text-white'>
 
                 <div className="flex items-center w-[80%] h-full">
-                    <span className="text-2xl font-blod  ms-8">Logo</span>
+                    <span className="text-2xl font-blod  ms-8">Opti corona</span>
                 </div>
 
                 <div className="flex items-center w-[10%] h-full">

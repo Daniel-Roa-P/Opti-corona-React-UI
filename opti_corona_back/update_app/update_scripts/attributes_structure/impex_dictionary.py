@@ -2,6 +2,7 @@ attributes_structure = {
     "corona": {
         "advantages": {
             "id": 1,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -10,6 +11,7 @@ attributes_structure = {
         },
         "approvalStatus": {
             "id": 2,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -23,6 +25,7 @@ attributes_structure = {
         },
         "areaCovered": {
             "id": 3,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -31,6 +34,7 @@ attributes_structure = {
         },
         "areaUnit": {
             "id": 4,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -43,6 +47,7 @@ attributes_structure = {
         },
         "blueprints": {
             "id": 5,
+            "nomenclatura": "(code, $catalogVersion)",
             "attribute_structure": {
                 "type": "text"
             },
@@ -51,6 +56,7 @@ attributes_structure = {
         },
         "colorSelector": {
             "id": 6,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "checkbox"
             },
@@ -59,6 +65,7 @@ attributes_structure = {
         },
         "conversionUnit": {
             "id": 7,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -79,6 +86,7 @@ attributes_structure = {
         },
         "conversionValue": {
             "id": 8,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -87,6 +95,7 @@ attributes_structure = {
         },
         "description": {
             "id": 9,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -95,6 +104,7 @@ attributes_structure = {
         },
         "ean": {
             "id": 10,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -103,6 +113,7 @@ attributes_structure = {
         },
         "extendedContent": {
             "id": 11,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -111,6 +122,7 @@ attributes_structure = {
         },
         "externalSalesUnit": {
             "id": 12,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -119,6 +131,7 @@ attributes_structure = {
         },
         "flag": {
             "id": 13,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -136,6 +149,7 @@ attributes_structure = {
         },
         "hasPriorityVariant": {
             "id": 14,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "checkbox"
             },
@@ -144,6 +158,7 @@ attributes_structure = {
         },
         "name": {
             "id": 15,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -152,6 +167,7 @@ attributes_structure = {
         },
         "ogDescription": {
             "id": 16,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -160,6 +176,7 @@ attributes_structure = {
         },
         "ogTitle": {
             "id": 17,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -168,6 +185,7 @@ attributes_structure = {
         },
         "presentation": {
             "id": 18,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -181,6 +199,7 @@ attributes_structure = {
         },
         "productRequest": {
             "id": 19,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "checkbox"
             },
@@ -189,6 +208,7 @@ attributes_structure = {
         },
         "recommendationsForApplying": {
             "id": 20,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -197,6 +217,7 @@ attributes_structure = {
         },
         "recommendationsForCleaning": {
             "id": 21,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -205,6 +226,7 @@ attributes_structure = {
         },
         "recommendationsForInstalation": {
             "id": 22,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -213,6 +235,7 @@ attributes_structure = {
         },
         "recommendationsForUse": {
             "id": 23,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -221,6 +244,7 @@ attributes_structure = {
         },
         "relevance": {
             "id": 24,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -237,6 +261,7 @@ attributes_structure = {
         },
         "seoDescription": {
             "id": 25,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -245,6 +270,7 @@ attributes_structure = {
         },
         "seoRobots": {
             "id": 26,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -260,6 +286,7 @@ attributes_structure = {
         },
         "seoTitle": {
             "id": 27,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -268,6 +295,7 @@ attributes_structure = {
         },
         "showCalculator": {
             "id": 28,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "checkbox"
             },
@@ -276,6 +304,7 @@ attributes_structure = {
         },
         "specialAttributes": {
             "id": 29,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -284,6 +313,7 @@ attributes_structure = {
         },
         "summary": {
             "id": 30,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -292,6 +322,7 @@ attributes_structure = {
         },
         "supercategories": {
             "id": 31,
+            "nomenclatura": "(code, $catalogVersion)",
             "attribute_structure": {
                 "type": "text"
             },
@@ -300,6 +331,7 @@ attributes_structure = {
         },
         "technicalDocuments": {
             "id": 32,
+            "nomenclatura": "(code, $catalogVersion)",
             "attribute_structure": {
                 "type": "text"
             },
@@ -308,6 +340,7 @@ attributes_structure = {
         },
         "unit": {
             "id": 33,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -322,6 +355,7 @@ attributes_structure = {
         },
         "wastePerecentage": {
             "id": 34,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -330,6 +364,7 @@ attributes_structure = {
         },
         "weight": {
             "id": 35,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -340,6 +375,7 @@ attributes_structure = {
     "especificaciones-accesorios": {
         "profundidad": {
             "id": 36,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -348,6 +384,7 @@ attributes_structure = {
         },
         "temperatura-de-uso": {
             "id": 37,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -358,6 +395,7 @@ attributes_structure = {
     "especificaciones-combos-y-kits": {
         "componentes": {
             "id": 38,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -383,6 +421,7 @@ attributes_structure = {
         },
         "numero-de-piezas": {
             "id": 39,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -391,6 +430,7 @@ attributes_structure = {
         },
         "tipo-de-sifon": {
             "id": 40,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -405,6 +445,7 @@ attributes_structure = {
     "especificaciones-comunes-a": {
         "areas-de-uso": {
             "id": 41,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -428,6 +469,7 @@ attributes_structure = {
         },
         "diseno": {
             "id": 42,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -438,6 +480,7 @@ attributes_structure = {
     "especificaciones-comunes-b": {
         "contenido-del-producto": {
             "id": 43,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -446,6 +489,7 @@ attributes_structure = {
         },
         "precauciones": {
             "id": 44,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -454,6 +498,7 @@ attributes_structure = {
         },
         "presentacion": {
             "id": 45,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -475,6 +520,7 @@ attributes_structure = {
         },
         "rendimiento": {
             "id": 46,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -483,6 +529,7 @@ attributes_structure = {
         },
         "tiempo-de-secado": {
             "id": 47,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -493,6 +540,7 @@ attributes_structure = {
     "especificaciones-comunes-c": {
         "consumo-de-agua": {
             "id": 48,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -501,6 +549,7 @@ attributes_structure = {
         },
         "forma": {
             "id": 49,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -516,6 +565,7 @@ attributes_structure = {
         },
         "tipo-de-instalacion": {
             "id": 50,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -531,6 +581,7 @@ attributes_structure = {
         },
         "tipo-de-manija-o-accionamiento": {
             "id": 51,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -553,6 +604,7 @@ attributes_structure = {
     "especificaciones-duchas": {
         "dimension-de-la-regadera": {
             "id": 52,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -561,6 +613,7 @@ attributes_structure = {
         },
         "longitud-del-brazo": {
             "id": 53,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -569,6 +622,7 @@ attributes_structure = {
         },
         "tipo-de-regadera": {
             "id": 54,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -588,6 +642,7 @@ attributes_structure = {
         },
         "tipo-mezclador": {
             "id": 55,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -604,6 +659,7 @@ attributes_structure = {
     "especificaciones-gaso-electro": {
         "color": {
             "id": 56,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -612,6 +668,7 @@ attributes_structure = {
         },
         "eficiencia-energetica": {
             "id": 57,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -620,6 +677,7 @@ attributes_structure = {
         },
         "especificaciones-gaso-electro": {
             "id": 58,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -628,6 +686,7 @@ attributes_structure = {
         },
         "marca": {
             "id": 59,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -645,6 +704,7 @@ attributes_structure = {
         },
         "observaciones": {
             "id": 60,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -653,6 +713,7 @@ attributes_structure = {
         },
         "tipo-de-sistema": {
             "id": 61,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -678,6 +739,7 @@ attributes_structure = {
         },
         "tipo-instalacion": {
             "id": 62,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -690,6 +752,7 @@ attributes_structure = {
         },
         "voltaje": {
             "id": 63,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -700,6 +763,7 @@ attributes_structure = {
     "especificaciones-generales": {
         "acabado": {
             "id": 64,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -716,6 +780,7 @@ attributes_structure = {
         },
         "alto": {
             "id": 65,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -724,6 +789,7 @@ attributes_structure = {
         },
         "ancho": {
             "id": 66,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -732,6 +798,7 @@ attributes_structure = {
         },
         "calidad": {
             "id": 67,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -740,6 +807,7 @@ attributes_structure = {
         },
         "coleccion": {
             "id": 68,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -748,6 +816,7 @@ attributes_structure = {
         },
         "espesor-mm": {
             "id": 69,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -756,6 +825,7 @@ attributes_structure = {
         },
         "fabricado-por": {
             "id": 70,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -764,6 +834,7 @@ attributes_structure = {
         },
         "fabricante": {
             "id": 71,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -772,6 +843,7 @@ attributes_structure = {
         },
         "garantia": {
             "id": 72,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -780,6 +852,7 @@ attributes_structure = {
         },
         "garantias-de-otros-componentes": {
             "id": 73,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -788,6 +861,7 @@ attributes_structure = {
         },
         "incluye": {
             "id": 74,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -796,6 +870,7 @@ attributes_structure = {
         },
         "largo": {
             "id": 75,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -804,6 +879,7 @@ attributes_structure = {
         },
         "linea": {
             "id": 76,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -812,6 +888,7 @@ attributes_structure = {
         },
         "marca": {
             "id": 77,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -820,6 +897,7 @@ attributes_structure = {
         },
         "materiales": {
             "id": 78,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -828,6 +906,7 @@ attributes_structure = {
         },
         "no-incluye": {
             "id": 79,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -836,6 +915,7 @@ attributes_structure = {
         },
         "paisdeorigen": {
             "id": 80,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -844,6 +924,7 @@ attributes_structure = {
         },
         "premios": {
             "id": 81,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -852,6 +933,7 @@ attributes_structure = {
         },
         "productos-compatibles": {
             "id": 82,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -860,6 +942,7 @@ attributes_structure = {
         },
         "resistencia": {
             "id": 83,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -868,6 +951,7 @@ attributes_structure = {
         },
         "tecnologias": {
             "id": 84,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -876,6 +960,7 @@ attributes_structure = {
         },
         "uso": {
             "id": 85,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -891,6 +976,7 @@ attributes_structure = {
     "especificaciones-griferias": {
         "altura-de-la-griferia": {
             "id": 86,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -904,6 +990,7 @@ attributes_structure = {
         },
         "capacidad-de-flujo": {
             "id": 87,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -912,6 +999,7 @@ attributes_structure = {
         },
         "observaciones": {
             "id": 88,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -920,6 +1008,7 @@ attributes_structure = {
         },
         "rango-de-presion-de-agua": {
             "id": 89,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -928,6 +1017,7 @@ attributes_structure = {
         },
         "sistema-antivandalico": {
             "id": 90,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -936,6 +1026,7 @@ attributes_structure = {
         },
         "sistema-de-accionamiento": {
             "id": 91,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -944,6 +1035,7 @@ attributes_structure = {
         },
         "temperatura-de-uso": {
             "id": 92,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -952,6 +1044,7 @@ attributes_structure = {
         },
         "tipo-de-chorro": {
             "id": 93,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -966,6 +1059,7 @@ attributes_structure = {
         },
         "tipo-de-griferia": {
             "id": 94,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -983,6 +1077,7 @@ attributes_structure = {
     "especificaciones-herramientas": {
         "caracteristicas-funcionales": {
             "id": 95,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -993,6 +1088,7 @@ attributes_structure = {
     "especificaciones-materiales-limpiadores-pegantes": {
         "adherencia": {
             "id": 96,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1001,6 +1097,7 @@ attributes_structure = {
         },
         "dilucion": {
             "id": 97,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1009,6 +1106,7 @@ attributes_structure = {
         },
         "duracion-de-la-mezcla": {
             "id": 98,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1017,6 +1115,7 @@ attributes_structure = {
         },
         "tiempo-abierto": {
             "id": 99,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1025,6 +1124,7 @@ attributes_structure = {
         },
         "tiempo-para-emboquillar": {
             "id": 100,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1035,6 +1135,7 @@ attributes_structure = {
     "especificaciones-muebles": {
         "profundidad": {
             "id": 101,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1043,6 +1144,7 @@ attributes_structure = {
         },
         "resistente-humedad": {
             "id": 102,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1051,6 +1153,7 @@ attributes_structure = {
         },
         "tiempo-de-armado-estimado": {
             "id": 103,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1059,6 +1162,7 @@ attributes_structure = {
         },
         "tipo-de-canto": {
             "id": 104,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1071,6 +1175,7 @@ attributes_structure = {
         },
         "tipo-de-cierre": {
             "id": 105,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1085,6 +1190,7 @@ attributes_structure = {
         },
         "tipo-de-herrajes": {
             "id": 106,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1095,6 +1201,7 @@ attributes_structure = {
     "especificaciones-muebles-bano": {
         "material-del-lavamanos": {
             "id": 107,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1108,6 +1215,7 @@ attributes_structure = {
         },
         "material-del-meson": {
             "id": 108,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1122,6 +1230,7 @@ attributes_structure = {
     "especificaciones-muebles-cocina": {
         "caracteristicas-de-la-cubierta": {
             "id": 109,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1130,6 +1239,7 @@ attributes_structure = {
         },
         "material-del-lavaplatos": {
             "id": 110,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1140,6 +1250,7 @@ attributes_structure = {
     "especificaciones-muebles-lavadero": {
         "material-del-lavadero": {
             "id": 111,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1150,6 +1261,7 @@ attributes_structure = {
     "especificaciones-pinturas": {
         "cuarteamiento-alto-espesor": {
             "id": 112,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1158,6 +1270,7 @@ attributes_structure = {
         },
         "cuarteamiento-superficial": {
             "id": 113,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1166,6 +1279,7 @@ attributes_structure = {
         },
         "fabricado-por": {
             "id": 114,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1174,6 +1288,7 @@ attributes_structure = {
         },
         "lavabilidad": {
             "id": 115,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1187,6 +1302,7 @@ attributes_structure = {
         },
         "lote-fecha-fabricacion": {
             "id": 116,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1195,6 +1311,7 @@ attributes_structure = {
         },
         "poder-cubriente": {
             "id": 117,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1203,6 +1320,7 @@ attributes_structure = {
         },
         "remocion-manchas-lavabilidad": {
             "id": 118,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1211,6 +1329,7 @@ attributes_structure = {
         },
         "resistencia-abrasion": {
             "id": 119,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1219,6 +1338,7 @@ attributes_structure = {
         },
         "resistencia-agua": {
             "id": 120,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1227,6 +1347,7 @@ attributes_structure = {
         },
         "resistencia-hongos-algas": {
             "id": 121,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1235,6 +1356,7 @@ attributes_structure = {
         },
         "retencion-olor": {
             "id": 122,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1243,6 +1365,7 @@ attributes_structure = {
         },
         "toxicidad": {
             "id": 123,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1253,6 +1376,7 @@ attributes_structure = {
     "especificaciones-plomeria": {
         "alto-plomeria": {
             "id": 124,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1261,6 +1385,7 @@ attributes_structure = {
         },
         "ancho-plomeria": {
             "id": 125,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1269,6 +1394,7 @@ attributes_structure = {
         },
         "especificaciones": {
             "id": 126,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1277,6 +1403,7 @@ attributes_structure = {
         },
         "largo-plomeria": {
             "id": 127,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1287,6 +1414,7 @@ attributes_structure = {
     "especificaciones-pozos": {
         "diametro-del-desague": {
             "id": 128,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1295,6 +1423,7 @@ attributes_structure = {
         },
         "dimensiones-del-pozo": {
             "id": 129,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1303,6 +1432,7 @@ attributes_structure = {
         },
         "profundidad-del-pozo": {
             "id": 130,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1311,6 +1441,7 @@ attributes_structure = {
         },
         "sistema-antivandalico": {
             "id": 131,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1319,6 +1450,7 @@ attributes_structure = {
         },
         "tipo-de-desague": {
             "id": 132,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1331,6 +1463,7 @@ attributes_structure = {
         },
         "tipo-de-lavamanos": {
             "id": 133,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1341,6 +1474,7 @@ attributes_structure = {
     "especificaciones-revestimientos": {
         "aspecto": {
             "id": 134,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1354,6 +1488,7 @@ attributes_structure = {
         },
         "formato": {
             "id": 135,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1362,6 +1497,7 @@ attributes_structure = {
         },
         "lote-fecha-fabricacion": {
             "id": 136,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1370,6 +1506,7 @@ attributes_structure = {
         },
         "m2-por-caja": {
             "id": 137,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1378,6 +1515,7 @@ attributes_structure = {
         },
         "pais-origen": {
             "id": 138,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1386,6 +1524,7 @@ attributes_structure = {
         },
         "piezas-por-caja": {
             "id": 139,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1394,6 +1533,7 @@ attributes_structure = {
         },
         "resistencia-a-las-manchas": {
             "id": 140,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1409,14 +1549,16 @@ attributes_structure = {
         },
         "superficie": {
             "id": 141,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
             "multivalued": "false",
             "zonified": "true"
         },
-        "tamaño": {
+        "tama�o": {
             "id": 142,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1425,6 +1567,7 @@ attributes_structure = {
         },
         "trafico": {
             "id": 143,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1441,6 +1584,7 @@ attributes_structure = {
         },
         "unidad-de-embalaje": {
             "id": 144,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1451,6 +1595,7 @@ attributes_structure = {
     "especificaciones-sanitarios": {
         "accesibilidad": {
             "id": 145,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1459,6 +1604,7 @@ attributes_structure = {
         },
         "altura-de-la-taza": {
             "id": 146,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1467,6 +1613,7 @@ attributes_structure = {
         },
         "capacidad-de-descarga": {
             "id": 147,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "numeric"
             },
@@ -1475,6 +1622,7 @@ attributes_structure = {
         },
         "espejo-de-agua": {
             "id": 148,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1483,6 +1631,7 @@ attributes_structure = {
         },
         "perfil-de-la-taza": {
             "id": 149,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1495,6 +1644,7 @@ attributes_structure = {
         },
         "sistema-antivandalico": {
             "id": 150,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1503,6 +1653,7 @@ attributes_structure = {
         },
         "sistema-de-descarga": {
             "id": 151,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1516,6 +1667,7 @@ attributes_structure = {
         },
         "tipo-de-asiento": {
             "id": 152,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1528,6 +1680,7 @@ attributes_structure = {
         },
         "tipo-de-sifon": {
             "id": 153,
+            "nomenclatura": "(code)",
             "attribute_structure": {
                 "type": "dropdown",
                 "source": [
@@ -1540,6 +1693,7 @@ attributes_structure = {
         },
         "tipo-de-tanque": {
             "id": 154,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },
@@ -1548,6 +1702,7 @@ attributes_structure = {
         },
         "tipo-de-valvula": {
             "id": 155,
+            "nomenclatura": "",
             "attribute_structure": {
                 "type": "text"
             },

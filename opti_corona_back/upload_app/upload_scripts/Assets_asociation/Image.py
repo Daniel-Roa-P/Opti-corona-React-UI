@@ -25,6 +25,8 @@ class Images(Asset):
 
                 self.create_dictionary_by_row()
 
+            allowedTypes = ['jpg', 'png']
+
             skus = []
             nombre_archivos = []
             posiciones = []
@@ -34,18 +36,20 @@ class Images(Asset):
 
                 for filename in self.relations_dictionary[str(referencia)]:
 
-                    if(indice == 0):
-                            
-                        miniatura = 'thumbnail'
+                     if (filename.lower()[-3:] in allowedTypes):
 
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
-                    posiciones.append(str(indice))
-                    thumbnails.append(miniatura)
+                        if(indice == 0):
+                                
+                            miniatura = 'thumbnail'
 
-                    indice = indice + 1
-                    miniatura = ''
-                    self.relatedAssets.append(filename)
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
+                        posiciones.append(str(indice))
+                        thumbnails.append(miniatura)
+
+                        indice = indice + 1
+                        miniatura = ''
+                        self.relatedAssets.append(filename)
 
                 self.cantidades[referencia] = indice
 

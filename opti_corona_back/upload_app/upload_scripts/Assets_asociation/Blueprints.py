@@ -24,18 +24,22 @@ class Blueprints(Asset):
 
                 self.create_dictionary_by_row()
             
+            allowedTypes = ['jpg', 'png']
+
             skus = []
             nombre_archivos = []
 
             for referencia in self.relations_dictionary:
 
                 for filename in self.relations_dictionary[str(referencia)]:
-                    
-                    skus.append(str(referencia))
-                    nombre_archivos.append(filename)
+                        
+                    if (filename.lower()[-3:] in allowedTypes):
 
-                    indice = indice + 1
-                    self.relatedAssets.append(filename)
+                        skus.append(str(referencia))
+                        nombre_archivos.append(filename)
+
+                        indice = indice + 1
+                        self.relatedAssets.append(filename)
 
                 self.cantidades[referencia] = indice
 
