@@ -9,26 +9,69 @@ def generate_impex(data):
 
     writer = csv.writer(response, delimiter=';') 
 
+    writer.writerow(["$productCatalog = corona-coProductCatalog"])
+    writer.writerow(["$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]"]) 
+    writer.writerow(["$clAttrModifiers = system='corona-coClassification', version='1.0', translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator"]) 
+    writer.writerow(["$lang = es"]) 
+
     print(data)
 
     data_serializada = {}
 
+    macros = []
+    cabezera_impex = ["UPDATE Product"]
+
     for objeto in data:
 
-        data_serializada[[*objeto.keys()][0]] = [*objeto.values()][0]    
+        clasification = objeto['properties']['clasification']
+        attribute = objeto['properties']['attribute']
+        mode = objeto['properties']['mode']
+        
+        data_serializada[clasification + ',' + attribute] = objeto['values']
+
+        details = impex_dictionary.get_structure(clasification,attribute)
+
+        if(clasification not in ['default','corona']):
+
+            macroName = '$' + attribute
+
+            if(details['zonified'] == "true"):
+
+                macros.append(macroName + "= @" + attribute + "[$clAttrModifiers,lang=$lang]")
+
+            else:
+
+                macros.append(macroName + "= @" + attribute + "[$clAttrModifiers]")
+
+            cabezera_impex.append(attribute + details['nomenclatura'] + mode)
+
+        else:
+
+            if(details['zonified'] == "true"):
+
+                cabezera_impex.append(attribute + details['nomenclatura'] + '[lang=$lang]' + mode)
+
+            else:
+
+                cabezera_impex.append(attribute + details['nomenclatura'] + mode)
+
+    cabezera_impex.insert(2,'$catalogVersion')
+    cabezera_impex.append('')
+
+    print(cabezera_impex)
+
+    writer.writerow([])
+
+    for macro in macros:
+
+        writer.writerow([macro])
+
+    writer.writerow([])
+    writer.writerow(cabezera_impex) 
 
     atributos = [*data_serializada.keys()] 
 
-    writer.writerow(["$productCatalog = corona-coProductCatalog"])
-    writer.writerow(["$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]"]) 
-
-    for atributo in list(data_serializada.keys()):
-
-        print(atributo)
-
-    writer.writerow(["UPDATE Product; code [unique = true]; $catalogVersion;"] + atributos) 
-
-    n_referencias = len(data_serializada['code'])
+    n_referencias = len(data_serializada['default,code'])
 
     for i in range(0, n_referencias):
 
@@ -41,7 +84,6 @@ def generate_impex(data):
             if(key == 'code'):
 
                 temp_row.append('') 
-
 
         temp_row.append('')
         writer.writerow(temp_row)

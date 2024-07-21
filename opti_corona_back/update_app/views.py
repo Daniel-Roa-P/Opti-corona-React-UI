@@ -40,17 +40,3 @@ def get_attributes_list(request):
         #print(impex_dictionary.get_attributes(data[0]))
         return JsonResponse(impex_dictionary.get_attributes(data[0]), safe=False)
     
-def get_attibute_structure(request):
-
-    if request.method == 'GET':
-
-        print(request)
-        return JsonResponse(request)
-
-    else: 
-
-        data = json.loads(request.body)
-
-        print(data)
-
-        return JsonResponse(impex_dictionary.get_structure(data[0],data[1]), safe=False)

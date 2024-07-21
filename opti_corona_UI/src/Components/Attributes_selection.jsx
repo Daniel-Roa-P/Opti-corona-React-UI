@@ -114,8 +114,8 @@ function Attributes_selection({ clasification, selectedAttributes, setSelectedAt
                         {(attributesStructure[attribute] != undefined && attributesStructure[attribute]['multivalued'] == 'true') ?
 
                             <div className="grid grid-cols-2 gap-2 w-1/4">
-                                <input type="radio" value="append" name="mode" onChange={handleModeChange} />Append
-                                <input type="radio" value="remove" name="mode" onChange={handleModeChange} />Remove
+                                <input type="radio" value="mode[append]" name="mode" onChange={handleModeChange} />Append
+                                <input type="radio" value="mode[remove]" name="mode" onChange={handleModeChange} />Remove
                             </div>
 
                             : null}

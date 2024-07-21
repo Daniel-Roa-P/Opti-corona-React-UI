@@ -4,7 +4,15 @@ const UpdateContext = React.createContext();
 
 function UpdateProvider(props) {
 
-    const [selectedAttributes, setSelectedAttributes] = React.useState([]);
+    const [selectedAttributes, setSelectedAttributes] = React.useState([{
+
+        clasification: "default", 
+        attribute: "code", 
+        attribute_structure: { type: "text" }, 
+        mode: "" 
+
+    }
+    ]);
     const [impex, setImpex] = React.useState([]);
 
     return (

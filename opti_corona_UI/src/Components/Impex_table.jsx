@@ -58,12 +58,10 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         hotTableComponent.current.hotInstance.updateData(attributes)
 
-        let tempHeader = ['code']
-        let tempStructure = [{"type": "text"}]
+        let tempHeader = []
+        let tempStructure = []
 
         for (let i = 0; i < selectedAttributes.length; i++) {
-
-            console.log(selectedAttributes[i])
 
             if(selectedAttributes[i]['mode'] === ''){
 
@@ -71,7 +69,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
             } else {
 
-                tempHeader.push(selectedAttributes[i]['attribute'] + ' mode[' + selectedAttributes[i]['mode'] + ']' )
+                tempHeader.push(selectedAttributes[i]['attribute'] + selectedAttributes[i]['mode']  )
 
             }
 
