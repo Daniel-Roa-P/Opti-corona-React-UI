@@ -128,7 +128,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         }
 
-        if (objects_list[0]['values'].includes(null) || objects_list[0]['values'].includes('')){
+        if (objects_list[0]['values'].includes(null)){
 
             alert('Por favor ingrese siempre un SKU al inicio de las filas')
 

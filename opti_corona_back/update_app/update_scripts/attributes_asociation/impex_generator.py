@@ -11,8 +11,7 @@ def generate_impex(data):
 
     writer.writerow(["$productCatalog = corona-coProductCatalog"])
     writer.writerow(["$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]"]) 
-    writer.writerow(["$clAttrModifiers = system='corona-coClassification', version='1.0', translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator"]) 
-    writer.writerow(["$lang = es"]) 
+    writer.writerow(["$clAttrModifiers = system='corona-coClassification', version='1.0', translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator"])  
 
     print(data)
 
@@ -58,9 +57,8 @@ def generate_impex(data):
     cabezera_impex.insert(2,'$catalogVersion')
     cabezera_impex.append('')
 
-    print(cabezera_impex)
-
     writer.writerow([])
+    writer.writerow(["$lang = es"])
 
     for macro in macros:
 
@@ -81,7 +79,10 @@ def generate_impex(data):
 
             temp_row.append(data_serializada[key][i])
             
-            if(key == 'code'):
+            print(key)
+            print(data_serializada[key][i])
+
+            if(atributos.index(key) == 0):
 
                 temp_row.append('') 
 

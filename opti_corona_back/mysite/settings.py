@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-w$uq-y!yez$9@$0y_3$d)e*(ph(fabo7onyi2io9*y#cr_94d4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://127.0.0.1:5173', 'http://127.0.0.1:8000', 'localhost']
+ALLOWED_HOSTS =  ['*']
 
 
 # Application definition
@@ -25,15 +25,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'upload_app',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'upload_app',
+    'update_app',
+    'user_api'
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -63,6 +65,17 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+AUTH_USER_MODEL = 'user_api.AppUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
 
 DATABASES = {
     'default': {
@@ -113,4 +126,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5173']
+CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5173','http://localhost:5173']
+
+CORS_ALLOWED_CREDENTIALS = True
