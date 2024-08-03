@@ -7,7 +7,9 @@ from .upload_scripts.Assets_asociation.Rfa import Rfa
 from .upload_scripts.Assets_asociation.Videos import Videos
 from .upload_scripts.Assets_asociation.Prices import Prices
 from .upload_scripts.Assets_structure.asset_dictionary import get_list , get_structure
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt 
 def upload_asset(request):
 
     if request.method == 'GET':
@@ -27,7 +29,8 @@ def upload_asset(request):
         response.append(asset.create_automatic_matrix())
         response.append(asset.generate_report())
         return JsonResponse(response, safe=False)
-    
+
+@csrf_exempt 
 def idenfy_asset(data): 
 
     uploadType = data[0]['uploadType']
@@ -55,7 +58,8 @@ def idenfy_asset(data):
     elif(uploadType == "prices"):
 
         return Prices(data)
-    
+
+@csrf_exempt 
 def get_assets_list(request):
 
     if request.method == 'GET':
@@ -66,7 +70,8 @@ def get_assets_list(request):
     else: 
 
         return JsonResponse(get_list(), safe=False)
-    
+
+@csrf_exempt 
 def get_asset_structure(request):
 
     if request.method == 'GET':

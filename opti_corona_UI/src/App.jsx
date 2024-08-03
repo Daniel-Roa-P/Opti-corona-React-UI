@@ -4,6 +4,8 @@ import { UploadPage } from './Upload_module/UploadPage';
 import { UpdatePage } from './Update_module/UpdatePage';
 import { UploadProvider } from './Upload_module/UploadContext';
 import { UpdateProvider } from './Update_module/UpdateContext';
+import { LoginPage } from './Auth_module/LoginPage';
+import { AuthRoute, AuthProvider } from "./Auth_module/AuthContext";
 
 function App() {
 
@@ -11,25 +13,28 @@ function App() {
 
     <HashRouter>
 
-      <Routes>
+      <AuthProvider>
 
-        <Route path="/" element={
-          <UploadProvider>
-            <UploadPage />
-          </UploadProvider>} />
+        <Routes>
 
-        <Route path="/upload/" element={
-          <UploadProvider>
-            <UploadPage />
-          </UploadProvider>} />
-
-        <Route path="/update/" element={
-          <UpdateProvider>
-            <UpdatePage />
-          </UpdateProvider>
+          <Route path="/" element={
+              <LoginPage />
           } />
 
-      </Routes>
+          <Route path="/upload/" element={
+            <UploadProvider>
+              <UploadPage />
+            </UploadProvider>} />
+
+          <Route path="/update/" element={
+            <UpdateProvider>
+              <UpdatePage />
+            </UpdateProvider>
+            } />
+
+        </Routes>
+
+      </AuthProvider>
 
     </HashRouter>
 

@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'C-CSRFToken';
+axios.defaults.withCredentials = true;
+
 const uploadApi = axios.create({
 
     baseURL: 'http://localhost:8000/'
@@ -13,3 +17,6 @@ export const getAssetStructureJson = (task) =>  uploadApi.post('/upload/api/v1/u
 export const sendAttributesJson = (task) =>  uploadApi.post('/update/api/v1/update/',task)
 export const getClassificationsListJson = (task) =>  uploadApi.post('/update/api/v1/get_classification_list/',task)
 export const getAttributesListJson = (task) =>  uploadApi.post('/update/api/v1/get_attributes_list/',task)
+
+export const loginUser = (credentials) =>  uploadApi.post('/auth/api/v1/login/',credentials)
+export const logoutUser = (credentials) =>  uploadApi.post('/auth/api/v1/logout/',credentials)
