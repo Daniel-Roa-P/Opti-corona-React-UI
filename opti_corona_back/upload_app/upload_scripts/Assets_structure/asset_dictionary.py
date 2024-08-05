@@ -1,6 +1,6 @@
 assets_structure = {
 
-    'images': {
+    'gallery': {
 
         'true': {
 
@@ -28,7 +28,7 @@ assets_structure = {
         },
 
     },
-    'docs': {
+    'technical_documents': {
 
         'true': {
 
@@ -123,7 +123,7 @@ assets_structure = {
         }
 
     },
-    'videos': {
+    'video': {
 
         'true': {
 

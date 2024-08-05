@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS =  ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -26,10 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'upload_app',
     'update_app',
-    'user_api.apps.UserApiConfig',
+    'user_api'
 ]
 
 MIDDLEWARE = [
@@ -63,20 +63,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-AUTH_USER_MODEL = 'user_api.AppUser'
-
-REST_FRAMEWORK = {
+""" REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
     ),
-}
+} """
+
 
 DATABASES = {
     'default': {
@@ -130,9 +128,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_COOKIE_SECURE = True 
+""" CSRF_COOKIE_SECURE = True 
 CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True """
 
 CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5173','http://localhost:5173']
 

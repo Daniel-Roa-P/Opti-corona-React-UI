@@ -4,11 +4,21 @@ import { Attributes_selection } from '../Components/Attributes_selection';
 import { UpdateContext } from './UpdateContext';
 import { Impex_table } from '../Components/Impex_table';
 import { getClassificationsListJson } from '../api/task.api';
+import { useAuth } from "../Auth_module/AuthContext";
+import { Navigate } from "react-router-dom";
 
 function UpdatePage() {
 
+  const auth = useAuth();
+
   const [option, setOption] = React.useState('corona');
   const [classificationList, setClassificationList] = React.useState([]);
+
+  if(auth.currentUser === null){
+
+      return <Navigate to='/' replace/>;
+
+  }
 
   const {
 

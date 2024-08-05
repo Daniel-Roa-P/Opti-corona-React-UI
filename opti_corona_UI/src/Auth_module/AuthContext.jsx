@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 
-import { loginUser, logoutUser } from '../api/task.api';
+import { loginUser } from '../api/task.api';
 
 const AuthContext = React.createContext();
 
@@ -13,26 +13,22 @@ function AuthProvider({ children }) {
     let usuarioValidado = null;
     const navigate = useNavigate();
 
-    const getUser = async (email, password) => {
-
-        console.log(email)
-        console.log(password)
+    const getUser = async (username, password) => {
 
         /* {
-            "password": "12345678",
-            "last_login": null,
-            "email": "patata@test1.com",
-            "username": "test1"
+            "email": "patata@test.com",
+            "username": "test1",
+            "password": "12345678"
         } */
 
         const response = await loginUser(
             {
-                email: email,
+                username: username,
                 password: password
             }
         )
 
-        console.log(response);
+
 
         if (response.status == 200) {
 
@@ -49,31 +45,55 @@ function AuthProvider({ children }) {
 
     const login = async (data) => {
 
-        usuarioValidado = await getUser(data.email, data.password);
+        //usuarioValidado = await getUser(data.username, data.password);
 
-        console.log(usuarioValidado)
+        /* console.log(usuarioValidado)
 
         if (usuarioValidado) {
 
             setFailedLogin(false);
-            navigate('/update');
+            navigate('/upload');
 
         } else {
 
             setFailedLogin(true);
             navigate('/');
 
-        };
+        }; */
+
+        try {
+
+            const response = await loginUser(
+                {
+                    username: data.username,
+                    password: data.password
+                }
+            )
+
+            setCurrentUser(response.data)
+            setFailedLogin(false);
+            navigate('/upload');
+
+        } catch (error) {
+            
+            console.log('There was an error', error);
+
+            setFailedLogin(true);
+            navigate('/');
+
+        }
+
+
 
     }
 
     const logout = async () => {
 
-        const response = await logoutUser(
+        /* const response = await logoutUser(
             {
                 withCredentials: true
             }
-        )
+        ) */
 
         setCurrentUser(null);
         navigate('/');

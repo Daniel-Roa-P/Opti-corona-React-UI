@@ -7,7 +7,7 @@ function UploadProvider(props) {
   const [tipoCargue, setTipoCargue] = React.useState(
     
     {
-      upload_option: 'images',
+      upload_option: 'gallery',
       modifyManually: false,
     }
 

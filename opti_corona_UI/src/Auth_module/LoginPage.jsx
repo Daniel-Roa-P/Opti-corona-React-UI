@@ -1,17 +1,20 @@
 import React from 'react';
 import Nav from '../Components/Nav';
 import { useAuth } from "./AuthContext";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 function LoginPage() {
 
     const auth = useAuth();
     const location = useLocation();
-    const [data, setData] = React.useState({ email: (location.state !== null) ? location.state.email : '', password: (location.state !== null) ? location.state.password : '' });
+    const [data, setData] = React.useState({ username: (location.state !== null) ? location.state.username : '', password: (location.state !== null) ? location.state.password : '' });
+    if (auth.currentUser !== null) {
 
-    if (auth.user) {
+        const hasPreviousPage = window.history.length > 1;
 
-        return <Navigate to='/' replace />;
+        if (hasPreviousPage) {
+            return <Navigate to='/upload' replace/>;
+        }
 
     }
 
@@ -46,10 +49,10 @@ function LoginPage() {
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={login}>
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingrese email</label>
-                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com.co" required=""
+                                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ingrese su nombre de usuario</label>
+                                    <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required=""
                                         onChange={updateData}
-                                        value={data.email} />
+                                        value={data.username} />
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>

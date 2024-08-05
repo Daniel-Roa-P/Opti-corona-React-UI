@@ -1,8 +1,7 @@
-from django.forms import ValidationError
 from rest_framework import serializers
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth.models import User
 
-UserModel = get_user_model()
+""" UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -28,4 +27,10 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('email', 'username')
+		fields = ('email', 'username') """
+
+class UserSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = User
+		fields = ['id','username','email','password']

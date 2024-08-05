@@ -10,7 +10,7 @@ from .upload_scripts.Assets_structure.asset_dictionary import get_list , get_str
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt 
-def upload_asset(request):
+def generate_update_csv(request):
 
     if request.method == 'GET':
 

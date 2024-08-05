@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt 
-def update_impex(request):
+def generate_update_impex(request):
 
     if request.method == 'GET':
 

@@ -5,8 +5,18 @@ import Matrix_upload_table from '../Components/Matrix_upload_table';
 import { UploadContext } from './UploadContext';
 import Reports_component from '../Components/Reports_component';
 import { getAssetsListJson } from '../api/task.api';
+import { useAuth } from "../Auth_module/AuthContext";
+import { Navigate } from "react-router-dom";
 
 function UploadPage() {
+
+  const auth = useAuth();
+
+  if(auth.currentUser === null){
+
+      return <Navigate to='/' replace/>;
+
+  }
 
   const {
 
