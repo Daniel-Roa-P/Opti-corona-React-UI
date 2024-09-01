@@ -35,11 +35,11 @@ def idenfy_asset(data):
 
     uploadType = data[0]['uploadType']
 
-    if(uploadType == "images"):
+    if(uploadType == "gallery"):
 
         return Images(data)
 
-    elif(uploadType == "docs"):
+    elif(uploadType == "technical_documents"):
 
         return Document(data)
     
@@ -51,7 +51,7 @@ def idenfy_asset(data):
 
         return Rfa(data)
     
-    elif(uploadType == "videos"):
+    elif(uploadType == "video"):
 
         return Videos(data)
     
