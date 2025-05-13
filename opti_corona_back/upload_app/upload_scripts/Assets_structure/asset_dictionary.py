@@ -108,7 +108,7 @@ assets_structure = {
                 { 'type': 'numeric' },
                 { 'type': 'numeric' },
                 { 'type': 'checkbox' },
-                { 'type': 'dropdown', 'source': ['ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
+                { 'type': 'dropdown', 'source': ['TODAS','ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
             ]
 
         }, 'false': {
@@ -117,7 +117,7 @@ assets_structure = {
             'column_structure': [
                 { 'type': 'text' },
                 { 'type': 'numeric'},
-                { 'type': 'dropdown', 'source': ['ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
+                { 'type': 'dropdown', 'source': ['TODAS','ZNV000', 'ZNV001', 'ZNV002', 'ZNV003', 'ZNV004', 'ZNV005', 'ZNV006', 'ZNV016'] }
             ]
 
         }

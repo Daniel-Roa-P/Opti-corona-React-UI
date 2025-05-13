@@ -58,9 +58,44 @@ attributes_structure = {
         },
         "blueprints": {
             "id": 5,
-            "nomenclatura": "(code, $catalogVersion)",
+            "nomenclatura": "(qualifier, $catalogVersion)",
             "attribute_structure": {
                 "type": "text"
+            },
+            "multivalued": "true",
+            "zonified": "false"
+        },
+        "bottomFlag": {
+            "id": 993,
+            "nomenclatura": "(code)",
+            "attribute_structure": {
+                "type": "dropdown",
+                "source": [
+                    "Combo",
+                    "Grival",
+                    "Últimas unidades"
+                ]
+            },
+            "multivalued": "false",
+            "zonified": "false"
+        },
+        "Brandstrips": {
+            "id": 994,
+            "nomenclatura": "(name)",
+            "attribute_structure": {
+                "type": "dropdown",
+                "source": [
+                    "DeLonghi",
+                    "Logo Nine Stars corp.png",
+                    "Logo_Abba.png",
+                    "Logo-Abba.png",
+                    "Logo-American-Standard.png",
+                    "logo-ariston.png",
+                    "logoazul-challenger.png",
+                    "LOGO-CC.png",
+                    "logo-grival.png",
+                    "logo-firplak-brandstrip-resize"
+                ]
             },
             "multivalued": "true",
             "zonified": "false"
@@ -155,7 +190,7 @@ attributes_structure = {
                     "NEW"
                 ]
             },
-            "multivalued": "true",
+            "multivalued": "false",
             "zonified": "false"
         },
         "hasPriorityVariant": {
@@ -390,6 +425,46 @@ attributes_structure = {
             },
             "multivalued": "false",
             "zonified": "false"
+        },"galleryImages": {
+            "id": 999,
+            "nomenclatura": "(qualifier, $catalogVersion)",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "true",
+            "zonified": "false"
+        },"value": {
+            "id": 998,
+            "nomenclatura": "",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "false",
+            "zonified": "true"
+        },"colorHexaValue": {
+            "id": 997,
+            "nomenclatura": "",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "false",
+            "zonified": "false"
+        },"servicesDescription": {
+            "id": 996,
+            "nomenclatura": "",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "false",
+            "zonified": "true"
+        },"servicesAvailability": {
+            "id": 995,
+            "nomenclatura": "",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "false",
+            "zonified": "true"
         }
     },
     "especificaciones-accesorios": {

@@ -1,0 +1,4 @@
+plantillas/
+opti_corona_back/venv/
+**/__pycache__/
+.DS_Store

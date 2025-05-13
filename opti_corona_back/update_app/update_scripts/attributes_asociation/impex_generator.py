@@ -42,7 +42,7 @@ def generate_impex(data):
 
                 macros.append(macroName + "= @" + attribute + "[$clAttrModifiers]")
 
-            cabezera_impex.append(attribute + details['nomenclatura'] + mode)
+            cabezera_impex.append(macroName + details['nomenclatura'] + mode)
 
         else:
 
@@ -76,11 +76,17 @@ def generate_impex(data):
         temp_row = ['']
 
         for key in atributos:
-
-            temp_row.append(data_serializada[key][i])
             
             print(key)
             print(data_serializada[key][i])
+            
+            if(data_serializada[key][i] != None):
+                
+                temp_row.append(str(data_serializada[key][i]))
+
+            else:
+                
+                temp_row.append(' ')
 
             if(atributos.index(key) == 0):
 

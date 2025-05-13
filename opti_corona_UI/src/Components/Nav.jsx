@@ -41,9 +41,9 @@ const Nav = () => {
                             <button className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer text-center w-full h-full" onClick={onUpdate}>Actualización</button>
                         </div>
 
-                        <div className="flex items-center w-[10%] h-full">
+                        {<div className="flex items-center w-[10%] h-full">
                             <button className="hover:text-red-600 transition border-b-2 border-slate-900 hover:border-red-600 cursor-pointer text-center w-full h-full" onClick={onLogout}>Cerrar sesión</button>
-                        </div>
+                        </div>}
 
                     </>
 

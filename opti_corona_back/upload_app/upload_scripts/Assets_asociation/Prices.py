@@ -1,27 +1,36 @@
-import numpy as np
 from .Asset import Asset
 
 class Prices(Asset):
 
     def __init__(self, data):
 
-        self.autoCompletar = False
         self.zonas = ['ZNV000','ZNV001','ZNV002','ZNV003','ZNV004','ZNV005','ZNV006','ZNV016']
 
-        precios = []
-        zonas = []
+        skus = data[1]['SKU']
+        precios = data[2]['Precio']
+        zonasRegistradas = data[3]['Zona']
 
-        if(not data[len(data) - 1]['manual']):
+        while('TODAS' in zonasRegistradas):
+            
+            indexToReplace = zonasRegistradas.index('TODAS')
+            
+            temp_price = [precios[indexToReplace] for _ in range(len(self.zonas))]
+            
+            temp_sku = [skus[indexToReplace] for _ in range(len(self.zonas))]
+            
+            zonasRegistradas.pop(indexToReplace)
+            
+            zonasRegistradas = zonasRegistradas[:indexToReplace] + self.zonas + zonasRegistradas[indexToReplace:]
+            
+            precios.pop(indexToReplace)
+            
+            precios = precios[:indexToReplace] + temp_price + precios[indexToReplace:]
+            
+            skus.pop(indexToReplace)
+            
+            skus = skus[:indexToReplace] + temp_sku + skus[indexToReplace:]
 
-            precios = data[2]['Precio']
-            zonas = data[3]['Zona']
-
-        if(len(zonas) == 0):
-
-            zonas = [""] * len(precios)
-            self.autoCompletar = True
-
-        super().__init__(data, data[1]['SKU'], map(lambda precio, zona: str(precio) + ',' + str(zona), precios, zonas), data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
+        super().__init__(data, skus, map(lambda precio, zona: str(precio) + ',' + str(zona), precios, zonasRegistradas), data[len(data) - 2]['asociation'], data[len(data) - 1]['manual'])
 
     def create_automatic_matrix(self):
 
@@ -48,39 +57,19 @@ class Prices(Asset):
 
                 for price in self.relations_dictionary[str(referencia)]:
 
-                    if(self.autoCompletar):
+                    temp = price.split(',')
 
-                        for zona in self.zonas:
+                    skus.append(str(referencia))
+                    unidad_de_venta.append('pieces')
+                    divisa.append('COP')
+                    a.append('1')
+                    b.append('1')
+                    booleano.append('True')
+                    precio.append(temp[0])
+                    zonas.append(temp[1])
 
-                            temp = price.split(',')
-
-                            skus.append(str(referencia))
-                            unidad_de_venta.append('pieces')
-                            divisa.append('COP')
-                            a.append('1')
-                            b.append('1')
-                            booleano.append('True')
-                            precio.append(temp[0])
-                            zonas.append(zona)
-
-                            indice = indice + 1
-                            self.relatedAssets.append(price)
-
-                    else:
-
-                        temp = price.split(',')
-
-                        skus.append(str(referencia))
-                        unidad_de_venta.append('pieces')
-                        divisa.append('COP')
-                        a.append('1')
-                        b.append('1')
-                        booleano.append('True')
-                        precio.append(temp[0])
-                        zonas.append(temp[1])
-
-                        indice = indice + 1
-                        self.relatedAssets.append(price)
+                    indice = indice + 1
+                    self.relatedAssets.append(price)
 
                 self.cantidades[referencia] = indice
 

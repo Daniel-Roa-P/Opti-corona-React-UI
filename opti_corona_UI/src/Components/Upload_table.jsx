@@ -45,7 +45,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             const response = await getAssetStructureJson([selected_option, modifyManually]);
 
-            const data = new Array(1000)
+            const data = new Array(5000)
                 .fill()
                 .map((_, row) => new Array(response.data.header.length) // number of columns
                     .fill()
@@ -141,9 +141,9 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
             alert('Por favor ingrese relaciones uno a uno en la tabla al momento de hacer una asociacion por filas')
 
-        } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[2]) && columns_sizes[2] != 0) && !modifyManually) {
+        } else if (selected_option === 'prices' && ((columns_sizes[0] != columns_sizes[1]) || columns_sizes[0] != columns_sizes[2]) && !modifyManually) {
 
-            alert('Ingrese relaciones uno a uno en la columna de zonas o dejela vacia')
+            alert('Ingrese relaciones uno a uno sin dejar campos vacios en las columnas diligenciadas')
 
         } else {
 
@@ -164,9 +164,9 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
 
         <>
 
-            <div className={(selected_option != 'prices' && selected_option != 'videos') ? 'h-[10%] flex flex-nowrap' : 'h-[10%] flex justify-center'} >
+            <div className={(selected_option != 'prices' && selected_option != 'video') ? 'h-[10%] flex flex-nowrap' : 'h-[10%] flex justify-center'} >
 
-                {(selected_option != 'prices' && selected_option != 'videos') ?
+                {(selected_option != 'prices' && selected_option != 'video') ?
 
                     <div className='w-1/2 p-2'>
 
@@ -334,7 +334,7 @@ const Upload_table = ({ selected_option, modifyManually, setRelaciones, setRepor
                     width="100%"
                     height="100%"
                     rowHeaders={true}
-                    colWidths={150}
+                    colWidths={230}
                     manualRowMove={true}
                     autoWrapRow={true}
                     autoWrapCol={true}

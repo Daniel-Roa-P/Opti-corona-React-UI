@@ -83,7 +83,7 @@ function Impex_table({ selectedAttributes, impex, setImpex }) {
 
         function getData() {
 
-            const data = new Array(1000) // number of rows
+            const data = new Array(5000) // number of rows
                 .fill()
                 .map((_, row) => new Array(header.length) // number of columns
                     .fill()

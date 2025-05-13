@@ -12,9 +12,9 @@ function UploadPage() {
 
   const auth = useAuth();
 
-  if(auth.currentUser === null){
+  if (auth.currentUser === null) {
 
-      return <Navigate to='/' replace/>;
+    return <Navigate to='/' replace />;
 
   }
 
@@ -71,11 +71,11 @@ function UploadPage() {
         <div className="w-[20%] bg-neutral-700 h-full">
 
           <div className="flex flex-col h-1/6">
-            
-            <div className='h-1/4 flex items-center'>
+
+            <div className='h-2/4 flex items-center'>
               <p className="text-center font-bold text-sm text-gray-900 dark:text-white w-full">Tipo de cargue</p>
             </div>
-            
+
             <div className='h-2/4 flex items-center'>
 
               <select className="mx-[10%] w-[80%] h-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center"
@@ -93,7 +93,7 @@ function UploadPage() {
 
             </div>
 
-            <div className='h-1/4 text-sm flex items-center'>
+            {/* <div className='h-1/4 text-sm flex items-center'>
 
               <input type="checkbox"
                 id="modify_manually_checkbox"
@@ -105,7 +105,7 @@ function UploadPage() {
               <label className='w-[70%] text-start'>Modificar Manualmente</label>
               <br></br>
 
-            </div>
+            </div> */}
 
           </div>
 

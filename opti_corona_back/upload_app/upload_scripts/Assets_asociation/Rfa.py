@@ -43,7 +43,7 @@ class Rfa(Asset):
                         indice = indice + 1
                         self.relatedAssets.append(filename)
 
-                        self.cantidades[referencia] = indice
+                self.cantidades[referencia] = indice
 
                 indice = 0       
 
