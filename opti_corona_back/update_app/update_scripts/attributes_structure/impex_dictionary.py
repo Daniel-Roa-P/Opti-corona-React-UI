@@ -465,6 +465,14 @@ attributes_structure = {
             },
             "multivalued": "false",
             "zonified": "true"
+        },"productListPageImage": {
+            "id": 992,
+            "nomenclatura": "(qualifier, $catalogVersion)",
+            "attribute_structure": {
+                "type": "text"
+            },
+            "multivalued": "false",
+            "zonified": "false"
         }
     },
     "especificaciones-accesorios": {
