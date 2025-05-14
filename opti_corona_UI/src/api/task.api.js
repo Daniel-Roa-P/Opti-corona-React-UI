@@ -6,7 +6,8 @@ axios.defaults.withCredentials = true;
 
 const uploadApi = axios.create({
 
-    baseURL: 'http://localhost:8000/'
+    //baseURL: 'http://localhost:8000/'
+    baseURL: 'https://opti-corona-backend-django.vercel.app/'
 
 })
 
